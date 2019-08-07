@@ -1,0 +1,2 @@
+module LibraryOwner::LibrariesHelper
+end

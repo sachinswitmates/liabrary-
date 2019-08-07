@@ -1,0 +1,22 @@
+<nav class="navbar navbar-expand-lg bg-dark navbar-dark fixed-top navbar-right ">
+  <%= link_to 'LibraryApp', root_path, class: 'navbar-brand' %>
+  <div class="topnav-right">
+    <ul class="nav navbar-nav navbar-right">
+      <% if user_signed_in? %>
+        <li class="nav-item">
+          <%= link_to 'Dashboard', current_user.admin? ? admin_libraries_path : library_owner_libraries_path, class: 'nav-link' %>
+        </li>
+        <li class="nav-item">
+          <%= link_to destroy_user_session_path, method: :delete, class: 'nav-link' do %>
+            <%= image_tag current_user.image.avatar.url, width: '20' if current_user.image.present? %> Logout
+          <% end %>
+        </li>
+        
+      <% else %>
+        <li class="nav-item">
+          <%= link_to "Register", new_user_registration_path, class: 'nav-link'  %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</nav>

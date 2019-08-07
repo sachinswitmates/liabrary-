@@ -3,6 +3,8 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.0'
 gem 'devise'
+gem 'carrierwave', '>= 2.0.0.rc', '< 3.0'
+
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.3'
@@ -12,6 +14,7 @@ gem 'sqlite3'
 gem 'puma', '~> 3.11'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
+
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
@@ -30,13 +33,18 @@ gem 'jbuilder', '~> 2.5'
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
+gem 'libv8', '~> 5.2', '>= 5.2.361.43.1'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
-
+gem 'bootstrap'
+gem 'jquery-rails'
+gem 'mini_racer'
+gem 'nested_form_fields'
+gem "cocoon"
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

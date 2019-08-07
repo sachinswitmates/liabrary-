@@ -1,0 +1,56 @@
+<%= form_for([:library_owner, @library]) do |form| %>
+ 
+  <% if @library.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@library.errors.count, "error") %> prohibited
+        this library from being saved:
+      </h2>
+      <ul>
+        <% @library.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+  <p>
+    <%= form.label :name %><br>
+    <%= form.text_field :name,class: 'form-control' %>
+  </p>
+ 
+  <p>
+    <%= form.label :address %><br>
+    <%= form.text_field :address, class: 'form-control'%>
+  </p>
+  
+  <p>
+    <%= form.label :open %><br>
+    <%= form.text_field :open, class: 'form-control' %>
+  </p>
+
+  <p>
+    <%= form.label :seats %><br>
+    <%= form.number_field :seats,min: 1, max: 500 ,autofocus: true,class: 'form-control' %>
+  </p>
+
+  <p>
+    <%= form.label :availability %><br>
+    <%= form.number_field :availability,min: 1 ,class: 'form-control'%>
+  </p>
+  
+  <div id="images">
+    <%= form.fields_for :images do |image| %>
+      <%= render 'image_fields', f: image %>
+    <% end %>
+    <div class="links">
+      <%= link_to_add_association 'add image', form, :images %>
+    </div>
+  </div>
+
+  <p>
+    <%= form.submit "Create" %>
+  </p>
+
+<% end %>

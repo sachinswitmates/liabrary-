@@ -1,0 +1,12 @@
+<div class="card">
+  <% if library.images.present? %>
+  	<%= image_tag library.images.first.avatar.url , class: 'card-img-top' %>
+  <% else %>
+  	<%= image_tag 'default_library.jpg', class: 'card-img-top' %>
+  <% end %>
+  <div class="card-body">
+    <h5 class="card-title"><%= library.name %></h5>
+    <p class="card-text"></p>
+    <%= link_to 'View Detail', library_owner_library_path(library), class: 'btn btn-primary' %>
+  </div>
+</div>
