@@ -1,0 +1,32 @@
+<div class="bg-white">
+  <div class="row">
+    <div class="col-12">
+      <div class="row">
+        <div class="col-6">
+          <h3>Your Payment Method</h3>
+        </div>
+        <div class="col-6 text-right">
+          <% if @bank_account.blank? %>
+            <%= link_to 'Add Payment Method ', new_library_owner_bank_account_path, class: 'btn btn-primary'  %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr>
+  <% if @bank_account.present? %>
+    <div class="card" style="width: 300px">
+      <div class="card-body">
+        <p class="card-text"><strong>Bank Name: </strong><%= @bank_account.bank_name %></p>
+        <p class="card-text"><strong>A/C Holder Name: </strong><%= @bank_account.account_holder_name%></p>
+        <p class="card-text"><strong>Account Number: </strong>******<%= @bank_account.account_number.last(4)%></p>
+        <p class="card-text"><strong>ISFC: </strong><%= @bank_account.ifsc_code%></p>
+      </div>
+      <div class="text-right margin-r-b">
+        <%= link_to 'Edit', edit_library_owner_bank_account_path(@bank_account), class: 'btn btn-primary' %>
+      </div>
+    </div>
+  <% else %>
+    <p class="card-text">Payment method not available</p>
+  <% end %>
+</div>

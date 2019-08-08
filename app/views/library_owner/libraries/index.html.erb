@@ -1,14 +1,22 @@
-<div class="row">
-  <div class="col-12 text-right">
-    <%= link_to 'Add', new_library_owner_library_path, class: 'btn btn-primary'  %>
+<div class="bg-white">
+  <div class="row">
+    <div class="col-12">
+      <div class="row">
+        <div class="col-6">
+          <h3>Your Libraries</h3>
+        </div>
+        <div class="col-6 text-right">
+          <%= link_to 'Add New Library', new_library_owner_library_path, class: 'btn btn-primary'  %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr>
+  <div class="row">
+    <% @libraries.each do |library| %>
+      <div class="col-4">
+        <%= render partial: 'library', locals: {library: library} %>
+      </div>
+    <% end%>
   </div>
 </div>
-<div class="row">
-  <% @libraries.each do |library| %>
-    <div class="col-4">
-      <%= render partial: 'library', locals: {library: library} %>
-    </div>
-  <% end%>
-</div>
-
-

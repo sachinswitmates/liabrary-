@@ -7,11 +7,15 @@
   </ol>
   <div class="carousel-inner">
     <% index = 0 %>
-    <% images.each do |image| %>
-      <div class="carousel-item <%= index == 0 ? 'active' : '' %>">
-        <%= image_tag image.avatar.url, height: '250', class: 'd-block w-100' %>
-      </div>
-      <% index += 1 %>
+    <% if images.present? %>
+      <% images.each do |image| %>
+        <div class="carousel-item <%= index == 0 ? 'active' : '' %>">
+          <%= image_tag image.avatar.url, height: '250', class: 'd-block w-100' %>
+        </div>
+        <% index += 1 %>
+      <% end %>
+    <% else %>
+      <%= image_tag 'default_library.jpg', height: '250', class: 'd-block w-100' %>
     <% end %>
   </div>
   <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">

@@ -1,0 +1,24 @@
+<div class="row">
+  <div class="col-12">
+    <div class="row">
+      <div class="col-6">
+        <h3>Your Payment Mehtod</h3>
+      </div>
+      <div class="col-6 text-right">
+        <%= link_to 'Add Payment Mehtod ', new_library_owner_bank_account_path, class: 'btn btn-primary'  %>
+      </div>
+    </div>
+  </div>
+</div>
+<hr>
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title"><%= @bank_account.bank_name %></h5>
+    <p class="card-text"><%= @bank_account.account_holder_name%></p>
+    <p class="card-text"><%= @bank_account.account_number.last(4)%></p>
+    <p class="card-text"><%= @bank_account.ifsc_code%></p>
+  </div>
+</div>
+ 
+<%= link_to 'Back', library_owner_bank_account_path %> |
+<%= link_to 'Edit', edit_library_owner_bank_account_path(@bank_account) %>

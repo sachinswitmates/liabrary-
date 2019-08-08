@@ -1,12 +1,10 @@
 <%= simple_form_for([:admin, @library]) do |form| %>
   <div>
-  <%= form.input :name,autofocus: true,placeholder: 'Libraryname' %>
-  <%= form.input :address,hint: 'No special characters' %>
-  <%= form.input :open,hint: 'No sepical characters'%>
-  <%= form.input :seats ,collection: 0..1000%>
-  <%= form.input :availability,collection: 1..1000%> 
-</div>
-
-  
+    <%= form.input :name,autofocus: true,placeholder: 'Libraryname' %>
+    <%= form.input :address,hint: 'No special characters' %>
+    <%= form.input :open,hint: 'No sepical characters',placeholder: '8AM-11PM'%>
+    <%= form.input :seats ,collection: 0..1000%>
+    <%= form.input :availability,collection: 1..1000%> 
+  </div>
   <%= form.submit %>
 <% end %>

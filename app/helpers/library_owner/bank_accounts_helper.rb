@@ -1,0 +1,2 @@
+module LibraryOwner::BankAccountsHelper
+end

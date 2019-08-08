@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   end
   namespace :library_owner do
   	resources :libraries
+    resources :bank_accounts
   end
 
 end

@@ -1,6 +1,7 @@
 class LibraryOwner::LibrariesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_library, only: [:show, :edit, :update]
+  before_action :prevent_unauthorize_access?
   
   def index
     @libraries = current_user.libraries
@@ -34,9 +35,16 @@ class LibraryOwner::LibrariesController < ApplicationController
     end
   end
 
+  def prevent_unauthorize_access?
+    unless current_user && current_user.library_owner?
+      flash[:alert] = "You'r not authorize to access this page"
+      redirect_to root_path
+    end
+  end
+
 private
   def library_params
-    params.require(:library).permit(:name, :address, :open, :seats, :availability, images_attributes: [:id, :avatar, :_destroy])
+    params.require(:library).permit(:name, :address, :open, :seats, :availability,:contact_number, images_attributes: [:id, :avatar, :_destroy])
   end
 
 

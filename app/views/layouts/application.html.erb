@@ -11,12 +11,14 @@
 
   <body>
     <%=render 'layouts/header' %>
-    <div class="container" style="padding-top: 60px">
-      <%=render 'layouts/alert' %>
-    </div>
-    <div class="container body-min-hieght">
-      <div class="padd-top-15">
-        <%= yield %>
+    <div style="background: #ccc;">
+      <div class="container" style="margin-top: 60px">
+        <%=render 'layouts/alert' %>
+      </div>
+      <div class="container body-min-hieght">
+        <div class="padd-top-15">
+          <%= yield %>
+        </div>
       </div>
     </div>
     <%=render 'layouts/footer' %>

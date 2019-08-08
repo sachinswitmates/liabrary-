@@ -1,0 +1,15 @@
+<div class="row">
+  <div class="col-12">
+    <%= simple_form_for([:library_owner, @bank_account]) do |form| %>
+      <div class="row">
+        <div class="col-6">
+        <%= form.input :bank_name,autofocus: true %>
+        <%= form.input :account_number %>
+        <%= form.input :ifsc_code %>
+        <%= form.input :account_holder_name %>
+        </div>
+      </div>
+      <%= form.submit @bank_account.id ? 'Update' : 'Save' ,class: 'btn btn-primary' %>
+    <% end %>
+  </div>
+</div>
