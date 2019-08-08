@@ -1,5 +1,4 @@
 Rails.application.routes.draw do 
-	
   devise_for :users, :controllers => {:registrations => "users/registrations"} do
   	get '/users/sign_out' => 'devise/sessions#destroy'
   end

@@ -1,8 +1,6 @@
 <div class="nested-fields">
   <div class="field">
-    <%= f.label :avatar %>
-    <br/>
-    <%= f.file_field :avatar %>
+    <%=f.input :avatar,as: :file %>
   </div>
   <%= link_to_remove_association "remove image", f %>
 </div>

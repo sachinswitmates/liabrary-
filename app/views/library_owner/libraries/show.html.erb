@@ -1,30 +1,29 @@
 <%= render partial: 'image_items', locals: {images: @images} %>
-<h1>Show Library</h1>
 
-<p>
-
+<div>
   <strong>name:</strong>
   <%= @library.name %>
-</p>
+</div>
 
-<p>
+<div>
   <strong>address:</strong>
   <%= @library.address %>
-</p>
+</div>
 
-<p>
+<div>
   <strong>open:</strong>
   <%= @library.open %>
-</p>
+</div>
 
-<p>
+<div>
   <strong>seats:</strong>
   <%= @library.seats %>
+</div> 
 
-<p>
+<div>
   <strong>availability:</strong>
   <%= @library.availability %>
-</p>
+</div>
 
 
 <%= link_to 'Back', library_owner_libraries_path %> |
