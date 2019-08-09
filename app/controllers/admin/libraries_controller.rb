@@ -21,7 +21,7 @@ class Admin::LibrariesController < ApplicationController
   def create
     @library = Library.new(library_params)
     if @library.save
-      redirect_to admin_library_path(@library)
+      redirect_to admin_libraries_path
     else
       render 'new'
     end
@@ -53,7 +53,7 @@ class Admin::LibrariesController < ApplicationController
 
 private
   def library_params
-    params.require(:library).permit(:name, :address, :open, :seats, :availability)
+    params.require(:library).permit(:name, :address, :open, :seats, :availability,:contact_number)
   end
 end
   

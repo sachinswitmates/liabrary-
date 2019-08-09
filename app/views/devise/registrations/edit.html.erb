@@ -3,7 +3,9 @@
 
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
     <div class="field">
-      <%= f.input :email, :label => 'Email', required: true, autofocus: true,autocomplete: "email" %>
+      <%= f.input :first_name,:label => 'First Name', required:true, autofocus: true,autocomplete: "first_name" %>
+      <%= f.input :last_name,:label => 'Last Name', required:true, autocomplete: "last_name" %>
+      <%= f.input :email, :label => 'Email', required: true,autocomplete: "email" %>
     </div>
     <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
       <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>

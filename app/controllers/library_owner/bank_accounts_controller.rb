@@ -11,6 +11,7 @@ class LibraryOwner::BankAccountsController < ApplicationController
   def create
     @bank_account = current_user.build_bank_account(bank_account_params)
     if @bank_account.save
+      flash[:notice] = 'Payment method added successfully'
       redirect_to library_owner_bank_accounts_path
     else
       render 'new'
@@ -29,6 +30,7 @@ class LibraryOwner::BankAccountsController < ApplicationController
   def update
     @bank_account = BankAccount.find(params[:id])
     if @bank_account.update(bank_account_params)
+      flash[:notice] = 'Payment method updated successfully'
       redirect_to library_owner_bank_accounts_path
     else
       render 'edit'

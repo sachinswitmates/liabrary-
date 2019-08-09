@@ -14,5 +14,18 @@ class User < ApplicationRecord
   has_one :bank_account
 
   enum role: [:admin, :library_owner ]
+
+  def user_name
+    "#{self.first_name} #{self.last_name}"
+  end
+
+  def send_notification_email
+    UserMailer.notify_admin(User.admin_user).deliver_now
+    UserMailer.notify_library_owner(self).deliver_now
+  end
+
+  def self.admin_user
+    self.where(role: 'admin').first
+  end
    
 end
