@@ -1,1 +1,12 @@
-<h1>Welcome</h1>
+<div class="bg-white">
+  <div class="row">
+    <% @libraries.each do |library| %>
+      <div class="col-4">
+        <%= render partial: '/library_owner/libraries/library', locals: {library: library} %>
+      </div>
+    <% end%>
+  </div>
+</div>
+
+
+

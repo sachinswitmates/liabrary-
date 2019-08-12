@@ -3,7 +3,7 @@ class Admin::LibrariesController < ApplicationController
   before_action :prevent_unauthorize_access?
   
   def index
-    @libraries = Library.all
+    @libraries = Library.order("created_at DESC").paginate(page: params[:page], per_page: 10)
   end
   
   def show
@@ -38,7 +38,7 @@ class Admin::LibrariesController < ApplicationController
 
   def destroy
     @library = Library.find(params[:id])
-    @library.destroy
+    @library.update(deleted_at: Time.now)
     redirect_to admin_libraries_path
   end
 
@@ -53,7 +53,7 @@ class Admin::LibrariesController < ApplicationController
 
 private
   def library_params
-    params.require(:library).permit(:name, :address, :open, :seats, :availability,:contact_number)
+    params.require(:library).permit(:name,:address1,:address2,:state,:city,:landmark,:zip_code, :open, :seats, :availability,:contact_number,:published)
   end
 end
   

@@ -1,14 +1,12 @@
 <div class="bg-white">
   <div class="row">
-    <div class="col-12 text-right">
-      <%= link_to 'Add', new_admin_library_path, class: 'btn btn-primary'  %>
+    <div class="col-6">
+      <h2>Listing Libraries</h2>
+    </div>
+    <div class="col-6 text-right">
     </div>
   </div>
-  <h2>Listing Libraries</h2>
-  <hr>
-</div>
-  <table class="table table-bordered">
-    <thead class="thead-dark">
+  <table class="table table-striped">
     <tr>
       <th scope ="col">Name</th>
       <th scope ="col">Address</th>
@@ -18,27 +16,40 @@
       <th style = "width: 15%">Contact Number</th>
       <th colspan="6"></th>
     </tr>
-  </thead>
     <% @libraries.each do |library| %>
       <tr>
         <td><%= library.name %></td>
-        <td><%= library.address %></td>
+        <td><%= library.library_address %></td>
         <td><%= library.open %></td>
         <td><%= library.seats %></td>
         <td><%= library.availability %></td>
         <td><%= library.contact_number %></td>
-        <td><%= link_to 'Show', admin_library_path(library)  %></td>
+        <td>
+          <%= link_to admin_library_path(library) do %>
+            <%= fa_icon "eye" %>
+          <% end %>
+        </td>
         <% if current_user && current_user.admin? %>
-        <td><%= link_to 'Edit', edit_admin_library_path(library) %></td>
-        <ion-icon name="trash"></ion-icon>
-        <td><%= link_to 'Destroy', admin_library_path(library),
-                method: :delete,
-                data: { confirm: 'Are you sure?' } %></td>
+        <td>
+          <%= link_to edit_admin_library_path(library) do %>
+            <%= fa_icon "edit" %>
+          <% end %>
+          
+        </td>
+        <td>
+          <%= link_to admin_library_path(library),method: :delete,
+                data: { confirm: 'Are you sure?' } do %>
+            <%= fa_icon "trash" %>
+          <% end %>
+        </td>
+
     <% end %>
       </tr>
-
     <% end %>
   </table>
-
-
-
+  <div class="row">
+    <div class="col-6 text-center">
+      <%= will_paginate @library,renderer: BootstrapPagination::Rails %>
+    </div>
+  </div>
+</div>

@@ -2,15 +2,24 @@
   <div class="row">
     <div class="col-12"> 
       <%= simple_form_for([:admin, @library]) do |form| %>
-        <div>
-          <%= form.input :name,autofocus: true,placeholder: 'Libraryname' %>
-          <%= form.input :address,hint: 'No special characters' %>
-          <%= form.input :open,hint: 'No sepical characters',placeholder: '8AM-11PM'%>
-          <%= form.input :seats ,collection: 0..1000%>
-          <%= form.input :availability,collection: 1..1000%> 
-          <%= form.input :contact_number %>
+        <div class="row">
+          <div class="col-6">>
+            <%= form.input :name,autofocus: true,placeholder: 'Libraryname' %>
+            <%= form.input :address1 %>
+            <%= form.input :address2 %>
+            <%= form.input :state %>
+            <%= form.input :city %>
+            <%= form.input :landmark %>
+            <%= form.input :zip_code %>
+            <%= form.input :open,hint: 'No sepical characters',placeholder: '8AM-11PM'%>
+            <%= form.input :seats ,collection: 0..1000%>
+            <%= form.input :availability,collection: 1..1000%> 
+            <%= form.input :contact_number %>
+            <%=form.check_box :published, value: true %>
+            <%= form.label :published %>
+          </div>
         </div>
-        <%= form.submit %>
+        <%= form.submit @library.id ? 'Update' : 'Save', class: 'btn btn-primary' %>
       <% end %>
     </div>
   </div>

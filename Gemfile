@@ -46,6 +46,9 @@ gem 'mini_racer'
 gem 'nested_form_fields'
 gem "cocoon"
 gem 'simple_form'
+gem 'will_paginate', '~> 3.1', '>= 3.1.6'
+gem 'will_paginate-bootstrap', '~> 1.0', '>= 1.0.1'
+gem "font-awesome-rails"
 
 group :development, :test do
 gem "letter_opener"
