@@ -6,6 +6,8 @@ class ApplicationController < ActionController::Base
       admin_libraries_path
     elsif current_user.present? && current_user.library_owner?
       library_owner_libraries_path
+    elsif current_user.present? && current_user.student?
+      student_libraries_path
     else 
       root_path
     end

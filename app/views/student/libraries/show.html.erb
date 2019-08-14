@@ -1,0 +1,25 @@
+<div class="bg-white">     
+  <div class="row">
+    <div class="col-12">
+      <div class="row">
+        <div class="col-8">
+          <h3><%=@library.name %></h3>
+        </div>
+        <div class="col-4 text-right">
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr>
+</div>
+  <%= render partial: '/library_owner/libraries/image_items', locals: {images: @images} %>
+  <div class="card">
+    <div class="card-body">
+      <p class="card-text"><strong>Name: </strong><%= @library.name %></p>
+      <p class="card-text"><strong>Address:</strong><%= @library.library_address %></p>
+      <p class="card-text"><strong>Open: </strong><%= @library.open %></p>
+      <p class="card=text"><strong>Seats: </strong><%= @library.seats %></p>
+      <p class="card-text"><strong>Availability: </strong><%= @library.availability %></p>
+      <p class="card-text"><strong>Contact Number: </strong><%= @library.contact_number %></p>
+    </div>
+  </div>

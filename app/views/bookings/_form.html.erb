@@ -1,0 +1,20 @@
+<div class="row">
+  <div class="col-6 devider-verticle">
+    <%= simple_form_for @booking do |form| %>
+      <%= form.input :name,autofocus: true %>
+      <%= form.input :email %>
+      <%= form.input :contact_number %>
+      <%= form.input :seats ,collection: 1...2  %>
+      <div class="field">
+        <%= form.input :package, as: :radio_buttons, collection: ['Weekly', 'Quaterly', 'Halfyearly', 'Yearly'] %>
+      </div>
+      <%= form.submit 'Save', class: 'btn btn-primary' %>
+    <% end %>
+  </div>
+  <div class="col-6">
+      <h3>Our Packages </h3><br>
+      <p></p><br>
+      <p></p>
+  </div>
+</div>
+

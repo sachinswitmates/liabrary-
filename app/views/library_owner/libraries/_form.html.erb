@@ -10,27 +10,23 @@
             <%= form.input :landmark %>
             <%= form.input :state ,collection: states.map { |c| [c[0], c[1]] } %>
             <%= form.input :city %>
-            <%= form.input :zip_code %>
           </div>
             <div class="col-6">
+              <%= form.input :zip_code %>
               <%= form.input :open,hint: 'No sepical characters',placeholder:'8AM-11PM'%>
               <%= form.input :seats ,collection: 0..1000 %>
               <%= form.input :availability,collection: 1..1000 %> 
               <%= form.input :contact_number %>
+              <div id="images">
+                <%= form.simple_fields_for :images do |image| %>
+                <%= render 'image_fields', f: image %>
+                <% end %>
+                <div class="links">
+                  <%= link_to_add_association 'add image', form, :images %>
+                </div>
+              </div>
             </div>
         </div>
-        
-          <div id="images">
-            <%= form.simple_fields_for :images do |image| %>
-            <%= render 'image_fields', f: image %>
-            <% end %>
-            <div class="links">
-              <%= link_to_add_association 'add image', form, :images %>
-            </div>
-          </div>
-      </div>
-      </div>
-
         <div class="text-right">
           <%= form.submit @library.id ? 'Update' : 'Save', class: 'btn btn-primary' %> 
         </div>

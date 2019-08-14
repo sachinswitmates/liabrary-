@@ -12,8 +12,9 @@ class User < ApplicationRecord
   has_many :libraries
   has_one :image, :as => :imageable
   has_one :bank_account
+  has_many :bookings
 
-  enum role: [:admin, :library_owner ]
+  enum role: [:admin, :library_owner, :student]
 
   def user_name
     "#{self.first_name} #{self.last_name}"

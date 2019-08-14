@@ -2,23 +2,28 @@
   <%= link_to 'LibraryApp', root_path, class: 'navbar-brand' %>
   <div class="topnav-right">
     <ul class="nav navbar-nav navbar-right">  
-      <%#= link_to destroy_user_session_path, method: :delete, class: 'nav-link' do %>
-      <%#= image_tag current_user.image.avatar.url, width: '20' if current_user.image.present? %>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Menu
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <% if user_signed_in? %>
-            <%= link_to 'Dashboard', current_user.admin? ? admin_libraries_path : library_owner_libraries_path, class: 'dropdown-item' %>
-            <%= link_to 'Payment Method',library_owner_bank_accounts_path, class: 'dropdown-item' %>
-            <%= link_to 'Logout',destroy_user_session_path, method: :delete, class: 'dropdown-item'%>
-          <% else %>
-            <%= link_to "Register", new_user_registration_path, class: 'nav-link'  %>  
-            <%= link_to "Login", user_session_path, class: 'nav-link' %>
-          <% end %>    
-        </div>
-      </li>
+      <% if user_signed_in? %>
+        <li class="nav-item">
+          <%= link_to 'Dashboard', current_user.admin? ? admin_libraries_path : library_owner_libraries_path, class: 'nav-link' %>
+        </li>
+        <%= link_to 'Payment Method',library_owner_bank_accounts_path, class: 'nav-link' %>
+        <li class="nav-item">
+          <%= link_to destroy_user_session_path, method: :delete, class: 'nav-link' do %>
+            <%= image_tag current_user.image.avatar.url, width: '20' if current_user.image.present? %> Logout
+          <% end %>
+        </li>
+        
+      <% else %>
+        <li class="nav-item">
+          <%= link_to "Register", new_user_registration_path, class: 'nav-link'  %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "Partner Register", new_user_registration_path(partner: true), class: 'nav-link'  %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "Login", user_session_path, class: 'nav-link' %>
+        </li>
+      <% end %>
     </ul>
   </div>
 </nav>
