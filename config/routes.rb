@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   end
   
   resources :bookings
+ 
 
   root 'welcome#index'
   get '/libraries/:id' => 'welcome#show', as: :library_detail

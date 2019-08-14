@@ -8,7 +8,9 @@
             <%= form.input :address1 %>
             <%= form.input :address2 %>
             <%= form.input :landmark %>
-            <%= form.input :state ,collection: states.map { |c| [c[0], c[1]] } %>
+            <%=form.label :state %>
+            <%= form.select :state ,options_for_select(states),{}, class: 'form-control' %><br>
+            <%#= form.input :state ,collection: states.map { |c| [c[0], c[1]] } %>
             <%= form.input :city %>
           </div>
             <div class="col-6">

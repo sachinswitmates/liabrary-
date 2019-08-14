@@ -12,7 +12,7 @@ class BookingsController < ApplicationController
   def create
     @booking = current_user.bookings.new(booking_params)
     if @booking.save
-      flash[:notice] = "You have successfully booked your seat proceeds for payment...!!!"
+      flash[:notice] = "You have successfully booked your seat plz proceeds for payment...!!!"
       redirect_to bookings_path
     else
       render 'new'
@@ -20,7 +20,7 @@ class BookingsController < ApplicationController
   end
 
   def show
-    @booking = Booking.find(params[:id])
+    @booking =Booking.find(params[:id])
   end
 
   def edit

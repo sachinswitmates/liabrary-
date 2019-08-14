@@ -11,15 +11,18 @@
           <%= f.input :password, :label => 'Password', required: true,placeholder:'********' %>
           <%= f.input :password_confirmation, :label => 'Confirm Password', required: true,placeholder:'*********' %>
           <%= f.file_field :avatar %> 
+          <% if params[:partner].present? && params[:partner].eql?('true')%>
+            <%= f.input_field :role, as: :hidden, value: "library_owner" %>
+          <% end %>
         </div>
-        
         <div class="actions">
           <br><%= f.button :submit, class: 'btn btn-primary'%>
+          <%= render "devise/shared/links" %>
         </div>
     </div>
   </div>
     <% end %>
-  <%= render "devise/shared/links" %>
+  
 </div>
 
 

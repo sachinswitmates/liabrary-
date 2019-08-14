@@ -13,6 +13,8 @@ class User < ApplicationRecord
   has_one :image, :as => :imageable
   has_one :bank_account
   has_many :bookings
+  #has_many :libraries, :through => :bookings
+
 
   enum role: [:admin, :library_owner, :student]
 
@@ -29,4 +31,5 @@ class User < ApplicationRecord
     self.where(role: 'admin').first
   end
    
+
 end

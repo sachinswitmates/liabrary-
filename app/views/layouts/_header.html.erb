@@ -3,27 +3,37 @@
   <div class="topnav-right">
     <ul class="nav navbar-nav navbar-right">  
       <% if user_signed_in? %>
-        <li class="nav-item">
-          <%= link_to 'Dashboard', current_user.admin? ? admin_libraries_path : library_owner_libraries_path, class: 'nav-link' %>
-        </li>
-        <%= link_to 'Payment Method',library_owner_bank_accounts_path, class: 'nav-link' %>
-        <li class="nav-item">
-          <%= link_to destroy_user_session_path, method: :delete, class: 'nav-link' do %>
-            <%= image_tag current_user.image.avatar.url, width: '20' if current_user.image.present? %> Logout
-          <% end %>
-        </li>
-        
-      <% else %>
-        <li class="nav-item">
-          <%= link_to "Register", new_user_registration_path, class: 'nav-link'  %>
-        </li>
-        <li class="nav-item">
-          <%= link_to "Partner Register", new_user_registration_path(partner: true), class: 'nav-link'  %>
-        </li>
-        <li class="nav-item">
-          <%= link_to "Login", user_session_path, class: 'nav-link' %>
-        </li>
-      <% end %>
+        <% unless  current_user.role == "student" %>
+          <li class="nav-item">
+            <%= link_to 'Dashboard', current_user.admin? ? admin_libraries_path : library_owner_libraries_path, class: 'nav-link' %>
+          </li>
+          <%= link_to 'Payment Method',library_owner_bank_accounts_path, class: 'nav-link' %>
+          <li class="nav-item">
+            <%= link_to destroy_user_session_path, method: :delete, class: 'nav-link' do %>
+              <%#= image_tag current_user.image.avatar.url, width: '20' if current_user.image.present? %> Logout
+            <% end %>
+          </li>
+        <%else%>
+          <li class="nav-item">
+            <%= link_to 'Booking Details', bookings_path, class: 'nav-link' %>
+          </li>
+          <li class ="nav-item">
+            <%= link_to 'Logout',destroy_user_session_path, method: :delete, class: 'nav-link' %>
+          </li>
+        <%end%>
+        <% else %>
+          <li class="nav-item">
+            <%= link_to "Register", new_user_registration_path, class: 'nav-link'  %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "Partner Register", new_user_registration_path(partner: true), class: 'nav-link'  %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "Login", user_session_path, class: 'nav-link' %>
+          </li>
+        <% end %>
+
+      
     </ul>
   </div>
 </nav>
