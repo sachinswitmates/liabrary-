@@ -14,6 +14,7 @@
             <% end %>
           </li>
         <%else%>
+        <%#= link_to 'LibraryApp', student_libraries_path, class: 'navbar-brand' %>
           <li class="nav-item">
             <%= link_to 'Booking Details', bookings_path, class: 'nav-link' %>
           </li>
@@ -31,9 +32,7 @@
           <li class="nav-item">
             <%= link_to "Login", user_session_path, class: 'nav-link' %>
           </li>
-        <% end %>
-
-      
+      <% end %>  
     </ul>
   </div>
 </nav>

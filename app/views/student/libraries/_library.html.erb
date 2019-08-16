@@ -7,6 +7,6 @@
   <div class="card-body">
     <h5 class="card-title"><%= link_to library.name , student_library_path(library) %></h5>
     <p class="card-text"><%= fa_icon "map-marker" %> <%= "#{library.city}, #{library.state}" %></p>
-    <%= link_to 'Book Your Seat', new_booking_path, class: 'btn btn-primary w-100' %>
+    <%= link_to 'Book Your Seat', new_booking_path(library_id: library.id), class: 'btn btn-primary w-100' %>
   </div>
 </div>

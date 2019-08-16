@@ -6,10 +6,11 @@ class CreateBookings < ActiveRecord::Migration[5.2]
       t.string :contact_number
       t.integer :seats
       t.string :package
-      t.references :user, foreign_key: true
-      t.references :library, foreign_key: true
+      t.integer :user_id
+      t.integer :library_id
       
       t.timestamps
     end
+    add_index :bookings, [:user_id, :library_id]
   end
 end

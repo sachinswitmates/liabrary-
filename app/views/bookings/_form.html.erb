@@ -5,6 +5,9 @@
       <%= form.input :email %>
       <%= form.input :contact_number %>
       <%= form.input :seats ,collection: 1...2  %>
+      <%= form.hidden_field :library_id, :value => params[:library_id]%>
+
+      
       <div class="field">
         <%= form.input :package, as: :radio_buttons, collection: ['Monthly', 'Quaterly', 'Halfyearly', 'Yearly'] %>
       </div>
@@ -15,30 +18,31 @@
       <h3>Our Packages </h3><br>
       <p></p>
       <div class="row text-center">
-    <div class="col-md-6 mb-4 ">
-      <div class="card-body">
-          <h2 class="font-weight-light deep-lighter-hover mb-5">Monthly</h2>
-          <p class="brown-lighter-hover">500/-</p>
+        <div class="col-md-6 mb-4 ">
+          <div class="card-body">
+              <h2 class="font-weight-light deep-lighter-hover mb-5">Monthly</h2>
+              <p class="brown-lighter-hover">500/-</p>
+          </div>
+        </div>
+         <div class="card text-white bg-danger mb-3" style="max-width: 18rem;">
+          <div class="card-body">
+              <h2 class="font-weight-light deep-lighter-hover mb-5">Quaterly</h2><br>
+              <p class="brown-lighter-hover">1500/-</p>
+          </div>
+        </div>
+        <div class="card text-white bg-danger mb-3" style="max-width: 15rem;">
+          <div class="card-body">
+              <h2 class="font-weight-light deep-lighter-hover mb-5">Halfyearly</h2>
+              <p class="brown-lighter-hover">3000/-</p>
+          </div>
+        </div>
+        <div class="col-md-6 mb-4 ">
+          <div class="card-body">
+              <h2 class="font-weight-light deep-lighter-hover mb-5">Yearly</h2>
+              <p class="brown-lighter-hover">6000/-</p>
+          </div>
+        </div>
       </div>
-    </div>
-     <div class="card text-white bg-danger mb-3" style="max-width: 18rem;">
-      <div class="card-body">
-          <h2 class="font-weight-light deep-lighter-hover mb-5">Quaterly</h2><br>
-          <p class="brown-lighter-hover">1500/-</p>
-      </div>
-    </div>
-    <div class="card text-white bg-danger mb-3" style="max-width: 15rem;">
-      <div class="card-body">
-          <h2 class="font-weight-light deep-lighter-hover mb-5">Halfyearly</h2>
-          <p class="brown-lighter-hover">3000/-</p>
-      </div>
-    </div>
-     <div class="col-md-6 mb-4 ">
-      <div class="card-body">
-          <h2 class="font-weight-light deep-lighter-hover mb-5">Yearly</h2>
-          <p class="brown-lighter-hover">6000/-</p>
-      </div>
-    </div>
   </div>
 </div>
 

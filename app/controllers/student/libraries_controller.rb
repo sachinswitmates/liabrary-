@@ -1,7 +1,7 @@
 class Student::LibrariesController < ApplicationController
 
   def index
-    @libraries = Library.all
+    @libraries = Library.published
   end
 
   def show

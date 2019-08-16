@@ -1,7 +1,8 @@
 Rails.application.routes.draw do 
-  devise_for :users, :controllers => {:registrations => "users/registrations"} do
+  devise_for :users, :controllers => {:registrations => "users/registrations"},controllers: { omniauth_callbacks: 'users/omniauth_callbacks' } do
   	get '/users/sign_out' => 'devise/sessions#destroy'
   end
+
   
   resources :bookings
  

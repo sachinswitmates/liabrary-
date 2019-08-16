@@ -12,13 +12,19 @@
             <%= form.select :state ,options_for_select(states),{}, class: 'form-control' %><br>
             <%#= form.input :state ,collection: states.map { |c| [c[0], c[1]] } %>
             <%= form.input :city %>
+            <%#= form.label :package %>
+            <%#= form.select :package ,options_for_select(monthly),{}, class: 'form-control' %><br>
+            <%#= form.select :package ,options_for_select(monthly),{}, class: 'form-control' %><br>
           </div>
             <div class="col-6">
+              <%#= form.select :package ,options_for_select(monthly),{}, class: 'form-control' %>
+              <%#= form.select :package ,options_for_select(monthly),{}, class: 'form-control' %>
               <%= form.input :zip_code %>
               <%= form.input :open,hint: 'No sepical characters',placeholder:'8AM-11PM'%>
               <%= form.input :seats ,collection: 0..1000 %>
               <%= form.input :availability,collection: 1..1000 %> 
               <%= form.input :contact_number %>
+              <%= form.hidden_field :user_id, value: current_user.id %>
               <div id="images">
                 <%= form.simple_fields_for :images do |image| %>
                 <%= render 'image_fields', f: image %>

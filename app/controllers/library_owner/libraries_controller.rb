@@ -45,7 +45,7 @@ class LibraryOwner::LibrariesController < ApplicationController
 
 private
   def library_params
-    params.require(:library).permit(:name, :address1,:address2,:state,:city,:landmark,:zip_code, :open, :seats, :availability,:contact_number, images_attributes: [:id, :avatar, :_destroy])
+    params.require(:library).permit(:name, :address1,:address2,:state,:city,:landmark,:zip_code, :open, :seats, :availability,:contact_number,:user_id,images_attributes: [:id, :avatar, :_destroy])
   end
 
 
