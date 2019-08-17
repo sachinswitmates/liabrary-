@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-
+require 'omniauth-google-oauth2'
 # Use this hook to configure devise mailer, warden hooks and so forth.
 # Many of these configuration options can be set straight in your model.
 Devise.setup do |config|
@@ -261,7 +261,7 @@ Devise.setup do |config|
   # up on your models and hooks.
   config.omniauth :facebook, "2394821800606536", "55d804220cebaf873064b4ea954b5ee2",token_params: { parse: :json }
   #config.omniauth :github, '2394821800606536', '55d804220cebaf873064b4ea954b5ee2', scope: 'user,public_repo' 
-  
+  config.omniauth :google_oauth2, "935276905492-4rakhmpis3hu78crionetkdivrvio6nf.apps.googleusercontent.com", "ZeRzcfecUiCqveb9P80CGTJH", { access_type: "offline", approval_prompt: "" }
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
   # change the failure app, you can configure them inside the config.warden block.

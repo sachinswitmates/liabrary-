@@ -29,6 +29,4 @@ class Library < ApplicationRecord
     "#{self.address1} ,#{self.address2} , #{self.landmark}, #{self.city}, #{self.zip_code}, #{self.state}"
   end
 
-
-
 end

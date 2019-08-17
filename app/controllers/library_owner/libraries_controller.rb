@@ -4,6 +4,7 @@ class LibraryOwner::LibrariesController < ApplicationController
   before_action :prevent_unauthorize_access?
   
   def index
+   
     @libraries = current_user.libraries
   end
 
@@ -45,7 +46,7 @@ class LibraryOwner::LibrariesController < ApplicationController
 
 private
   def library_params
-    params.require(:library).permit(:name, :address1,:address2,:state,:city,:landmark,:zip_code, :open, :seats, :availability,:contact_number,:user_id,images_attributes: [:id, :avatar, :_destroy])
+    params.require(:library).permit(:name, :address1,:address2,:state,:city,:landmark,:zip_code, :open, :seats, :availability,:contact_number,:user_id,:monthly, :quaterly, :halfyearly, :yearly,images_attributes: [:id, :avatar, :_destroy])
   end
 
 

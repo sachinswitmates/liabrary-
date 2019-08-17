@@ -7,6 +7,7 @@ class BookingsController < ApplicationController
 
   def new
     @booking = current_user.bookings.new
+    @library = Library.find_by(id: params[:library_id])
   end
 
   def create
@@ -31,5 +32,8 @@ private
   def booking_params
     params.require(:booking).permit(:name, :email, :contact_number, :seats, :package, :library_id)
   end
+
+
+  
 
 end

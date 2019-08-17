@@ -4,12 +4,30 @@
       <%= form.input :name,autofocus: true %>
       <%= form.input :email %>
       <%= form.input :contact_number %>
+      <%= form.label :availability %>
+      <%=  @library.availability %>
       <%= form.input :seats ,collection: 1...2  %>
-      <%= form.hidden_field :library_id, :value => params[:library_id]%>
-
-      
+      <%= form.hidden_field :library_id, :value => params[:library_id] %>
       <div class="field">
-        <%= form.input :package, as: :radio_buttons, collection: ['Monthly', 'Quaterly', 'Halfyearly', 'Yearly'] %>
+        <%= form.label :package %>
+          <ul class="subscription-btn">
+            <li>
+                <input class="form-check-input radio_buttons optional" type="radio" value="<%= @library.monthly %>" name="booking[package]" id="booking_package_monthly">
+                <label for="booking_package_monthly"><strong><%=@library.monthly %>-Monthly </strong></label>
+            </li>
+            <li>
+                <input class="form-check-input radio_buttons optional" type="radio" value="<%=@library.quaterly %>" name="booking[package]" id="booking_package_quaterly">
+                <label for="booking_package_quaterly"><strong><%=@library.quaterly %>-Quaterly </strong></label>
+            </li>
+            <li>
+                <input class="form-check-input radio_buttons optional" type="radio" value="<%=@library.halfyearly %>" name="booking[package]" id="booking_package_halfyearly">
+                <label for="booking_package_halfyearly"><strong><%=@library.halfyearly %>-Half Yearly </strong></label>
+            </li>
+            <li>
+              <input class="form-check-input radio_buttons optional" type="radio" value="<%=@library.yearly %>" name="booking[package]" id="booking_package_yearly ">
+              <label for="booking_package_yearly "><strong><%=@library.yearly %>-Yearly </strong></label>
+            </li>
+          </ul>
       </div>
       <%= form.submit 'Save', class: 'btn btn-primary' %>
     <% end %>
