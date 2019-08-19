@@ -6,15 +6,33 @@
           <div class="card-body"><br>
             <p class="card-text"><strong>Name: </strong><%= booking.name %></p>
             <p class="card-text"><strong>Email: </strong><%= booking.email %></p>
-            <p class="card-text"><strong>Contact_Number: </strong><%= booking.contact_number %></p>
-            <p class="card-text"><strong>Package: </strong><%= booking.package %></p>
-            <p class="card-text"><strong>Seats: </strong><%= booking.seats %></p>
-            <%= link_to 'proceed to payment' '',class: 'btn btn-primary'%>
+      <% end %>
+            <%= link_to 'proceed to payment' '',class: 'btn btn-primary'%> |
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+            Show
+           </button>
+            <div class="modal" id="myModal">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title">Booking Details</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  </div>
+                  <div class="modal-body">
+                   <strong>Name:</strong><%= booking.name %><br>
+                   <strong>Email:</strong><%= booking.email %><br>
+                   <strong>Contact Number:</strong><%= booking.contact_number %><br>
+                   <strong>Seats:</strong><%= booking.seats %><br>
+                   <strong>Package:</strong><%= booking.package %><br>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-      <% else %>
-        <p class="card-text">Booking details not found ..!!</p>
-      <% end %>
     <% end%>
   </div>
 </div>

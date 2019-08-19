@@ -7,9 +7,13 @@
             <%= form.input :name,autofocus: true,placeholder: 'Libraryname' %>
             <%= form.input :address1 %>
             <%= form.input :address2 %>
+            <%= form.input :landmark %>
             <%= form.input :state ,collection: states.map { |c| [c[0], c[1]] } %>
             <%= form.input :city %>
-            <%= form.input :landmark %>
+            <%= form.input :monthly %>
+            <%= form.input :quaterly %>
+            <%= form.input :halfyearly %>
+            <%= form.input :yearly %> 
           </div>
             <div class= "col-6">
               <%= form.input :zip_code %>

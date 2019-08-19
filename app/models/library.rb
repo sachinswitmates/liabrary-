@@ -1,6 +1,7 @@
 class Library < ApplicationRecord
   default_scope -> { where(deleted_at: nil) } 
 
+
   #validations
   # validates :name, presence: true, uniqueness: true
   validates :address1, presence: true, uniqueness: true
@@ -12,6 +13,7 @@ class Library < ApplicationRecord
   validates :seats, presence: true
   validates :availability, presence: true
   validates :contact_number,presence: true #uniqueness:true
+  validate :validate_package
   
   
   #associations
@@ -29,4 +31,15 @@ class Library < ApplicationRecord
     "#{self.address1} ,#{self.address2} , #{self.landmark}, #{self.city}, #{self.zip_code}, #{self.state}"
   end
 
+  def validate_package
+    unless monthly.present? || quaterly.present? || halfyearly.present? || yearly.present?
+      errors.add(:monthly, "You have to fill atleast one package ")
+      errors.add(:quaterly, "You have to fill atleast one package")
+      errors.add(:halfyearly, "You have to fill atleast one package")
+      errors.add(:yearly, "You have to fill atleast one package ")
+    end
+  end
+
+
 end
+

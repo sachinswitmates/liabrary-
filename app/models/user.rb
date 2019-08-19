@@ -13,6 +13,7 @@ class User < ApplicationRecord
   has_one :image, :as => :imageable
   has_one :bank_account
   has_many :bookings
+  has_many :owned_libraries, class_name: 'Library'
   has_many :libraries, :through => :bookings
 
 

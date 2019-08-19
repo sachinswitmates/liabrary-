@@ -6,7 +6,14 @@
   <% end %>
   <div class="card-body">
     <h5 class="card-title"><%= link_to library.name , library_detail_path(library) %></h5>
-    <p class="card-text"><%= fa_icon "map-marker" %> <%= "#{library.city}, #{library.state}" %></p>
-    <%= link_to 'Book Your Seat', new_booking_path(library_id: library.id), class: 'btn btn-primary w-100' %>
+    <p class="card-text">
+      <%= fa_icon "map-marker" %> <%= "#{library.city}, #{library.state}" %>,
+      Available Seats: <%= library.availability %>
+    </p>
+    <% if library.availability == 0 %>
+      <%= link_to 'All Seats Booked', 'javascript:;', class: 'btn btn-primary w-100' %>
+    <% else %>
+      <%= link_to 'Book Your Seat', new_booking_path(library_id: library.id), class: 'btn btn-primary w-100' %>
+    <% end %>
   </div>
 </div>

@@ -4,8 +4,7 @@ class LibraryOwner::LibrariesController < ApplicationController
   before_action :prevent_unauthorize_access?
   
   def index
-   
-    @libraries = current_user.libraries
+    @libraries = current_user.owned_libraries.order("created_at DESC")
   end
 
   def new
@@ -51,6 +50,6 @@ private
 
 
   def set_library
-    @library = current_user.libraries.find(params[:id])
+    @library = current_user.owned_libraries.find(params[:id])
   end
 end

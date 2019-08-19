@@ -33,7 +33,4 @@ private
     params.require(:booking).permit(:name, :email, :contact_number, :seats, :package, :library_id)
   end
 
-
-  
-
 end
