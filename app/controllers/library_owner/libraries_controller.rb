@@ -4,7 +4,7 @@ class LibraryOwner::LibrariesController < ApplicationController
   before_action :prevent_unauthorize_access?
   
   def index
-    @libraries = current_user.owned_libraries.order("created_at DESC")
+    @libraries = current_user.owned_libraries.order("created_at DESC").paginate(page: params[:page], per_page: 10)
   end
 
   def new
@@ -22,6 +22,7 @@ class LibraryOwner::LibrariesController < ApplicationController
   end
 
   def show
+    @bookings = @library.bookings
     @images = @library.images
   end
 
@@ -42,6 +43,8 @@ class LibraryOwner::LibrariesController < ApplicationController
       redirect_to root_path
     end
   end
+
+  
 
 private
   def library_params

@@ -1,49 +1,58 @@
 <div class="row">
-  <div class="col-6">
-    <div class="row">
-      <div class="col-12 text-right">
-        <span class="green-box">Available Seats: <%=  @library.availability %> </span>
-      </div>
-    <div>
-    <%= simple_form_for @booking do |form| %>
-      <%= form.input :name,autofocus: true %>
-      <%= form.input :email %>
-      <%= form.input :contact_number %>
-      <%#= form.input :seats ,collection: 1...2  %>
-      <%= form.hidden_field :library_id, :value => params[:library_id] %>
-      <div class="field">
-        <%= form.label :package %>
-          <ul class="subscription-btn">
-              <li>
-                <%if @library.monthly.present?%>
-                  <input class="form-check-input radio_buttons optional" type="radio" value="<%= @library.monthly %>" name="booking[package]" id="booking_package_monthly">
-                  <label for="booking_package_monthly"><strong><%=@library.monthly %>-Monthly </strong></label>
-                <%end%>
-              </li>
-              <li>
-                <%if @library.monthly.present?%>
-                  <input class="form-check-input radio_buttons optional" type="radio" value="<%=@library.quaterly %>" name="booking[package]" id="booking_package_quaterly">
-                  <label for="booking_package_quaterly"><strong><%=@library.quaterly %>-Quaterly </strong></label>
-                <%end%>
-              </li>
-            
-              <li>
-                <%if @library.halfyearly.present? %>
-                  <input class="form-check-input radio_buttons optional" type="radio" value="<%=@library.halfyearly %>" name="booking[package]" id="booking_package_halfyearly">
-                  <label for="booking_package_halfyearly"><strong><%=@library.halfyearly %>-Half Yearly </strong></label>
-                <%end%> 
-              </li>
-              <li>
-                <%if @library.yearly.present? %>
-                  <input class="form-check-input radio_buttons optional" type="radio" value="<%=@library.yearly %>" name="booking[package]" id="booking_package_yearly ">
-                  <label for="booking_package_yearly "><strong><%=@library.yearly %>-Yearly </strong></label>
-                <%end%>
-              </li>
-          </ul>
-      </div>
-        <br><br><%= form.submit 'Save', class: 'btn btn-primary' %><br>
-        <hr>
-    <% end %>
+  <div class="col-12 text-right">
+    <span class="green-box">Available Seats: <%=  @library.availability %> </span>
   </div>
-</div>
-
+<div>
+<%= simple_form_for(@booking, url: create_library_booking_path(@library)) do |form| %>
+  <%= form.hidden_field :library_id, :value => params[:library_id] %>
+  <%= form.hidden_field :subscription_length %>
+  <ul class="subscription-btn" style="width: 100%">
+    <h4>Choose Package</h4>
+    <li>
+      <%if @library.monthly.present?%>
+        <input class="form-check-input radio_buttons optional" type="radio" value="<%= @library.monthly %>" name="booking[package]" id="booking_package_monthly" data-subscription="monthly">
+        <label for="booking_package_monthly"><strong><%=@library.monthly %>-Monthly </strong></label>
+      <%end%>
+    </li>
+    <li>
+      <%if @library.monthly.present?%>
+        <input class="form-check-input radio_buttons optional" type="radio" value="<%=@library.quaterly %>" name="booking[package]" id="booking_package_quaterly" data-subscription="quaterly">
+        <label for="booking_package_quaterly"><strong><%=@library.quaterly %>-Quaterly </strong></label>
+      <%end%>
+    </li>
+  
+    <li>
+      <%if @library.halfyearly.present? %>
+        <input class="form-check-input radio_buttons optional" type="radio" value="<%=@library.halfyearly %>" name="booking[package]" id="booking_package_halfyearly" data-subscription="halfyearly">
+        <label for="booking_package_halfyearly"><strong><%=@library.halfyearly %>-Half Yearly </strong></label>
+      <%end%> 
+    </li>
+    <li>
+      <%if @library.yearly.present? %>
+        <input class="form-check-input radio_buttons optional" type="radio" value="<%=@library.yearly %>" name="booking[package]" id="booking_package_yearly " data-subscription="yearly">
+        <label for="booking_package_yearly "><strong><%=@library.yearly %>-Yearly </strong></label>
+      <%end%>
+    </li>
+    <h4>Choose Payment Method</h4>
+    <li>
+      <input class="form-check-input radio_buttons optional" type="radio" value="Pay At Library" name="booking[payment]" id="booking_payment_pay_at_library ">
+      <label for="booking_payment_pay_at_library "><strong>Pay at Library </strong></label>
+    </li>
+    <li>
+      <input class="form-check-input radio_buttons optional" type="radio" value="Pay Now" name="booking[payment]" id="booking_payment_pay_now ">
+      <label for="booking_payment_pay_now "><strong>Pay Now </strong></label>
+    </li>
+  </ul>
+  <div class="actions text-right">
+    <%= form.submit 'Save and Pay', class: 'btn btn-primary' %>
+  </div>
+<% end %>
+<script type="text/javascript">
+  $(document).ready(function(){
+    $("input[name='booking[package]']").on('click', function(){
+      var subscription_length = $(this).data('subscription');
+      $('#booking_subscription_length').val(subscription_length);
+      console.log(subscription_length);
+    });
+  });
+</script>

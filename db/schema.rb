@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_19_074520) do
+ActiveRecord::Schema.define(version: 2019_08_20_142510) do
 
   create_table "bank_accounts", force: :cascade do |t|
     t.string "bank_name"
@@ -24,15 +24,15 @@ ActiveRecord::Schema.define(version: 2019_08_19_074520) do
   end
 
   create_table "bookings", force: :cascade do |t|
-    t.string "name"
-    t.string "email"
-    t.string "contact_number"
-    t.integer "seats"
     t.string "package"
     t.integer "user_id"
     t.integer "library_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "payment"
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.string "subscription_length"
     t.index ["user_id", "library_id"], name: "index_bookings_on_user_id_and_library_id"
   end
 

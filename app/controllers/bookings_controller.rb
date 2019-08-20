@@ -1,19 +1,20 @@
 class BookingsController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_library, only: [:new, :create] 
   
   def index
-    @bookings = current_user.bookings
+    @bookings = current_user.bookings.order("created_at DESC").paginate(page: params[:page], per_page: 9)
   end
 
   def new
     @booking = current_user.bookings.new
-    @library = Library.find_by(id: params[:library_id])
   end
 
   def create
     @booking = current_user.bookings.new(booking_params)
     if @booking.save
-      flash[:notice] = "You have successfully booked your seat plz proceeds for payment...!!!"
+      current_user.send_booking_notification_email
+      flash[:notice] = "You have successfully booked your seat please proceeds for payment"
       redirect_to bookings_path
     else
       render 'new'
@@ -30,7 +31,11 @@ class BookingsController < ApplicationController
 
 private
   def booking_params
-    params.require(:booking).permit(:name, :email, :contact_number, :seats, :package, :library_id)
+    params.require(:booking).permit( :package, :payment, :subscription_length, :library_id)
+  end
+
+  def set_library
+    @library = Library.find(params[:library_id])
   end
 
 end

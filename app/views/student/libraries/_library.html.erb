@@ -11,7 +11,7 @@
     <% if library.availability == 0 %>
       <%= link_to 'All Seats Booked', 'javascript:;', class: 'btn btn-primary w-100' %>
     <% else %>
-    <%= link_to 'Book Your Seat', new_booking_path(library_id: library.id), class: 'btn btn-primary w-100' %>
+    <%= link_to 'Book Your Seat', new_library_booking_path(library.id), class: 'btn btn-primary w-100' %>
     <%end%>
   </div>
 </div>

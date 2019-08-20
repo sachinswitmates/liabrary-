@@ -40,6 +40,5 @@ class Library < ApplicationRecord
     end
   end
 
-
 end
 

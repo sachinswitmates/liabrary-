@@ -23,10 +23,10 @@
 }
 
 .subscription-btn li {
-     float:left;
-     margin:0 5px 0 0;
-    width:200px;
-    height:40px;
+    float:left;
+    margin:0 5px 0 0;
+    width: 265px;
+    height:70px;
     position:relative;
 }
 
@@ -45,22 +45,24 @@
 }
 
 .subscription-btn input[type="radio"]:checked + label {
-    background: #dc3545;
+    background: #f76573;
     color: #fff;
 }
 
 .subscription-btn label {
-     padding:5px;
-     border:1px solid #CCC; 
-     cursor:pointer;
+    padding: 20px 5px 5px 5px;
+    border:1px solid #CCC; 
+    cursor:pointer;
     z-index:90;
+    border-radius: 5px;
+    text-align: center;
 }
 
 .subscription-btn label:hover {
      background:#DDD;
 }
 .green-box{
-    background: #dc3545;
+    background: #f76573;
     padding: 5px 15px 5px 15px;
     border-radius: 5px;
     color: #fff;
