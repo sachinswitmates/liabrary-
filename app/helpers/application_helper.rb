@@ -16,33 +16,4 @@ module ApplicationHelper
       ['West Bengal','WB']
     ]
   end
-  def monthly
-    [
-      ['Hundred', '100'],
-      ['Two Hundred','200'],
-      ['Three Hundred','300'],
-      ['Four Hundred','400'],
-      ['Five Hundred','500'],
-      ['Six Hundred','600'],
-      ['Seven Hundred','700'],
-      ['Eight Hundred','800'],
-      ['Nine Hundred','900'],
-      ['Thousand','1000']
-    ]
-  end
-
-  def Quaterly
-    [
-      ['Hundred', '100'],
-      ['Two Hundred','200'],
-      ['Three Hundred','300'],
-      ['Four Hundred','400'],
-      ['Five Hundred','500'],
-      ['Six Hundred','600'],
-      ['Seven Hundred','700'],
-      ['Eight Hundred','800'],
-      ['Nine Hundred','900'],
-      ['Thousand','1000']
-    ]
-  end
 end

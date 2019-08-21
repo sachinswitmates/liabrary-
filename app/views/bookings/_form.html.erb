@@ -15,7 +15,7 @@
       <%end%>
     </li>
     <li>
-      <%if @library.monthly.present?%>
+      <%if @library.quaterly.present?%>
         <input class="form-check-input radio_buttons optional" type="radio" value="<%=@library.quaterly %>" name="booking[package]" id="booking_package_quaterly" data-subscription="quaterly">
         <label for="booking_package_quaterly"><strong><%=@library.quaterly %>-Quaterly </strong></label>
       <%end%>

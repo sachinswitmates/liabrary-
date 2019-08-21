@@ -16,7 +16,6 @@ class User < ApplicationRecord
   has_many :owned_libraries, class_name: 'Library'
   has_many :libraries, :through => :bookings
 
-
   enum role: [:admin, :library_owner, :student]
 
   def user_name

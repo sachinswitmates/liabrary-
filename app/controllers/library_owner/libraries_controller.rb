@@ -22,7 +22,6 @@ class LibraryOwner::LibrariesController < ApplicationController
   end
 
   def show
-    @bookings = @library.bookings
     @images = @library.images
   end
 
@@ -43,9 +42,7 @@ class LibraryOwner::LibrariesController < ApplicationController
       redirect_to root_path
     end
   end
-
   
-
 private
   def library_params
     params.require(:library).permit(:name, :address1,:address2,:state,:city,:landmark,:zip_code, :open, :seats, :availability,:contact_number,:user_id,:monthly, :quaterly, :halfyearly, :yearly,images_attributes: [:id, :avatar, :_destroy])

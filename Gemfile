@@ -52,6 +52,7 @@ gem "font-awesome-rails"
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2' 
+gem 'rqrcode', '>= 1.0.0.pre'
 
 group :development, :test do
 gem "letter_opener"

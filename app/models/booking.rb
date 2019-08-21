@@ -1,13 +1,12 @@
 class Booking < ApplicationRecord
 
   #validations
-  validates :name, presence: true
-  validates :email, presence: true
-  validates :contact_number, presence: true
+  validate :validate_package
    
   #associations
   belongs_to :user, optional:true
   belongs_to :library, optional:true
+  has_one :qrcode
 
   # Callbacks
   after_create :update_availability
@@ -50,11 +49,20 @@ class Booking < ApplicationRecord
     end
   end
 
+
+  def validate_package
+    unless package.present? 
+      errors.add(:package, "You have to pick atleast one package ")
+    end
+  end
+
+
   def send_booking_notification_email
     UserMailer.notify_student(self.user).deliver_now
     library_owner = User.find_by(id: self.library&.user_id)
     UserMailer.notify_booking_library_owner(library_owner).deliver_now if library_owner
   end
+
 
 end
     
