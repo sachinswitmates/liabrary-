@@ -4,16 +4,11 @@
       <% if current_user.bookings.present? %>
         <div class="card" style="width: 300px">
           <div class="card-body"><br>
+            <p class="card-text"><strong>Name:</strong><%= current_user.user_name %><br>
+            <p class="card-text"><strong>Email:</strong><%= current_user.email %><br>
             <p class="card-text"><strong>Package:</strong><%= booking.package %>  <%= booking.subscription_length %><br> 
             <p class="card-text"><strong>Payment Type:</strong><%= booking.payment %><br>
-              <table class="qr">
-              <% @qr.modules.each do |row| %>
-                <% row.each do |col| %>
-                    <%= print col ? "X" : " " %>
-                <%end %>
-                <%= print "\n" %>
-              <%end%>
-            </table>
+             
       <% end %>
             <%#= link_to 'proceed to payment' '',class: 'btn btn-primary'%> 
           </div>
@@ -21,4 +16,4 @@
     </div>
   <% end %>
 </div>
-<%= will_paginate @library,renderer: BootstrapPagination::Rails %>
+<%= will_paginate @bookings, renderer: BootstrapPagination::Rails %>

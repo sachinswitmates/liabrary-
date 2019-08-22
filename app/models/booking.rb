@@ -2,6 +2,7 @@ class Booking < ApplicationRecord
 
   #validations
   validate :validate_package
+  validate :validate_payment
    
   #associations
   belongs_to :user, optional:true
@@ -11,6 +12,7 @@ class Booking < ApplicationRecord
   # Callbacks
   after_create :update_availability
   after_create :update_subscription_date
+  after_create :generate_qrcode
 
   def update_availability
     if library.availability > 0
@@ -56,6 +58,12 @@ class Booking < ApplicationRecord
     end
   end
 
+  def validate_payment
+    unless payment.present?
+      errors.add(:payment, "You have to select one payment mode ")
+    end
+  end
+
 
   def send_booking_notification_email
     UserMailer.notify_student(self.user).deliver_now
@@ -64,5 +72,28 @@ class Booking < ApplicationRecord
   end
 
 
+  def generate_qrcode
+    self.token = generate_token
+    self.save
+    @qr = RQRCode::QRCode.new(self.token, :size => 4, :level => :h)
+    png = @qr.as_png(
+          resize_gte_to: false,
+          resize_exactly_to: false,
+          fill: 'white',
+          color: 'black',
+          size: 120,
+          border_modules: 4,
+          module_px_size: 6,
+          file: nil 
+        )
+    file = File.write("/home/rails/rails_work/test_projects/LibraryApp/public/github-qrcode.png", png.to_s.force_encoding('UTF-8'))
+    file = File.open('/home/rails/rails_work/test_projects/LibraryApp/public/github-qrcode.png')
+    qrcode = self.build_qrcode(code: file)
+    qrcode.save
+  end
+
+  def generate_token
+    SecureRandom.base64(32)
+  end
 end
     

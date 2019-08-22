@@ -7,8 +7,12 @@
   <div class="card-body">
     <h5 class="card-title"><%= link_to library.name , library_owner_library_path(library) %></h5>
     <p class="card-text"><%= fa_icon "map-marker" %> <%= "#{library.city}, #{library.state}" %><br>
-    Available Seats: <%= library.availability %><br> Booked Seats: <%= library.booked_seats %></p>
-    <p class="card-text"></p>
+    Available Seats: <%= library.availability %></p>
+    <% if library.booked_seats.present? %>
+      <p class="card-text"> Booked Seats: <%= library.booked_seats %></p>
+    <%else%>
+      <p class="card-text"> Booked Seats: 0 </p>
+    <%end%>
     <hr>
     <%#= link_to 'View All Bookings',bookings_path, class: 'btn btn-primary' %>
   </div>
