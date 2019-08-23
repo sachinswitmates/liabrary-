@@ -4,11 +4,16 @@
       <% if current_user.bookings.present? %>
         <div class="card" style="width: 300px">
           <div class="card-body"><br>
-            <p class="card-text"><strong>Name:</strong><%= current_user.user_name %><br>
-            <p class="card-text"><strong>Email:</strong><%= current_user.email %><br>
-            <p class="card-text"><strong>Package:</strong><%= booking.package %>  <%= booking.subscription_length %><br> 
+            <div>
+              <% if booking.qrcode %>
+                <%= image_tag booking.qrcode.code.url %>
+              <% end %>
+            </div>
+            <p class="card-text"><strong>Name:</strong><%= current_user.user_name %><br></p>
+            <p class="card-text"><strong>Email:</strong><%= current_user.email %><br></p>
+            <p class="card-text"><strong>Package:</strong><%= booking.package %>  <%= booking.subscription_length %><br> </p>
             <p class="card-text"><strong>Payment Type:</strong><%= booking.payment %><br>
-             
+            </p>
       <% end %>
             <%#= link_to 'proceed to payment' '',class: 'btn btn-primary'%> 
           </div>

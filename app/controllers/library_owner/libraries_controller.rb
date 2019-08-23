@@ -30,6 +30,7 @@ class LibraryOwner::LibrariesController < ApplicationController
 
   def update
     if @library.update(library_params)
+       flash[:notice] = "You have Successfully updated"
       redirect_to library_owner_library_path
     else
       render 'edit'

@@ -11,7 +11,7 @@ class UserMailer < ApplicationMailer
 
   def notify_student(user)
     @user = user
-    attachments['github-qrcode.png'] = File.read('/home/rails/rails_work/test_projects/LibraryApp/public/github-qrcode.png')
+    attachments['code.png'] = File.read('/home/rails/rails_work/test_projects/LibraryApp/public/uploads/qrcode/code/66/code_5.png')
     mail(to: @user.email, subject: 'Your Booking Has Done')
   end
 
@@ -19,5 +19,4 @@ class UserMailer < ApplicationMailer
     @user = user
     mail(to: @user.email, subject: 'Library has booked')
   end
-
 end

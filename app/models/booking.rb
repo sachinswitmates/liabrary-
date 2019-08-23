@@ -86,10 +86,13 @@ class Booking < ApplicationRecord
           module_px_size: 6,
           file: nil 
         )
-    file = File.write("/home/rails/rails_work/test_projects/LibraryApp/public/github-qrcode.png", png.to_s.force_encoding('UTF-8'))
-    file = File.open('/home/rails/rails_work/test_projects/LibraryApp/public/github-qrcode.png')
+    filename = "#{Rails.root}/public/code_#{self.id}.png"
+    file = File.new(filename, "w")
+    File.write(filename, png.to_s.force_encoding('UTF-8'))
+    file = File.open(filename)
     qrcode = self.build_qrcode(code: file)
     qrcode.save
+    File.delete(filename) if File.exist?(filename)
   end
 
   def generate_token

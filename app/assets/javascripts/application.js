@@ -17,6 +17,7 @@
 //= require popper
 //= require bootstrap-sprockets
 //= require cocoon
+//= require instascan.min
 //= require_tree .
 
 
