@@ -1,8 +1,12 @@
 <div >
-  <p>Hello <%= @user.user_name %></p>
-  <br>
-  <p>Thank you for booking your seat.</p>
-  <br>
+  <p>Thank you for booking your seat in </p>
+  <p><%= @user.bookings.last.library.name %></p><br>
+  <p>Here is your booking detail :- </p>
+  <p><strong>Name : </strong><%= @user.user_name %></p>
+  <p><strong>Booking Start Date: </strong><%= @user.bookings.last.start_date %></p>
+  <p><strong>Booking End Date: </strong><%= @user.bookings.last.end_date %></p><br>
+  <p>Scan this Qrcode at the library</p>
+  <%= image_tag attachments['code.png'].url %><br>
   <p>Thank you!</p>
   <p>The LibraryApp Team</p>
 </div>

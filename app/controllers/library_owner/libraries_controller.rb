@@ -43,6 +43,11 @@ class LibraryOwner::LibrariesController < ApplicationController
       redirect_to root_path
     end
   end
+
+  def library_bookings
+    @library = Library.find(params[:id])
+    @bookings = @library.bookings
+  end
   
 private
   def library_params

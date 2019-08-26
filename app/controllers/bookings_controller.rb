@@ -14,7 +14,7 @@ class BookingsController < ApplicationController
     @booking = current_user.bookings.new(booking_params)
     if @booking.save
       @booking.send_booking_notification_email
-      flash[:notice] = "You have successfully booked your seat please proceeds for payment"
+      flash[:notice] = "You have successfully booked your seat."
       redirect_to bookings_path
     else
       render 'new'

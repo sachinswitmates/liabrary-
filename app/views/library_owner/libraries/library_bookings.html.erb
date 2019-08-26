@@ -1,0 +1,15 @@
+<div class="bg-white"> 
+  <div class="row">
+    <div class ="col-4" style="margin-bottom: 10px">
+      <% if @library.bookings.present? %>
+        <div class="card" style="width: 300px">
+          <div class="card-body"><br>
+            <p class="card-text"><%= @library.name %></p>
+      <%else%>
+            <p>This Library Has No Bookings</p>
+          </div>
+        </div>
+      <%end%>
+    </div>
+  </div>
+</div>

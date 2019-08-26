@@ -21,6 +21,10 @@
       <p class="card=text"><strong>Seats: </strong><%=@library.seats %></p>
       <p class="card-text"><strong>Availability: </strong><%= @library.availability %></p>
       <p class="card-text"><strong>Contact Number: </strong><%= @library.contact_number %></p>
+      <p class="card-text"><strong>Monthly: </strong><%= @library.monthly %></p>
+      <p class="card-text"><strong>Quaterly: </strong><%= @library.quaterly %></p>
+      <p class="card-text"><strong>HalfYearly: </strong><%= @library.halfyearly %></p>
+      <p class="card-text"><strong>Yearly: </strong><%= @library.yearly %></p>
       <%= link_to 'Back', admin_libraries_path %> |
       <%= link_to 'Edit', edit_admin_library_path(@library) %>
     </div>
