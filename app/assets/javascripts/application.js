@@ -18,6 +18,8 @@
 //= require bootstrap-sprockets
 //= require cocoon
 //= require instascan.min
+//= require lightgallery.min
+//= require lg-thumbnail
 //= require_tree .
 
 

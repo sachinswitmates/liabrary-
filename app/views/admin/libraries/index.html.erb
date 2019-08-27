@@ -12,8 +12,8 @@
       <th scope ="col">Address</th>
       <th scope = "col">opens</th>
       <th scope ="col">Seats</th>
-      <th scope ="col">Availability</th>
       <th style = "width: 15%">Contact Number</th>
+      <th style ="col">Published</th>
       <th colspan="6"></th>
     </tr>
     <% @libraries.each do |library| %>
@@ -22,12 +22,8 @@
         <td><%= library.library_address %></td>
         <td><%= library.open %></td>
         <td><%= library.seats %></td>
-        <td><%= library.availability %></td>
         <td><%= library.contact_number %></td>
-        <td><%#= library.monthly %></td>
-        <td><%#= library.quaterly %></td>
-        <td><%#= library.halfyearly %></td>
-        <td><%#= library.yearly %></td>
+        <td><%= library.published %></td>
         <td>
           <%= link_to admin_library_path(library) do %>
             <%= fa_icon "eye" %>

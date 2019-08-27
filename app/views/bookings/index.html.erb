@@ -24,6 +24,9 @@
           </div>
       </div>
     <% end %>
+    <% if current_user.bookings.blank? %>
+      <p class="card-text">You don't have any bookings </p>
+    <%end%>
   </div>
 <%= will_paginate @bookings, renderer: BootstrapPagination::Rails %>
 </div>

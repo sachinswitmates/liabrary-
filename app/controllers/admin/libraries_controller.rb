@@ -30,6 +30,7 @@ class Admin::LibrariesController < ApplicationController
   def update
     @library = Library.find(params[:id])
     if @library.update(library_params)
+      @library.send_published_notification_email
       redirect_to admin_library_path
     else
       render 'edit'
@@ -53,7 +54,7 @@ class Admin::LibrariesController < ApplicationController
 
 private
   def library_params
-    params.require(:library).permit(:name,:address1,:address2,:state,:city,:landmark,:zip_code, :open, :seats, :availability,:contact_number,:published)
+    params.require(:library).permit(:name,:address1,:address2,:state,:city,:landmark,:zip_code, :open, :seats,:contact_number,:published)
   end
 end
   

@@ -3,7 +3,7 @@ class BookingsController < ApplicationController
   before_action :set_library, only: [:new, :create] 
   
   def index
-    @bookings = current_user.bookings.order("created_at DESC").paginate(page: params[:page], per_page: 9)
+    @bookings = current_user.bookings.order("created_at DESC").paginate(page: params[:page], per_page: 10)
   end
 
   def new

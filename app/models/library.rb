@@ -3,7 +3,7 @@ class Library < ApplicationRecord
 
 
   #validations
-  # validates :name, presence: true, uniqueness: true
+  validates :name, presence: true, uniqueness: true
   validates :address1, presence: true, uniqueness: true
   validates :city, presence: true
   validates :zip_code, presence: true
@@ -11,10 +11,8 @@ class Library < ApplicationRecord
   validates :state, presence: true
   validates :open, presence: true
   validates :seats, presence: true
-  validates :availability, presence: true
   validates :contact_number,presence: true #uniqueness:true
   validate :validate_package
-  
   
   #associations
   #belongs_to :user, optional: true
@@ -30,6 +28,10 @@ class Library < ApplicationRecord
     "#{self.address1} ,#{self.address2} , #{self.landmark}, #{self.city}, #{self.zip_code}, #{self.state}"
   end
 
+  def library_name
+    "#{name}"
+  end
+
   def validate_package
     unless monthly.present? || quaterly.present? || halfyearly.present? || yearly.present?
       errors.add(:monthly, "You have to fill atleast one package ")
@@ -39,5 +41,9 @@ class Library < ApplicationRecord
     end
   end
 
+  def send_published_notification_email
+    library_owner = User.find_by(id: self&.user_id)
+    UserMailer.notify_library_owner_published_library(library_owner).deliver_now if library_owner
+  end
 end
 

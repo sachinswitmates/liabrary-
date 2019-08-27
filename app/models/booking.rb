@@ -15,8 +15,8 @@ class Booking < ApplicationRecord
   after_create :generate_qrcode
 
   def update_availability
-    if library.availability > 0
-      library.decrement!(:availability)
+    if library.seats > 0
+      library.decrement!(:seats)
       library.increment!(:booked_seats)
     end
   end 
@@ -26,6 +26,7 @@ class Booking < ApplicationRecord
     self.end_date = calcuate_subscription_end
     self.save
   end 
+
   
   def subscription_type
     if self.subscription_length == 'monthly'

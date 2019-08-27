@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-12 text-right">
-    <span class="green-box">Available Seats: <%=  @library.availability %> </span>
+    <span class="green-box">Available Seats: <%=  @library.seats %> </span>
   </div>
 <div>
 <%= simple_form_for(@booking, url: create_library_booking_path(@library)) do |form| %>

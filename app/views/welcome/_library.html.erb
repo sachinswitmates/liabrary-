@@ -1,19 +1,37 @@
 <div class="card">
-  <% if library.images.present? %>
-  	<%= image_tag library.images.first.avatar.url , class: 'card-img-top' %>
-  <% else %>
-  	<%= image_tag 'default_library.jpg', class: 'card-img-top' %>
-  <% end %>
+  <div id="library-gallary-<%= library.id %>" >
+    <% if library.images.present? %>
+      <% index = 0 %>
+      <% library.images.each do |image| %>
+        <a href="<%= image.avatar.url %>">
+          <%= image_tag image.avatar.url , class: "card-img-top #{index > 0 ? 'width-20' : '' }" %>
+        </a>
+        <% index += 1 %>
+      <% end %>
+    <% else %>
+      <a href="assets/default_library.jpg">
+        <%= image_tag 'default_library.jpg' , class: 'card-img-top' %>    
+      </a>
+    <% end %>
+  </div>
   <div class="card-body">
     <h5 class="card-title"><%= link_to library.name , library_detail_path(library) %></h5>
     <p class="card-text">
       <%= fa_icon "map-marker" %> <%= "#{library.city}, #{library.state}" %>,
-      Available Seats: <%= library.availability %>
+      Available Seats: <%= library.seats %>
     </p>
-    <% if library.availability == 0 %>
+    <% if library.seats == 0 %>
       <%= link_to 'All Seats Booked', 'javascript:;', class: 'btn btn-primary w-100' %>
     <% else %>
       <%= link_to 'Book Your Seat', new_library_booking_path(library.id), class: 'btn btn-primary w-100' %>
     <% end %>
   </div>
 </div>
+<script type="text/javascript">
+    $(document).ready(function() {
+        var library_id = "<%= library.id %>"
+        $("#library-gallary-"+library_id).lightGallery({
+          thumbnail:true
+        }); 
+    });
+</script>
