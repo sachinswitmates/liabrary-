@@ -1,3 +1,2 @@
 require 'razorpay'
-
-Razorpay.setup('rzp_test_dDQcpODWRVQWPJ', 'zem2KnuABLwU7nnRTD9X6WP6')
+Razorpay.setup(ENV['RAZORPAY_KEY_ID'], ENV['RAZORPAY_SECRET_KEY'])

@@ -1,3 +1,4 @@
+<script type="text/javascript" src="https://checkout.razorpay.com/v1/razorpay.js"></script>
 <div class="row">
   <div class="col-12 text-right">
     <span class="green-box">Available Seats: <%=  @library.seats %> </span>
@@ -44,9 +45,42 @@
     </li>
   </ul>
   <div class="actions text-right">
-    <%= form.submit 'Save and Pay', class: 'btn btn-primary' %>
+    <%= form.submit 'Save and Pay', class: 'btn btn-primary', id: 'rzp-button1' %>
   </div>
 <% end %>
+
+<!-- <button id="rzp-button1">Pay</button> -->
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+  var razorpayKeyId = "<%= ENV['RAZORPAY_KEY_ID'] %>";
+  var options = {
+    "key": razorpayKeyId, // Enter the Key ID generated from the Dashboard
+    "amount": "29935", // Amount is in currency subunits. Default currency is INR. Hence, 29935 refers to 29935 paise or INR 299.35.
+    "currency": "INR",
+    "name": "LibraryApp",
+    "description": "A Wild Sheep Chase is the third novel by Japanese author  Haruki Murakami",
+    "image": "https://example.com/your_logo",
+    "plan_id": "plan_DBNKFmNMgn8JJc",//This is a sample Order ID. Create an Order using Orders API. (https://razorpay.com/docs/payment-gateway/orders/integration/#step-1-create-an-order). Refer the Checkout form table given below
+    "handler": function (response){
+        alert(response.razorpay_payment_id);
+    },
+    "prefill": {
+        "name": "Gaurav Kumar",
+        "email": "gaurav.kumar@example.com"
+    },
+    "notes": {
+        "address": "note value"
+    },
+    "theme": {
+        "color": "#F37254"
+    }
+};
+var rzp1 = new Razorpay(options);
+document.getElementById('rzp-button1').onclick = function(e){
+    rzp1.open();
+    e.preventDefault();
+}
+</script>
 
 <script type="text/javascript">
   $(document).ready(function(){
@@ -56,4 +90,14 @@
       console.log(subscription_length);
     });
   });
+</script>
+<script type="text/javascript">
+  var razorpayKeyId = "<%= ENV['RAZORPAY_KEY_ID'] %>";
+  var razorpay = new Razorpay({
+    key: razorpayKeyId,
+    image: 'https://i.imgur.com/n5tjHFD.png',
+  });
+  razorpay.once('ready', function(response) {
+    
+  })
 </script>

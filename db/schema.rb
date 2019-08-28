@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_27_071951) do
+ActiveRecord::Schema.define(version: 2019_08_28_105459) do
 
   create_table "bank_accounts", force: :cascade do |t|
     t.string "bank_name"
@@ -67,6 +67,10 @@ ActiveRecord::Schema.define(version: 2019_08_27_071951) do
     t.integer "halfyearly"
     t.integer "yearly"
     t.integer "booked_seats"
+    t.string "monthly_plan_id"
+    t.string "quaterly_plan_id"
+    t.string "halfyearly_plan_id"
+    t.string "yearly_plan_id"
     t.index ["deleted_at"], name: "index_libraries_on_deleted_at"
     t.index ["user_id"], name: "index_libraries_on_user_id"
   end

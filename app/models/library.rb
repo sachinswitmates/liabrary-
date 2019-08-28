@@ -20,9 +20,12 @@ class Library < ApplicationRecord
   has_many :bookings
   has_many :users, :through => :bookings
 
+  after_create :create_plan_on_razorpay
+
   accepts_nested_attributes_for :images, reject_if: :all_blank, allow_destroy: true
   
   scope :published, -> { where(:published => true) }
+  PACKAGES = ['monthly', 'quaterly', 'halfyearly', 'yearly']
 
   def library_address
     "#{self.address1} ,#{self.address2} , #{self.landmark}, #{self.city}, #{self.zip_code}, #{self.state}"
@@ -45,5 +48,44 @@ class Library < ApplicationRecord
     library_owner = User.find_by(id: self&.user_id)
     UserMailer.notify_library_owner_published_library(library_owner).deliver_now if library_owner
   end
+
+  def create_plan_on_razorpay
+    PACKAGES.each do |package|
+      if self[package].present?
+        options={
+          "period": (package == 'yearly') ? 'yearly' : 'monthly',
+          "interval": get_interval(package),
+          "item": {
+            "name": "L-#{self.id}-#{self[package]}-#{package}",
+            "description": "L-#{self.id}-#{self[package]}-#{package}",
+            "amount": self[package].to_i * 100,
+            "currency": "INR"
+          },
+        }
+
+        begin
+          plan = Razorpay::Plan.create(options)
+          if plan.id.present?
+            self.update_attribute("#{package}_plan_id", plan.id)
+          end
+        rescue => e
+          puts e.messages
+        end
+      end
+    end
+  end
+
+  def get_interval(package)
+    if package == 'monthly'
+      1
+    elsif package == 'quaterly'
+      3
+    elsif package == 'halfyearly'
+      6
+    elsif package == 'yearly'
+      1
+    end
+  end
 end
+
 
