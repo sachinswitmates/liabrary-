@@ -1,6 +1,8 @@
 class Booking < ApplicationRecord
 
   #validations
+  validates :package, presence: true
+  validates :payment, presence: true
   validate :validate_package
   validate :validate_payment
    

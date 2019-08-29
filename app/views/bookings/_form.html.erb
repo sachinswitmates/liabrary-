@@ -7,30 +7,31 @@
 <%= simple_form_for(@booking, url: create_library_booking_path(@library)) do |form| %>
   <%= form.hidden_field :library_id, :value => params[:library_id] %>
   <%= form.hidden_field :subscription_length %>
+  <%= form.hidden_field :razorpay_payment_id %>
   <ul class="subscription-btn" style="width: 100%">
     <h4>Choose Package</h4>
     <li>
       <%if @library.monthly.present?%>
-        <input class="form-check-input radio_buttons optional" type="radio" value="<%= @library.monthly %>" name="booking[package]" id="booking_package_monthly" data-subscription="monthly">
+        <input class="form-check-input radio_buttons optional" type="radio" value="<%= @library.monthly %>" name="booking[package]" id="booking_package_monthly" data-subscription="monthly" data-planId="<%=@library.monthly_plan_id %>" >
         <label for="booking_package_monthly"><strong><%=@library.monthly %>-Monthly </strong></label>
       <%end%>
     </li>
     <li>
       <%if @library.quaterly.present?%>
-        <input class="form-check-input radio_buttons optional" type="radio" value="<%=@library.quaterly %>" name="booking[package]" id="booking_package_quaterly" data-subscription="quaterly">
+        <input class="form-check-input radio_buttons optional" type="radio" value="<%=@library.quaterly %>" name="booking[package]" id="booking_package_quaterly" data-subscription="quaterly" data-planId="<%=@library.quaterly_plan_id %>" >
         <label for="booking_package_quaterly"><strong><%=@library.quaterly %>-Quaterly </strong></label>
       <%end%>
     </li>
   
     <li>
       <%if @library.halfyearly.present? %>
-        <input class="form-check-input radio_buttons optional" type="radio" value="<%=@library.halfyearly %>" name="booking[package]" id="booking_package_halfyearly" data-subscription="halfyearly">
+        <input class="form-check-input radio_buttons optional" type="radio" value="<%=@library.halfyearly %>" name="booking[package]" id="booking_package_halfyearly" data-subscription="halfyearly" data-planId="<%=@library.halfyearly_plan_id %>" >
         <label for="booking_package_halfyearly"><strong><%=@library.halfyearly %>-Half Yearly </strong></label>
       <%end%> 
     </li>
     <li>
       <%if @library.yearly.present? %>
-        <input class="form-check-input radio_buttons optional" type="radio" value="<%=@library.yearly %>" name="booking[package]" id="booking_package_yearly " data-subscription="yearly">
+        <input class="form-check-input radio_buttons optional" type="radio" value="<%=@library.yearly %>" name="booking[package]" id="booking_package_yearly " data-subscription="yearly" data-planId="<%=@library.yearly_plan_id %>" >
         <label for="booking_package_yearly "><strong><%=@library.yearly %>-Yearly </strong></label>
       <%end%>
     </li>
@@ -52,34 +53,34 @@
 <!-- <button id="rzp-button1">Pay</button> -->
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 <script>
-  var razorpayKeyId = "<%= ENV['RAZORPAY_KEY_ID'] %>";
-  var options = {
-    "key": razorpayKeyId, // Enter the Key ID generated from the Dashboard
-    "amount": "29935", // Amount is in currency subunits. Default currency is INR. Hence, 29935 refers to 29935 paise or INR 299.35.
-    "currency": "INR",
-    "name": "LibraryApp",
-    "description": "A Wild Sheep Chase is the third novel by Japanese author  Haruki Murakami",
-    "image": "https://example.com/your_logo",
-    "plan_id": "plan_DBNKFmNMgn8JJc",//This is a sample Order ID. Create an Order using Orders API. (https://razorpay.com/docs/payment-gateway/orders/integration/#step-1-create-an-order). Refer the Checkout form table given below
-    "handler": function (response){
-        alert(response.razorpay_payment_id);
-    },
-    "prefill": {
-        "name": "Gaurav Kumar",
-        "email": "gaurav.kumar@example.com"
-    },
-    "notes": {
-        "address": "note value"
-    },
-    "theme": {
-        "color": "#F37254"
-    }
-};
-var rzp1 = new Razorpay(options);
-document.getElementById('rzp-button1').onclick = function(e){
-    rzp1.open();
-    e.preventDefault();
-}
+//   var razorpayKeyId = "<%= ENV['RAZORPAY_KEY_ID'] %>";
+//   var options = {
+//     "key": razorpayKeyId, // Enter the Key ID generated from the Dashboard
+//     "amount": "29935", // Amount is in currency subunits. Default currency is INR. Hence, 29935 refers to 29935 paise or INR 299.35.
+//     "currency": "INR",
+//     "name": "LibraryApp",
+//     "description": "A Wild Sheep Chase is the third novel by Japanese author  Haruki Murakami",
+//     "image": "https://example.com/your_logo",
+//     "plan_id": "plan_DBNKFmNMgn8JJc",//This is a sample Order ID. Create an Order using Orders API. (https://razorpay.com/docs/payment-gateway/orders/integration/#step-1-create-an-order). Refer the Checkout form table given below
+//     "handler": function (response){
+//         alert(response.razorpay_payment_id);
+//     },
+//     "prefill": {
+//         "name": "Gaurav Kumar",
+//         "email": "gaurav.kumar@example.com"
+//     },
+//     "notes": {
+//         "address": "note value"
+//     },
+//     "theme": {
+//         "color": "#F37254"
+//     }
+// };
+// var rzp1 = new Razorpay(options);
+// document.getElementById('rzp-button1').onclick = function(e){
+//     rzp1.open();
+//     e.preventDefault();
+// }
 </script>
 
 <script type="text/javascript">
@@ -92,12 +93,88 @@ document.getElementById('rzp-button1').onclick = function(e){
   });
 </script>
 <script type="text/javascript">
-  var razorpayKeyId = "<%= ENV['RAZORPAY_KEY_ID'] %>";
-  var razorpay = new Razorpay({
-    key: razorpayKeyId,
-    image: 'https://i.imgur.com/n5tjHFD.png',
-  });
-  razorpay.once('ready', function(response) {
+  // var razorpayKeyId = "<%= ENV['RAZORPAY_KEY_ID'] %>";
+  // var razorpay = new Razorpay({
+  //   key: razorpayKeyId,
+  //   image: 'https://i.imgur.com/n5tjHFD.png',
+  // });
+  // razorpay.once('ready', function(response) {
     
-  })
+  // })
+</script>
+<script>
+  // Function to lazy load a script
+  // -----------------------------------------------
+  var loadExternalScript = function(path) {
+    var result = $.Deferred(),
+        script = document.createElement("script");
+
+    script.async = "async";
+    script.type = "text/javascript";
+    script.src = path;
+    script.onload = script.onreadystatechange = function(_, isAbort) {
+      if (!script.readyState || /loaded|complete/.test(script.readyState)) {
+        if (isAbort)
+          result.reject();
+        else
+          result.resolve();
+      }
+    };
+
+    script.onerror = function() {
+      result.reject();
+    };
+
+    $("head")[0].appendChild(script);
+
+    return result.promise();
+  };
+</script>
+<script type="text/javascript">
+razorpayKeyId = "<%= ENV['RAZORPAY_KEY_ID'] %>";
+var callRazorPayScript = function(itemId, amount) {
+  var merchangeName = "LibraryApp",
+      img = "https://s3.amazonaws.com/uifaces/faces/twitter/jsa/128.jpg",
+      name = "LibraryApp",
+      description = "Library subscription",
+      amount = amount;
+      
+  loadExternalScript('https://checkout.razorpay.com/v1/checkout.js').then(function() { 
+    var options = {
+      key: razorpayKeyId,
+      protocol: 'https',
+      hostname: 'api.razorpay.com',
+      amount: amount * 100,
+      name: merchangeName,
+      description: description,
+      image: img,
+      prefill: {
+        name: name,
+      },
+      theme: {
+        color: '#f76573'
+      },
+      handler: function (transaction){
+        if (transaction.razorpay_payment_id){
+          $('#booking_razorpay_payment_id').val(transaction.razorpay_payment_id)
+          $("#new_booking").submit();
+        }
+        console.log('Transaction id: ' + transaction.razorpay_payment_id);
+      }
+    };
+
+    window.rzpay = new Razorpay(options);
+
+    console.log('Item Id: ', itemId);
+    console.log('Amount: ', amount);
+    rzpay.open();
+  });
+}
+
+$('#rzp-button1').on('click', function(e) {
+  e.preventDefault();
+  var amount= $("input[name='booking[package]']:checked").val()
+  var plan_id = $("input[name='booking[package]']:checked").data('planid')
+  callRazorPayScript(plan_id, amount);
+});
 </script>

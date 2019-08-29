@@ -20,6 +20,7 @@ class Library < ApplicationRecord
   has_many :bookings
   has_many :users, :through => :bookings
 
+  #callbacks
   after_create :create_plan_on_razorpay
 
   accepts_nested_attributes_for :images, reject_if: :all_blank, allow_destroy: true
@@ -29,10 +30,6 @@ class Library < ApplicationRecord
 
   def library_address
     "#{self.address1} ,#{self.address2} , #{self.landmark}, #{self.city}, #{self.zip_code}, #{self.state}"
-  end
-
-  def library_name
-    "#{name}"
   end
 
   def validate_package

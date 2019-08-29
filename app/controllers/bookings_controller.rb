@@ -31,7 +31,7 @@ class BookingsController < ApplicationController
 
 private
   def booking_params
-    params.require(:booking).permit(:package, :payment, :subscription_length,:token, :library_id)
+    params.require(:booking).permit(:package, :payment, :subscription_length,:token, :library_id,:razorpay_payment_id)
   end
 
   def set_library
