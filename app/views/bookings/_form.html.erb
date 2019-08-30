@@ -8,6 +8,7 @@
   <%= form.hidden_field :library_id, :value => params[:library_id] %>
   <%= form.hidden_field :subscription_length %>
   <%= form.hidden_field :razorpay_payment_id %>
+  <%= form.hidden_field :plan_id %>
   <ul class="subscription-btn" style="width: 100%">
     <h4>Choose Package</h4>
     <li>
@@ -177,4 +178,13 @@ $('#rzp-button1').on('click', function(e) {
   var plan_id = $("input[name='booking[package]']:checked").data('planid')
   callRazorPayScript(plan_id, amount);
 });
+</script>
+<script type="text/javascript">
+  $(document).ready(function(){
+    $("input[name='booking[package]']").on('click', function(){
+      var plan_id = $(this).data('planid');
+      $('#booking_plan_id').val(plan_id);
+      console.log(plan_id);
+    });
+  });
 </script>

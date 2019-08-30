@@ -1,7 +1,6 @@
 class Library < ApplicationRecord
   default_scope -> { where(deleted_at: nil) } 
 
-
   #validations
   validates :name, presence: true, uniqueness: true
   validates :address1, presence: true, uniqueness: true

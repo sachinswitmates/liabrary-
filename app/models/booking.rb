@@ -1,8 +1,6 @@
 class Booking < ApplicationRecord
 
   #validations
-  validates :package, presence: true
-  validates :payment, presence: true
   validate :validate_package
   validate :validate_payment
    
@@ -15,6 +13,7 @@ class Booking < ApplicationRecord
   after_create :update_availability
   after_create :update_subscription_date
   after_create :generate_qrcode
+  #after_create :create_subscription_on_razorpay
 
   def update_availability
     if library.seats > 0
@@ -29,7 +28,6 @@ class Booking < ApplicationRecord
     self.save
   end 
 
-  
   def subscription_type
     if self.subscription_length == 'monthly'
       1
@@ -54,7 +52,6 @@ class Booking < ApplicationRecord
     end
   end
 
-
   def validate_package
     unless package.present? 
       errors.add(:package, "You have to pick atleast one package ")
@@ -67,13 +64,11 @@ class Booking < ApplicationRecord
     end
   end
 
-
   def send_booking_notification_email
     UserMailer.notify_student(self.user).deliver_now
     library_owner = User.find_by(id: self.library&.user_id)
     UserMailer.notify_booking_library_owner(library_owner).deliver_now if library_owner
   end
-
 
   def generate_qrcode
     self.token = generate_token
@@ -101,5 +96,19 @@ class Booking < ApplicationRecord
   def generate_token
     SecureRandom.base64(32)
   end
+
+  # def create_subscription_on_razorpay
+  #   options= {
+  #     "plan_id": self.plan_id,
+  #     "total_count": 1,
+  #     "start_at": (Time.now + 30.days).to_i,
+  #     "notes": {
+  #       "notes_key": ""
+  #     },
+  #     "customer_notify": 1,
+  #     "expire_by": (Time.now + 60.days).to_i,
+  #   }
+  #   plan = Razorpay::Subscription.create(options)
+  # end
 end
     
