@@ -1,21 +1,19 @@
 class Booking < ApplicationRecord
-
-  #validations
-  validate :validate_package
-  validate :validate_payment
    
+  enum payment_status: [:paid, :unpaid]
+
   #associations
   belongs_to :user, optional:true
   belongs_to :library, optional:true
   has_one :qrcode
 
   # Callbacks
-  after_create :update_availability
+  after_create :update_seats
   after_create :update_subscription_date
   after_create :generate_qrcode
   #after_create :create_subscription_on_razorpay
 
-  def update_availability
+  def update_seats
     if library.seats > 0
       library.decrement!(:seats)
       library.increment!(:booked_seats)
@@ -52,18 +50,6 @@ class Booking < ApplicationRecord
     end
   end
 
-  def validate_package
-    unless package.present? 
-      errors.add(:package, "You have to pick atleast one package ")
-    end
-  end
-
-  def validate_payment
-    unless payment.present?
-      errors.add(:payment, "You have to select one payment mode ")
-    end
-  end
-
   def send_booking_notification_email
     UserMailer.notify_student(self.user).deliver_now
     library_owner = User.find_by(id: self.library&.user_id)
@@ -71,6 +57,7 @@ class Booking < ApplicationRecord
   end
 
   def generate_qrcode
+    unless self.razorpay_payment_id.blank?
     self.token = generate_token
     self.save
     @qr = RQRCode::QRCode.new(self.token, :size => 4, :level => :h)
@@ -92,23 +79,24 @@ class Booking < ApplicationRecord
     qrcode.save
     File.delete(filename) if File.exist?(filename)
   end
+  end
 
   def generate_token
     SecureRandom.base64(32)
   end
 
-  # def create_subscription_on_razorpay
-  #   options= {
-  #     "plan_id": self.plan_id,
-  #     "total_count": 1,
-  #     "start_at": (Time.now + 30.days).to_i,
-  #     "notes": {
-  #       "notes_key": ""
-  #     },
-  #     "customer_notify": 1,
-  #     "expire_by": (Time.now + 60.days).to_i,
-  #   }
-  #   plan = Razorpay::Subscription.create(options)
-  # end
+  def create_subscription_on_razorpay
+    options= {
+      "plan_id": self.plan_id,
+      "total_count": 1,
+      "start_at": (Time.now + 30.days).to_i,
+      "notes": {
+        "notes_key": ""
+      },
+      "customer_notify": 1,
+      "expire_by": (Time.now + 60.days).to_i,
+    }
+    plan = Razorpay::Subscription.create(options)
+  end
 end
     

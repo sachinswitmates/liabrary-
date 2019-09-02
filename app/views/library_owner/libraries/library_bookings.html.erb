@@ -1,27 +1,52 @@
-<div class="bg-white"> 
+<div class="bg-white">
   <div class="row">
-    <% @bookings.each do |booking| %>
-      <div class ="col-4" style="margin-bottom: 10px">
-        <% if @library.bookings.present? %>
-          <div class="card" style="width: 300px">
-            <div class="card-body"><br>
-              <p class="card-text"><strong>Name: </strong><%= booking.user.user_name %></p>
-              <p class="card-text"><strong>Email: </strong><%= booking.user.email %></p>
-              <p class="card-text"><strong>Package: </strong><%= booking.package %>  <%= booking.subscription_length %><br> </p>
-              <p class="card-text"><strong>Payment Type: </strong><%= booking.payment %></p>
-              <p class="card-text"><strong>Booking Duration: </strong><%= booking.subscription_length %><br></p>
-              <p class= "card-text"><strong>Start Date:</strong><%= booking.start_date %></p>
-              <p class= "card-text"><strong>End Date:</strong><%= booking.end_date %><br></p>
-            </div>
-          </div>
-        <%end%>
-      </div>
-    <%end%>
-    <% if @library.bookings.blank? %>
-      <p class="card-text">This Library Has No Bookings</p>
-    <%end%>
+    <div class="col-6">
+      <h3>Bookings</h3>
+      <hr>
+    </div>
+    <div class="col-6 text-right">
+    </div>
   </div>
+    <table class="table table-striped">
+      <% if @library.bookings.present? %>
+        <tr>
+          <th scope = "col">Name</th>
+          <th style = "col">Email</th>
+          <th scope ="col">Package</th>
+          <th style = "width: 15%">Payment Type</th>
+          <th style = "col">Subscription Type</th>
+          <th style = "col">Start Date</th>
+          <th style = "col">End Date</th>
+          <th colspan="7"></th>
+        </tr>
+      <%end%>
+        <% @bookings.each do |booking| %>
+          <% if @library.bookings.present? %>
+            <tr>
+              <td><%= booking.user.user_name %></td>
+              <td><%= booking.user.email %></td>
+              <td><%= booking.package %></td>
+              <td><%= booking.payment %></td>
+              <td><%= booking.subscription_length %></td>
+              <td><%= booking.start_date.strftime('%d %b,%Y') %></td>
+              <td><%= booking.end_date&.strftime('%d %b,%Y') %></td>
+            </tr>
+          <%end%>
+        <%end%>
+          <% if @library.bookings.blank? %>
+            <p> This Library Has No Bookings.</p>
+          <%end%>
+    </table>
+    <%= will_paginate @bookings, renderer: BootstrapPagination::Rails %>
 </div>
+
+
+
+
+
+
+
+
 
               
              

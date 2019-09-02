@@ -20,6 +20,7 @@
 //= require instascan.min
 //= require lightgallery.min
 //= require lg-thumbnail
+//= require jquery.validate
 //= require_tree .
 
 

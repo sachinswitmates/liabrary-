@@ -19,7 +19,8 @@ Rails.application.routes.draw do
   namespace :student do
     resources :libraries
   end
-  resources :bookings, only: [:index]
+  
+  resources :bookings, only: [:index, :show]
   get    '/libraries/:library_id/bookings',  to: 'bookings#new', as: 'new_library_booking'
   post   '/libraries/:library_id/bookings',  to: 'bookings#create', as: 'create_library_booking'
 end

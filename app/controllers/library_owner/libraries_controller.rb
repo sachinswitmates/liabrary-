@@ -46,14 +46,13 @@ class LibraryOwner::LibrariesController < ApplicationController
 
   def library_bookings
     @library = Library.find(params[:id])
-    @bookings = @library.bookings
+    @bookings = @library.bookings.order("created_at DESC").paginate(:page => params[:page], :per_page => 10)
   end
   
 private
   def library_params
     params.require(:library).permit(:name, :address1,:address2,:state,:city,:landmark,:zip_code, :open, :seats,:contact_number,:user_id,:monthly, :quaterly, :halfyearly, :yearly,:monthly_plan_id,:quaterly_plan_id,:halfyearly_plan_id,:yearly,images_attributes: [:id, :avatar, :_destroy])
   end
-
 
   def set_library
     @library = current_user.owned_libraries.find(params[:id])

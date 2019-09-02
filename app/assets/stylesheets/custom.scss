@@ -70,3 +70,21 @@
 .width-20{
   width: 20%;
 }
+body
+{
+  font-family: Arial, Sans-serif;
+}
+.error
+{
+color:red;
+font-family:verdana, Helvetica;
+}
+li{
+list-style-type: none;
+padding: 6px;
+}
+
+.error_msg, .error_msg_package{
+  color:red;
+  font-family:verdana, Helvetica;
+}

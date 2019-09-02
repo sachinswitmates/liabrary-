@@ -1,0 +1,13 @@
+
+Welcome to LibraryApp.com, <%= @user.user_name %>
+===============================================
+ 
+You have successfully booked your seat,
+Your bookings details: 
+<%= @user.bookings.last.library.name %>
+Start Date: <%= @user.bookings.last.start_date %>
+End Date: <%= @user.bookings.last.end_date %>
+
+
+Thank You for booking and have a great day!
+The LibraryApp Team

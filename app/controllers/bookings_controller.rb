@@ -13,7 +13,10 @@ class BookingsController < ApplicationController
   def create
     @booking = current_user.bookings.new(booking_params)
     if @booking.save
-      @booking.send_booking_notification_email
+      if @booking.payment_method == 'Card' && @booking.razorpay_payment_id.present?
+        @booking.payment_status = 'paid'
+      end
+      #@booking.send_booking_notification_email
       flash[:notice] = "You have successfully booked your seat."
       redirect_to bookings_path
     else
@@ -31,7 +34,7 @@ class BookingsController < ApplicationController
 
 private
   def booking_params
-    params.require(:booking).permit(:package, :payment, :subscription_length,:token, :library_id,:razorpay_payment_id,:plan_id)
+    params.require(:booking).permit(:package, :payment_method, :subscription_length,:token, :library_id,:razorpay_payment_id,:plan_id,:payment_status)
   end
 
   def set_library

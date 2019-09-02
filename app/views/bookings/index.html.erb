@@ -1,32 +1,51 @@
-<div class="bg-white"> 
+<div class="bg-white">
   <div class="row">
-    <% @bookings.each do |booking| %>
-      <div class ="col-4" style="margin-bottom: 10px">
-        <% if current_user.bookings.present? %>
-          <div class="card" style="width: 300px">
-            <div class="card-body"><br>
-              <div>
-                <% if booking.qrcode %>
-                  <%= image_tag booking.qrcode.code.url %>
-                <% end %>
-              </div>
-              <p class="card-text"><strong>Library Name: </strong><%= booking.library.name %></p>
-              <p class="card-text"><strong>Name: </strong><%= current_user.user_name %></p>
-              <p class="card-text"><strong>Email: </strong><%= current_user.email %></p>
-              <p class="card-text"><strong>Package: </strong><%= booking.package %>  <%= booking.subscription_length %><br> </p>
-              <p class="card-text"><strong>Payment Type: </strong><%= booking.payment %></p>
-              <p class="card-text"><strong>Booking Duration: </strong><%= booking.subscription_length %><br></p>
-              <p class= "card-text"><strong>Start Date:</strong><%= booking.start_date %></p>
-              <p class= "card-text"><strong>End Date:</strong><%= booking.end_date %><br></p>
-        <% end %>
-              <%#= link_to 'proceed to payment' '',class: 'btn btn-primary'%> 
-            </div>
-          </div>
-      </div>
-    <% end %>
-    <% if current_user.bookings.blank? %>
-      <p class="card-text">You don't have any bookings </p>
-    <%end%>
+    <div class="col-6">
+      <h3>Bookings</h3>
+      <hr>
+    </div>
+    <div class="col-6 text-right">
+    </div>
   </div>
-<%= will_paginate @bookings, renderer: BootstrapPagination::Rails %>
+    <table class="table table-striped">
+      <% if current_user.bookings.present? %>
+        <tr>
+          <th scope ="col">Library name</th>
+          <th scope = "col">Name</th>
+          <th scope ="col">Package</th>
+          <th style = "width: 15%">Payment Type</th>
+          <th colspan="4"></th>
+        </tr>
+      <%end%>
+        <% @bookings.each do |booking| %>
+          <% if current_user.bookings.present? %>
+            <tr>
+             
+              <td><%= booking.library.name %></td>
+              <td><%= current_user.user_name %></td>
+              <td><%= booking.package %></td>
+              <td><%= booking.payment_method %></td>
+              <td><%= link_to booking_path(booking.id) do %>
+                  <%= fa_icon "eye" %>
+                  <% end %>
+              </td>
+            </tr>
+          <%end%>
+          <%end%>
+          <% if current_user.bookings.blank? %>
+            <p> You don't have any bookings.</p>
+          <%end%>
+    </table>
+    <%= will_paginate @booking, renderer: BootstrapPagination::Rails %>
 </div>
+
+
+
+
+
+
+
+
+
+
+
