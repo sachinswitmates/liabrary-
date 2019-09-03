@@ -14,9 +14,11 @@ class BookingsController < ApplicationController
     @booking = current_user.bookings.new(booking_params)
     if @booking.save
       if @booking.payment_method == 'Card' && @booking.razorpay_payment_id.present?
-        @booking.payment_status = 'paid'
+        @booking.update(payment_status: 'paid')
+      else
+        @booking.update(payment_status: 'unpaid')
       end
-      #@booking.send_booking_notification_email
+      @booking.send_booking_notification_email
       flash[:notice] = "You have successfully booked your seat."
       redirect_to bookings_path
     else

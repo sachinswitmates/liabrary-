@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_02_132002) do
+ActiveRecord::Schema.define(version: 2019_09_03_142733) do
 
   create_table "bank_accounts", force: :cascade do |t|
     t.string "bank_name"
@@ -36,8 +36,14 @@ ActiveRecord::Schema.define(version: 2019_09_02_132002) do
     t.string "token"
     t.string "razorpay_payment_id"
     t.string "plan_id"
-    t.string "payment_status"
+    t.integer "payment_status"
     t.index ["user_id", "library_id"], name: "index_bookings_on_user_id_and_library_id"
+  end
+
+  create_table "cities", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "images", force: :cascade do |t|

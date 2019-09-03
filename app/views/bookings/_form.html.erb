@@ -9,7 +9,6 @@
   <%= form.hidden_field :subscription_length %>
   <%= form.hidden_field :razorpay_payment_id %>
   <%= form.hidden_field :plan_id %>
-  <%= form.hidden_field :payment_status %>
   <ul class="subscription-btn" style="width: 100%">
     <h4>Choose Package</h4>
     <li>
@@ -39,19 +38,19 @@
       <%end%>
     </li>
     <span class="error_msg_package"></span>
-    <h4>Choose Payment Method</h4>
+    <!-- <h4>Choose Payment Method</h4>
     <li>
-      <input class="form-check-input radio_buttons optional" type="radio" value="Cash" name="booking[payment_method]" id="booking_payment_method_pay_at_library " data-payment_status="unpaid">
+      <input class="form-check-input radio_buttons optional" type="radio" value="Cash" name="booking[payment_method]" id="booking_payment_method_pay_at_library ">
       <label for="booking_payment_method_pay_at_library "><strong>Pay at Library </strong></label>
-    </li>
-    <li>
-      <input class="form-check-input radio_buttons optional" type="radio" value="Card" name="booking[payment_method]" id="booking_payment_method_pay_now" data-payment_status="paid">
-      <label for="booking_payment_method_pay_now"><strong>Pay Now </strong></label>
-    </li>
-    <span class="error_msg"></span>
+    </li> -->
+    <!-- <li> -->
+      <input class="form-check-input radio_buttons optional" type="hidden" value="Card" name="booking[payment_method]" id="booking_payment_method_pay_now">
+      <!-- <label for="booking_payment_method_pay_now"><strong>Pay Now </strong></label> -->
+    <!-- </li> -->
+    <!-- <span class="error_msg"></span> -->
   </ul>
   <div class="actions text-right">
-    <%= form.submit 'Save and Pay', class: 'btn btn-primary', id: 'rzp-button1' %>
+    <%= form.submit 'Pay Now', class: 'btn btn-primary', id: 'rzp-button1' %>
   </div>
 <% end %>
 
@@ -68,12 +67,7 @@
       console.log(plan_id);
       $('.error_msg_package').text('');
     });
-    $("input[name='booking[payment_method]'").on('click',function(){
-      var payment_status = $(this).data('payment_status');
-      $('#booking_payment_status').val(payment_status);
-      console.log(payment_status);
     });
-  });
 </script>
 <script>
   var loadExternalScript = function(path) {
@@ -151,22 +145,18 @@
       $('.error_msg_package').text('Please select package.')
       return false;
     }
-    var p_method_invalid = true; 
-    $("input[name='booking[payment_method]']").each(function(index, element){
-      if ($(element).is(':checked')){
-        p_method_invalid = false
-      }
-    })
-    if (p_method_invalid){
-      $('.error_msg').text('Please select payment method.')
-      return false;
-    }
-    if ($('#booking_payment_method_pay_now').is(':checked')){
-      var amount= $("input[name='booking[package]']:checked").val()
-      var plan_id = $("input[name='booking[package]']:checked").data('planid')
-      callRazorPayScript(plan_id, amount);  
-    }else{
-      $("#new_booking").submit();
-    }
+    // var p_method_invalid = true; 
+    // $("input[name='booking[payment_method]']").each(function(index, element){
+    //   if ($(element).is(':checked')){
+    //     p_method_invalid = false
+    //   }
+    // })
+    // if (p_method_invalid){
+    //   $('.error_msg').text('Please select payment method.')
+    //   return false;
+    // }
+    var amount= $("input[name='booking[package]']:checked").val()
+    var plan_id = $("input[name='booking[package]']:checked").data('planid')
+    callRazorPayScript(plan_id, amount);
   });
 </script>

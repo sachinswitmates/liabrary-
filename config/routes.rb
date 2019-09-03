@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   	resources :libraries do
       member do
         get 'library_bookings'
+        get 'update_unpaid_bookings'
       end
     end
     resources :bank_accounts
