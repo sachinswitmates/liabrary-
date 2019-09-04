@@ -56,6 +56,7 @@ gem 'omniauth-google-oauth2'
 gem 'rqrcode', '>= 1.0.0.pre'
 gem 'razorpay'
 gem 'jquery-validation-rails'
+gem 'jquery-ui-rails'
 
 
 group :development, :test do

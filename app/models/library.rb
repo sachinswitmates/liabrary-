@@ -10,7 +10,7 @@ class Library < ApplicationRecord
   validates :state, presence: true
   validates :open, presence: true
   validates :seats, presence: true
-  validates :contact_number,presence: true #uniqueness:true
+  validates :contact_number,presence: true 
   validate :validate_package
   
   #associations

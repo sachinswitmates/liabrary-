@@ -51,39 +51,32 @@ class Booking < ApplicationRecord
   end
 
   def send_booking_notification_email
-    if self.payment_status == 'paid'
-      UserMailer.notify_student(self.user).deliver_now
-      library_owner = User.find_by(id: self.library&.user_id)
-      UserMailer.notify_booking_library_owner(library_owner).deliver_now if library_owner
-    else
-      library_owner = User.find_by(id: self.library&.user_id)
-      UserMailer.notify_booking_library_owner(library_owner).deliver_now if library_owner
-    end
+    UserMailer.notify_student(self.user).deliver_now
+    library_owner = User.find_by(id: self.library&.user_id)
+    UserMailer.notify_booking_library_owner(library_owner).deliver_now if library_owner
   end
 
   def generate_qrcode
-    unless self.razorpay_payment_id.blank?
-      self.token = generate_token
-      self.save
-      @qr = RQRCode::QRCode.new(self.token, :size => 4, :level => :h)
-      png = @qr.as_png(
-            resize_gte_to: false,
-            resize_exactly_to: false,
-            fill: 'white',
-            color: 'black',
-            size: 120,
-            border_modules: 4,
-            module_px_size: 6,
-            file: nil 
-          )
-      filename = "#{Rails.root}/public/code_#{self.id}.png"
-      file = File.new(filename, "w")
-      File.write(filename, png.to_s.force_encoding('UTF-8'))
-      file = File.open(filename)
-      qrcode = self.build_qrcode(code: file)
-      qrcode.save
-      File.delete(filename) if File.exist?(filename)
-    end
+    self.token = generate_token
+    self.save
+    @qr = RQRCode::QRCode.new(self.token, :size => 4, :level => :h)
+    png = @qr.as_png(
+          resize_gte_to: false,
+          resize_exactly_to: false,
+          fill: 'white',
+          color: 'black',
+          size: 120,
+          border_modules: 4,
+          module_px_size: 6,
+          file: nil 
+        )
+    filename = "#{Rails.root}/public/code_#{self.id}.png"
+    file = File.new(filename, "w")
+    File.write(filename, png.to_s.force_encoding('UTF-8'))
+    file = File.open(filename)
+    qrcode = self.build_qrcode(code: file)
+    qrcode.save
+    File.delete(filename) if File.exist?(filename)
   end
 
   def generate_token

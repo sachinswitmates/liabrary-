@@ -49,11 +49,11 @@ class LibraryOwner::LibrariesController < ApplicationController
     @bookings = @library.bookings.order("created_at DESC").paginate(:page => params[:page], :per_page => 10)
   end
 
-  def update_unpaid_bookings
-    @booking = Booking.find(params[:id])
-    @bookings = @booking.update(payment_status: 'paid')
-    redirect_to library_owner_libraries_path
-  end
+  # def update_unpaid_bookings
+  #   @booking = Booking.find(params[:id])
+  #   @bookings = @booking.update(payment_status: 'paid')
+  #   redirect_to library_owner_libraries_path
+  # end
   
 private
   def library_params
