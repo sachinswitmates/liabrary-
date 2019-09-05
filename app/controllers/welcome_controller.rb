@@ -11,4 +11,14 @@ class WelcomeController < ApplicationController
     @library = Library.find(params[:id])
     @images = @library.images
   end
+
+  def city_search
+    @cities = City.where("name LIKE ?", "%#{params[:search]}")
+    respond_to do |format|
+      format.json do
+        render json: @cities.to_json
+      end
+    end
+  end
 end
+
