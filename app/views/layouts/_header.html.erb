@@ -67,7 +67,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <%= form_tag(root_path, :method => "get", ) do %>  
+        <%= form_tag(root_path, :method => "get", class: 'city-form' ) do %>  
           <div class="input-group">  
             <%= search_field_tag :search_city, params[:search], :size=>"25x30",placeholder: "Select Location", class: "form-control" %>  
           </div>  
@@ -75,29 +75,31 @@
         
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary" id="submit" value="Submit" >Search</button>
       </div>
     </div>
   </div>
 </div>
 <script type="text/javascript">
   $(document).on('click', '#search', function(){
-    $('#cityModal').modal('show');
-  });
+  $('#cityModal').modal('show');
+  $( "#search_city" ).autocomplete( "option", "appendTo", ".city-form" );
+});
 </script>
 <script type="text/javascript">
   $( "#search_city" ).autocomplete({
     source: function (request, response) {
-      $.getJSON("/city_search.json?city=" + request.term, function (data) {
-          response($.map(data, function (value, key) {
-              return {
-                  label: value,
-                  value: key
-              };
-          }));
-      });
-    },
-    minLength: 2,
-    delay: 100
+    $.getJSON("/city_search.json?search=" + request.term, function (data) {
+      response($.map(data, function (value) {
+        return {
+          label: value,
+          value: value
+        };
+      }));
+    });
+  },
+  minLength: 2,
+  delay: 100
 });
 </script>
+

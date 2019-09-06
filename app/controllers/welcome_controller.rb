@@ -13,10 +13,10 @@ class WelcomeController < ApplicationController
   end
 
   def city_search
-    @cities = City.where("name LIKE ?", "%#{params[:search]}")
+    @cities = City.where("lower(name) LIKE ?", "%#{params[:search].to_s.downcase}%")
     respond_to do |format|
       format.json do
-        render json: @cities.to_json
+        render json: @cities.pluck(:name)
       end
     end
   end
