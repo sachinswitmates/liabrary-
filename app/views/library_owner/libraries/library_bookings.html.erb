@@ -29,8 +29,8 @@
               <td><%= booking.package %></td>
               <td><%= booking.payment_method %></td>
               <td><%= booking.subscription_length %></td>
-              <td><%= booking.start_date.strftime('%d %b,%Y') %></td>
-              <td><%= booking.end_date&.strftime('%d %b,%Y') %></td>
+              <td><%= booking.start_date.strftime('%d %b %Y') %></td>
+              <td><%= booking.end_date&.strftime('%d %b %Y') %></td>
               <td><%= booking.payment_status %></td>
              <!--  <% if booking.payment_status == 'unpaid'%>
                 <td><%= link_to 'update payment status',update_unpaid_bookings_library_owner_library_path(booking.id)%></td>

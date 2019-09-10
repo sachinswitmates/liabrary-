@@ -1,21 +1,21 @@
 <div class="bg-white"> 
   <div class="row">
-    <div class="card" style="width: 300px">
+    <div class="card" style="background-color: #CCC ; margin: 0 auto">
       <div class="card-body"><br>
         <div>
           <% if @booking.qrcode %>
             <%= image_tag @booking.qrcode.code.url %>
           <% end %>
         </div>
-        <p class="card-text"><strong>Library Name: </strong><%= @booking.library.name %></p>
+        <br><p class="card-text"><strong>Library Name: </strong><%= @booking.library.name %></p>
         <p class= "card-text"><strong>Address: </strong><%= @booking.library.library_address %><br></p>
         <p class="card-text"><strong>Name: </strong><%= current_user.user_name %></p>
         <p class="card-text"><strong>Email: </strong><%= current_user.email %></p>
         <p class="card-text"><strong>Package: </strong><%= @booking.package %>  <%= @booking.subscription_length %><br> </p>
         <p class="card-text"><strong>Payment Type: </strong><%= @booking.payment_method %></p>
         <p class="card-text"><strong>Booking Duration: </strong><%= @booking.subscription_length %><br></p>
-        <p class= "card-text"><strong>Start Date: </strong><%= @booking.start_date.strftime('%d %b,%Y') %></p>
-        <p class= "card-text"><strong>End Date: </strong><%= @booking.end_date.strftime('%d %b,%Y') %><br></p>
+        <p class= "card-text"><strong>Start Date: </strong><%= @booking.start_date.strftime('%d %b %Y') %></p>
+        <p class= "card-text"><strong>End Date: </strong><%= @booking.end_date&.strftime('%d %b %Y') %><br></p>
         <%= link_to 'Back', bookings_path %>
       </div>
     </div>

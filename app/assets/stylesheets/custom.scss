@@ -94,6 +94,31 @@ padding: 6px;
   overflow-x: hidden;
 }
 
+.modal-dialog {
+  height: 55%; 
+}
+.modal-content {
+  height: 55%; 
+}
+
+.modal-body
+{ /*#0074d9*/
+    background-color: #CCC;
+}
+
+.modal-content
+{
+    border-radius: 6px;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    background-color: #FFFFFF;
+}
+
+.modal-header{
+     background-color: #CCC;
+}
+
+
 /*! jQuery UI - v1.12.1 - 2016-09-14
 * http://jqueryui.com
 * Includes: core.css, accordion.css, autocomplete.css, menu.css, button.css, controlgroup.css, checkboxradio.css, datepicker.css, dialog.css, draggable.css, resizable.css, progressbar.css, selectable.css, selectmenu.css, slider.css, sortable.css, spinner.css, tabs.css, tooltip.css, theme.css

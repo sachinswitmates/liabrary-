@@ -20,7 +20,6 @@ Rails.application.routes.draw do
   namespace :student do
     resources :libraries
   end
-  # resources :cities, only: [:index]
   
   resources :bookings, only: [:index, :show]
   get    '/libraries/:library_id/bookings',  to: 'bookings#new', as: 'new_library_booking'
