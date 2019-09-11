@@ -30,8 +30,9 @@ class Admin::LibrariesController < ApplicationController
   def update
     @library = Library.find(params[:id])
     if @library.update(library_params)
+      flash[:notice] = "Successfully updated"
       @library.send_published_notification_email
-      redirect_to admin_library_path
+      redirect_to admin_libraries_path
     else
       render 'edit'
     end
@@ -49,13 +50,17 @@ class Admin::LibrariesController < ApplicationController
       redirect_to root_path
     end
   end
- 
- 
 
+  def all_bookings
+    @bookings = Booking.all.order("created_at DESC").paginate(page: params[:page], per_page: 10)
+  end
+
+  def all_libraries_name
+    @libraries = Library.all.order("created_at DESC").paginate(page: params[:page], per_page: 10)
+  end
+ 
 private
   def library_params
     params.require(:library).permit(:name,:address1,:address2,:state,:city,:landmark,:zip_code, :open, :seats,:contact_number,:published)
   end
 end
-  
-

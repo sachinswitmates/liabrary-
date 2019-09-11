@@ -16,10 +16,15 @@
                 <%#= image_tag current_user.image.avatar.url, width: '20' if current_user.image.present? %> Logout
               <% end %>
             </li>
-
           <%else%>
             <li class="nav-item">
               <%= link_to 'Dashboard', current_user.admin? ? admin_libraries_path : library_owner_libraries_path, class: 'nav-link' %>
+            </li>
+            <li class="nav-item">
+              <%= link_to 'View All Bookings',all_bookings_admin_libraries_path, class: 'nav-link'%>
+            </li>
+            <li class="nav-item">
+              <%= link_to 'List of Libraries',all_libraries_name_admin_libraries_path, class: 'nav-link'%>
             </li>
             <li class="nav-item">
               <%= link_to destroy_user_session_path, method: :delete, class: 'nav-link' do %>
@@ -27,7 +32,6 @@
               <%end%>
             </li>
           <%end%>
-
         <%else%>
           <li class="nav-item">
             <%= link_to 'My Bookings', bookings_path, class: 'nav-link' %>

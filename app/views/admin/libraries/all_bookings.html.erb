@@ -1,0 +1,47 @@
+<div class="bg-white">
+  <div class="row">
+    <div class="col-6">
+      <h3>Bookings</h3>
+      <hr>
+    </div>
+  </div>
+    <table class="table table-striped">
+      <tr>
+        <th>LibraryName</th>
+        <th>UserName</th>
+        <th>Email</th>
+        <th>Package</th>
+        <th style = "width: 15%">Payment Type</th>
+        <th>Subscription Type</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th> payment_status</th>
+        <th colspan="9"></th>
+      </tr>
+      <% @bookings.each do |booking| %>
+        <tr>
+          <td><%= booking.library.name %></td>
+          <td><%= booking.user.user_name %></td>
+          <td><%= booking.user.email %></td>
+          <td><%= booking.package %></td>
+          <td><%= booking.payment_method %></td>
+          <td><%= booking.subscription_length %></td>
+          <td><%= booking.start_date.strftime('%d %b %Y') %></td>
+          <td><%= booking.end_date&.strftime('%d %b %Y') %></td>
+          <td><%= booking.payment_status %></td>
+        </tr>
+      <%end%>
+    </table>
+    <%= will_paginate @bookings, renderer: BootstrapPagination::Rails %>
+</div>
+
+
+
+
+
+
+
+
+
+              
+             

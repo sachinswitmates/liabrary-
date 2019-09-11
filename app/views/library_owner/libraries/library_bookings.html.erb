@@ -10,14 +10,14 @@
     <table class="table table-striped">
       <% if @library.bookings.present? %>
         <tr>
-          <th scope = "col">Name</th>
-          <th style = "col">Email</th>
-          <th scope ="col">Package</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Package</th>
           <th style = "width: 15%">Payment Type</th>
-          <th style = "col">Subscription Type</th>
-          <th style = "col">Start Date</th>
-          <th style = "col">End Date</th>
-          <th style ="col"> payment_status</th>
+          <th>Subscription Type</th>
+          <th>Start Date</th>
+          <th>End Date</th>
+          <th> payment_status</th>
           <th colspan="8"></th>
         </tr>
       <%end%>
@@ -32,9 +32,6 @@
               <td><%= booking.start_date.strftime('%d %b %Y') %></td>
               <td><%= booking.end_date&.strftime('%d %b %Y') %></td>
               <td><%= booking.payment_status %></td>
-             <!--  <% if booking.payment_status == 'unpaid'%>
-                <td><%= link_to 'update payment status',update_unpaid_bookings_library_owner_library_path(booking.id)%></td>
-              <%end%> -->
             </tr>
           <%end%>
         <%end%>

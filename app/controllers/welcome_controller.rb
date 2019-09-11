@@ -2,6 +2,11 @@ class WelcomeController < ApplicationController
   def index
     if params[:search_city].present?
       @libraries = Library.published.where("lower(city) =(?)", params[:search_city].to_s.downcase).order("created_at DESC").paginate(page: params[:page], per_page: 10)
+      if @libraries.empty?
+        flash[:notice] = "This city has no libraries."
+      elsif @libraries.present?
+        flash[:notice] = " This City has #{@libraries.count} libraries."    
+      end
     else
       @libraries = Library.published.order("created_at DESC").paginate(page: params[:page], per_page: 10)
     end

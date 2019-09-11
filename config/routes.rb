@@ -6,13 +6,17 @@ Rails.application.routes.draw do
   end
   get '/libraries/:id' => 'welcome#show', as: :library_detail
   namespace :admin do
-    resources  :libraries
+    resources  :libraries do
+      collection do
+        get 'all_bookings'
+        get 'all_libraries_name'
+      end
+    end
   end
   namespace :library_owner do
   	resources :libraries do
       member do
         get 'library_bookings'
-        get 'update_unpaid_bookings'
       end
     end
     resources :bank_accounts

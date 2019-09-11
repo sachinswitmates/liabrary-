@@ -16,7 +16,7 @@
   </div>
   <div class="card-body">
     <h5 class="card-title"><%= link_to library.name , student_library_path(library) %></h5>
-    <p class="card-text"><%= fa_icon "map-marker" %> <%= "#{library.city}, #{library.state}" %>,
+    <p class="card-text"><%= fa_icon "map-marker" %> <%= "#{library.city}, #{library.state}" %><br>
     Available Seats: <%= library.seats %></p>
     <% if library.seats == 0 %>
       <%= link_to 'All Seats Booked', 'javascript:;', class: 'btn btn-primary w-100' %>

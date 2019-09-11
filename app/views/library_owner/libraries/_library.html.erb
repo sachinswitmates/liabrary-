@@ -17,11 +17,11 @@
   <div class="card-body">
     <h5 class="card-title"><%= link_to library.name , library_owner_library_path(library) %></h5>
     <p class="card-text"><%= fa_icon "map-marker" %> <%= "#{library.city}, #{library.state}" %><br>
-    Available Seats: <%= library.seats %></p>
+    Available Seats: <%= library.seats %><br>
     <% if library.booked_seats.present? %>
-      <p class="card-text"> Booked Seats: <%= library.booked_seats %></p>
+      Booked Seats: <%= library.booked_seats %>
     <%else%>
-      <p class="card-text"> Booked Seats: 0 </p>
+      Booked Seats: 0 </p>
     <%end%>
     <hr>
     <% if library.published? %>

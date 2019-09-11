@@ -10,7 +10,7 @@ class Library < ApplicationRecord
   validates :state, presence: true
   validates :open, presence: true
   validates :seats, presence: true
-  validates :contact_number,presence: true 
+  validates :contact_number,presence: true ,length: {minimum: 10, maximum: 10}
   validate :validate_package
   
   #associations
