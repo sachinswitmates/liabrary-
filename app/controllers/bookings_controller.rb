@@ -13,7 +13,7 @@ class BookingsController < ApplicationController
   def create
     @booking = current_user.bookings.new(booking_params)
     if @booking.save
-      if @booking.payment_method == 'Card' && @booking.razorpay_payment_id.present?
+      if @booking.payment_method == 'Online' && @booking.razorpay_payment_id.present?
         @booking.update(payment_status: 'paid')
       else
         @booking.update(payment_status: 'unpaid')

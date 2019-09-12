@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-ligh fixed-top navbar-right ">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
   <%= link_to 'LibraryApp', root_path, class: 'navbar-brand' %>
   <div class="topnav-right">
     <ul class="nav navbar-nav navbar-right">  
@@ -12,7 +12,7 @@
               <%= link_to 'Payment Method',library_owner_bank_accounts_path, class: 'nav-link' %>
             </li>
             <li class="nav-item">
-              <%= link_to destroy_user_session_path, method: :delete, class: 'nav-link' do %>
+              <%= link_to destroy_user_session_path,data: { confirm: 'Are you sure?' }, method: :delete, class: 'nav-link' do %>
                 <%#= image_tag current_user.image.avatar.url, width: '20' if current_user.image.present? %> Logout
               <% end %>
             </li>
@@ -20,24 +20,35 @@
             <li class="nav-item">
               <%= link_to 'Dashboard', current_user.admin? ? admin_libraries_path : library_owner_libraries_path, class: 'nav-link' %>
             </li>
-            <li class="nav-item">
-              <%= link_to 'View All Bookings',all_bookings_admin_libraries_path, class: 'nav-link'%>
-            </li>
-            <li class="nav-item">
-              <%= link_to 'List of Libraries',all_libraries_name_admin_libraries_path, class: 'nav-link'%>
-            </li>
-            <li class="nav-item">
-              <%= link_to destroy_user_session_path, method: :delete, class: 'nav-link' do %>
-                <%#= image_tag current_user.image.avatar.url, width: '20' if current_user.image.present? %> Logout
-              <%end%>
-            </li>
+            <ul class="nav navbar-nav navbar-right">
+              <li class="dropdown">
+                <a class= 'nav-link dropdown-toggle' data-toggle="dropdown" data-turbolinks="true" href= "#">Details <span class="caret"></span></a>  
+                <ul class="dropdown-menu"> </li>
+              <li class="nav-item">
+                <%= link_to 'View All Bookings',all_bookings_admin_libraries_path, class: 'nav-link'%>
+              </li>
+              <li class="nav-item">
+                <%= link_to 'Student Details',  student_details_admin_libraries_path, class: 'nav-link'%>
+              </li>
+              <li class="nav-item">
+                <%= link_to 'Library owner details',library_owner_details_admin_libraries_path, class: 'nav-link'%>
+              </li>
+              <li class="nav-item">
+                <%= link_to 'Libraries List',libraries_list_admin_libraries_path, class: 'nav-link'%>
+              </li>
+            </ul>
+              <li class="nav-item">
+                <%= link_to destroy_user_session_path, data: { confirm: 'Are you sure?' }, method: :delete, class: 'nav-link' do %>
+                  <%#= image_tag current_user.image.avatar.url, width: '20' if current_user.image.present? %> Logout
+                <%end%>
+              </li>
           <%end%>
         <%else%>
           <li class="nav-item">
             <%= link_to 'My Bookings', bookings_path, class: 'nav-link' %>
           </li>
           <li class ="nav-item">
-            <%= link_to destroy_user_session_path, method: :delete, class: 'nav-link' do %>
+            <%= link_to destroy_user_session_path,data: { confirm: 'Are you sure?' }, method: :delete, class: 'nav-link' do %>
               <%#= image_tag current_user.image.avatar.url , width: '20' if current_user.image.present? %> Logout
             <%end%>
           </li>
@@ -90,8 +101,6 @@
   $('#cityModal').modal('show');
   $( "#search_city" ).autocomplete( "option", "appendTo", ".city-form" );
 });
-</script>
-<script type="text/javascript">
   $( "#search_city" ).autocomplete({
     source: function (request, response) {
     $.getJSON("/city_search.json?city=" + request.term, function (data) {

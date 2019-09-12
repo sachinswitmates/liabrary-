@@ -10,9 +10,10 @@
     <tr>
       <th> Library Name</th>
       <th>Address</th>
+      <th style = "width: 15%">Contact Number</th>
       <th>Opens</th>
       <th>Seats</th>
-      <th style = "width: 15%">Contact Number</th>
+      <th>Booked Seats</th>
       <th>Owner Name</th>
       <th>Published</th>
       <th colspan="6"></th>
@@ -21,9 +22,14 @@
       <tr>
         <td><%= library.name %></td>
         <td><%= library.library_address %></td>
+        <td><%= library.contact_number %></td>
         <td><%= library.open %></td>
         <td><%= library.seats %></td>
-        <td><%= library.contact_number %></td>
+        <% if library.booked_seats.present? %>
+          <td><%= library.booked_seats %></td>
+        <%else%>
+          <td> 0</td>
+        <%end%>
         <td><%= User.find_by(id: library.user_id)&.user_name  %></td>
         <td><%= library.published %></td>
         <td>
@@ -44,7 +50,6 @@
             <%= fa_icon "trash" %>
           <% end %>
         </td>
-
     <% end %>
       </tr>
     <% end %>

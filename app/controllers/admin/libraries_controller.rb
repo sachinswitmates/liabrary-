@@ -1,13 +1,14 @@
 class Admin::LibrariesController < ApplicationController
   before_action :authenticate_user!
   before_action :prevent_unauthorize_access?
+  before_action :set_library, only: [:show, :edit, :update, :destroy]
   
   def index
     @libraries = Library.order("created_at DESC").paginate(page: params[:page], per_page: 10)
   end
   
   def show
-    @library = Library.find(params[:id])
+    @images = @library.images
   end
 
   def new
@@ -15,7 +16,6 @@ class Admin::LibrariesController < ApplicationController
   end
 
   def edit
-    @library = Library.find(params[:id])
   end
  
   def create
@@ -28,7 +28,6 @@ class Admin::LibrariesController < ApplicationController
   end
 
   def update
-    @library = Library.find(params[:id])
     if @library.update(library_params)
       flash[:notice] = "Successfully updated"
       @library.send_published_notification_email
@@ -39,7 +38,6 @@ class Admin::LibrariesController < ApplicationController
   end
 
   def destroy
-    @library = Library.find(params[:id])
     @library.update(deleted_at: Time.now)
     redirect_to admin_libraries_path
   end
@@ -55,12 +53,24 @@ class Admin::LibrariesController < ApplicationController
     @bookings = Booking.all.order("created_at DESC").paginate(page: params[:page], per_page: 10)
   end
 
-  def all_libraries_name
+  def library_owner_details
+   @users = User.where(role: "library_owner").order("created_at DESC").paginate(page: params[:page], per_page: 10)
+  end
+
+  def student_details
+    @users = User.where(role: "student").order("created_at DESC").paginate(page: params[:page], per_page: 10)
+  end
+
+  def libraries_list
     @libraries = Library.all.order("created_at DESC").paginate(page: params[:page], per_page: 10)
   end
  
 private
   def library_params
     params.require(:library).permit(:name,:address1,:address2,:state,:city,:landmark,:zip_code, :open, :seats,:contact_number,:published)
+  end
+
+  def set_library
+    @library = Library.find(params[:id])
   end
 end

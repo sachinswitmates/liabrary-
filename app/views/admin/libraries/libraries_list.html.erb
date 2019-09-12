@@ -1,0 +1,25 @@
+<div class="bg-white">
+  <div class="row">
+    <div class="col-6">
+      <h3>Libraries List</h3>
+      <hr>
+    </div>
+  </div>
+  <table class="table table-striped">
+    <tr>
+      <th>Library Name</th>
+      <th>Contact Number</th>
+      <th>Owner Name</th>
+      <th>
+      <th colspan="2"></th>
+    </tr>
+    <% @libraries.each do |library| %>
+      <tr>
+        <td><%= library.name %></td>
+        <td><%= library.contact_number %></td>
+        <td><%= User.find_by(id: library.user_id)&.user_name %></td>
+      </tr>
+    <%end%>
+  </table>
+  <%= will_paginate @users, renderer: BootstrapPagination::Rails %>
+</div>

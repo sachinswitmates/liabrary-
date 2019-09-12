@@ -9,7 +9,9 @@ Rails.application.routes.draw do
     resources  :libraries do
       collection do
         get 'all_bookings'
-        get 'all_libraries_name'
+        get 'library_owner_details'
+        get 'student_details'
+        get 'libraries_list'
       end
     end
   end

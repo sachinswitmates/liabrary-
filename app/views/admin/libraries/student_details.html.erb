@@ -1,0 +1,25 @@
+<div class="bg-white">
+  <div class="row">
+    <div class="col-6">
+      <h3>Student Details</h3>
+      <hr>
+    </div>
+  </div>
+  <table class="table table-striped">
+    <tr>
+      <th>User Name</th>
+      <th>User Email</th>
+      <th>Number of Bookings</th>
+      <th>
+      <th colspan="2"></th>
+    </tr>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.user_name %></td>
+        <td><%= user.email %></td>
+        <td><%= user.bookings.count %></td>
+      </tr>
+    <%end%>
+  </table>
+  <%= will_paginate @users, renderer: BootstrapPagination::Rails %>
+</div>
