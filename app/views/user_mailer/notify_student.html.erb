@@ -5,7 +5,7 @@
   <p>Here is your booking details :- </p>
   <p><strong>Name : </strong><%= @user.user_name %></p>
   <p><strong>Booking Start Date: </strong><%= @user.bookings.last.start_date.strftime('%d %b %Y')  %></p>
-  <p><strong>Booking End Date: </strong><%= @user.bookings.last.end_date.strftime('%d %b %Y') %></p><br>
+  <p><strong>Booking End Date: </strong><%= @user.bookings.last.end_date&.strftime('%d %b %Y') %></p><br>
   <p>Scan this Qrcode at the library</p>
   <%= image_tag attachments['code.png'].url %><br>
   <p>Thank you!</p>

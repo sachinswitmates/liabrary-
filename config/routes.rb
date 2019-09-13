@@ -13,6 +13,9 @@ Rails.application.routes.draw do
         get 'student_details'
         get 'libraries_list'
       end
+      member do
+        get 'lib_bookings'
+      end
     end
   end
   namespace :library_owner do

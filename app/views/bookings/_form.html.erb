@@ -4,55 +4,49 @@
     <span class="green-box">Available Seats: <%=  @library.seats %> </span>
   </div>
 <div>
-<%= simple_form_for(@booking, url: create_library_booking_path(@library)) do |form| %>
-  <%= form.hidden_field :library_id, :value => params[:library_id] %>
-  <%= form.hidden_field :subscription_length %>
-  <%= form.hidden_field :razorpay_payment_id %>
-  <%= form.hidden_field :plan_id %>
-  <ul class="subscription-btn" style="width: 100%">
-    <h4>Choose Package</h4>
-    <li>
-      <%if @library.monthly.present?%>
-        <input class="form-check-input radio_buttons optional" type="radio" value="<%= @library.monthly %>" name="booking[package]" id="booking_package_monthly" data-subscription="monthly" data-planId="<%=@library.monthly_plan_id %>">
-        <label for="booking_package_monthly"><strong><%=@library.monthly %>-Monthly </strong></label>
-      <%end%>
-    </li>
-    <li>
-      <%if @library.quaterly.present?%>
-        <input class="form-check-input radio_buttons optional" type="radio" value="<%=@library.quaterly %>" name="booking[package]" id="booking_package_quaterly" data-subscription="quaterly" data-planId="<%=@library.quaterly_plan_id %>" required>
-        <label for="booking_package_quaterly"><strong><%=@library.quaterly %>-Quaterly </strong></label>
-      <%end%>
-    </li>
-  
-    <li>
-      <%if @library.halfyearly.present? %>
-        <input class="form-check-input radio_buttons optional" type="radio" value="<%=@library.halfyearly %>" name="booking[package]" id="booking_package_halfyearly" data-subscription="halfyearly" data-planId="<%=@library.halfyearly_plan_id %>" >
-        <label for="booking_package_halfyearly"><strong><%=@library.halfyearly %>-Half Yearly </strong></label>
-      <%end%> 
-    </li>
-    <li>
-      <%if @library.yearly.present? %>
-        <input class="form-check-input radio_buttons optional" type="radio" value="<%=@library.yearly %>" name="booking[package]" id="booking_package_yearly " data-subscription="yearly" data-planId="<%=@library.yearly_plan_id %>" >
-        <label for="booking_package_yearly "><strong><%=@library.yearly %>-Yearly </strong></label>
-        <span class="error.msg"></span>
-      <%end%>
-    </li>
-    <span class="error_msg_package"></span>
-    <!-- <h4>Choose Payment Method</h4>
-    <li>
-      <input class="form-check-input radio_buttons optional" type="radio" value="Cash" name="booking[payment_method]" id="booking_payment_method_pay_at_library ">
-      <label for="booking_payment_method_pay_at_library "><strong>Pay at Library </strong></label>
-    </li> -->
-    <!-- <li> -->
-      <input class="form-check-input radio_buttons optional" type="hidden" value="Online" name="booking[payment_method]" id="booking_payment_method_pay_now">
-      <!-- <label for="booking_payment_method_pay_now"><strong>Pay Now </strong></label> -->
-    <!-- </li> -->
-    <!-- <span class="error_msg"></span> -->
-  </ul>
-  <div class="actions text-right">
-    <%= form.submit 'Pay Now', class: 'btn btn-primary', id: 'rzp-button1' %>
+  <%= simple_form_for(@booking, url: create_library_booking_path(@library)) do |form| %>
+    <%= form.hidden_field :library_id, :value => params[:library_id] %>
+    <%= form.hidden_field :subscription_length %>
+    <%= form.hidden_field :razorpay_payment_id %>
+    <%= form.hidden_field :plan_id %>
+    <ul class="subscription-btn" style="width: 100%">
+      <h4>Choose Package</h4>
+      <li>
+        <%if @library.monthly.present?%>
+          <input class="form-check-input radio_buttons optional" type="radio" value="<%= @library.monthly %>" name="booking[package]" id="booking_package_monthly" data-subscription="monthly" data-planId="<%=@library.monthly_plan_id %>">
+          <label for="booking_package_monthly"><strong><%=@library.monthly %>-Monthly </strong></label>
+        <%end%>
+      </li>
+      <li>
+        <%if @library.quaterly.present?%>
+          <input class="form-check-input radio_buttons optional" type="radio" value="<%=@library.quaterly %>" name="booking[package]" id="booking_package_quaterly" data-subscription="quaterly" data-planId="<%=@library.quaterly_plan_id %>" required>
+          <label for="booking_package_quaterly"><strong><%=@library.quaterly %>-Quaterly </strong></label>
+        <%end%>
+      </li>
+      <li>
+        <%if @library.halfyearly.present? %>
+          <input class="form-check-input radio_buttons optional" type="radio" value="<%=@library.halfyearly %>" name="booking[package]" id="booking_package_halfyearly" data-subscription="halfyearly" data-planId="<%=@library.halfyearly_plan_id %>" >
+          <label for="booking_package_halfyearly"><strong><%=@library.halfyearly %>-Half Yearly </strong></label>
+        <%end%> 
+      </li>
+      <li>
+        <%if @library.yearly.present? %>
+          <input class="form-check-input radio_buttons optional" type="radio" value="<%=@library.yearly %>" name="booking[package]" id="booking_package_yearly " data-subscription="yearly" data-planId="<%=@library.yearly_plan_id %>" >
+          <label for="booking_package_yearly "><strong><%=@library.yearly %>-Yearly </strong></label>
+          <span class="error.msg"></span>
+        <%end%>
+      </li>
+      <li>
+        <span class="error_msg_package"></span>
+          <input class="form-check-input radio_buttons optional" type="hidden" value="Online" name="booking[payment_method]" id="booking_payment_method_pay_now">
+      </li>
+    </ul>
+    <div class="actions text-right">
+      <%= form.submit 'Pay Now', class: 'btn btn-primary', id: 'rzp-button1' %>
+    </div>
   </div>
-<% end %>
+  <% end %>
+</div>
 
 <script type="text/javascript">
   $(document).ready(function(){
@@ -93,10 +87,10 @@
 
   razorpayKeyId = "<%= ENV['RAZORPAY_KEY_ID'] %>";
   var callRazorPayScript = function(itemId, amount) {
-    var merchangeName = "LibraryApp",
+    var merchangeName = "<%= @current_user.user_name %>",
         img = "http://www.witmates.com/assets/logo1-b92925ec0ec01ac5b2aad3ea29fbec0e67246a22c00f47174cb8e858efccaad3.png",
-        name = "LibraryApp",
-        description = "Library subscription",
+        name = "<%= @current_user.user_name %>",
+        description = "Payment for <%= @library.name %>",
         amount = amount;
         
     loadExternalScript('https://checkout.razorpay.com/v1/checkout.js').then(function() { 
@@ -145,16 +139,6 @@
       $('.error_msg_package').text('Please select package.')
       return false;
     }
-    // var p_method_invalid = true; 
-    // $("input[name='booking[payment_method]']").each(function(index, element){
-    //   if ($(element).is(':checked')){
-    //     p_method_invalid = false
-    //   }
-    // })
-    // if (p_method_invalid){
-    //   $('.error_msg').text('Please select payment method.')
-    //   return false;
-    // }
     var amount= $("input[name='booking[package]']:checked").val()
     var plan_id = $("input[name='booking[package]']:checked").data('planid')
     callRazorPayScript(plan_id, amount);

@@ -3,7 +3,8 @@
     <div class="col-6">
       <h3>Listing Libraries</h3>
     </div>
-    <div class="col-6 text-right">
+    <div class="col-12 text-right">
+      <%#= link_to 'Add New Library', new_admin_library_path, method: :get, class: 'btn btn-primary'  %>
     </div>
   </div>
   <table class="table table-striped">
@@ -26,7 +27,9 @@
         <td><%= library.open %></td>
         <td><%= library.seats %></td>
         <% if library.booked_seats.present? %>
-          <td><%= library.booked_seats %></td>
+          <td>
+            <%= link_to library.booked_seats, lib_bookings_admin_library_path(library)%>
+          </td>
         <%else%>
           <td> 0</td>
         <%end%>

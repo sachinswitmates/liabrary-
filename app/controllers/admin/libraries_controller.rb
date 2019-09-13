@@ -64,6 +64,11 @@ class Admin::LibrariesController < ApplicationController
   def libraries_list
     @libraries = Library.all.order("created_at DESC").paginate(page: params[:page], per_page: 10)
   end
+
+  def lib_bookings
+    @library = Library.find(params[:id])
+    @bookings = @library.bookings.order("created_at DESC").paginate(:page => params[:page], :per_page => 10)
+  end
  
 private
   def library_params
