@@ -1,0 +1,11 @@
+<div class="sidenav" style="margin-top: 80px">
+  <a href= "/admin/libraries/library_owner_details">Library owner details</a>
+  <a href="/admin/libraries/student_details">Student Details</a>
+  <a href="/admin/libraries/all_bookings">View All Bookings</a>
+  <a href="/admin/libraries/libraries_list">Libraries List</a>
+  <li class ="nav-item">
+    <%= link_to destroy_user_session_path,data: { confirm: 'Are you sure?' }, method: :delete, class: 'nav-link' do %>
+      <%#= image_tag current_user.image.avatar.url , width: '20' if current_user.image.present? %> Logout
+    <%end%>
+  </li>
+</div>

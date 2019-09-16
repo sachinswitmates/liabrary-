@@ -19,6 +19,7 @@
     <p class="card-text">
       <%= fa_icon "map-marker" %> <%= "#{library.city}, #{library.state}" %><br>
       Available Seats: <%= library.seats %>
+      <%= link_to "Write a Review", new_review_path(library_id: library.id) %>
     </p>
     <% if library.seats == 0 %>
       <%= link_to 'All Seats Booked', 'javascript:;', class: 'btn btn-primary w-100' %>

@@ -11,11 +11,15 @@
     <%=render 'layouts/header' %>
     <div style="background: #ccc;">
       <div class="container" style="margin-top: 60px">
-        <%=render 'layouts/alert' %>
+        <div class ="padd-left-30">
+          <%=render 'layouts/alert' %>
+        </div>
       </div>
       <div class="container body-min-hieght">
         <div class="padd-top-15">
-          <%= yield %>
+          <div class ="padd-left-30">
+            <%= yield %>
+          </div>
         </div>
       </div>
     </div>

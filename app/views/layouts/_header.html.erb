@@ -17,31 +17,12 @@
               <% end %>
             </li>
           <%else%>
+          <div >
+            <%=render 'layouts/sidebar' %>
+          </div>
             <li class="nav-item">
               <%= link_to 'Dashboard', current_user.admin? ? admin_libraries_path : library_owner_libraries_path, class: 'nav-link' %>
             </li>
-            <ul class="nav navbar-nav navbar-right">
-              <li class="dropdown">
-                <a class= 'nav-link dropdown-toggle' data-toggle="dropdown" data-turbolinks="true" href= "#">Details <span class="caret"></span></a>  
-                <ul class="dropdown-menu"> </li>
-              <li class="nav-item">
-                <%= link_to 'View All Bookings',all_bookings_admin_libraries_path, class: 'nav-link'%>
-              </li>
-              <li class="nav-item">
-                <%= link_to 'Student Details',  student_details_admin_libraries_path, class: 'nav-link'%>
-              </li>
-              <li class="nav-item">
-                <%= link_to 'Library owner details',library_owner_details_admin_libraries_path, class: 'nav-link'%>
-              </li>
-              <li class="nav-item">
-                <%= link_to 'Libraries List',libraries_list_admin_libraries_path, class: 'nav-link'%>
-              </li>
-            </ul>
-              <li class="nav-item">
-                <%= link_to destroy_user_session_path, data: { confirm: 'Are you sure?' }, method: :delete, class: 'nav-link' do %>
-                  <%#= image_tag current_user.image.avatar.url, width: '20' if current_user.image.present? %> Logout
-                <%end%>
-              </li>
           <%end%>
         <%else%>
           <li class="nav-item">

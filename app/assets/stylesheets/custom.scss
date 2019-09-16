@@ -4,6 +4,9 @@
 .padd-top-15{
   padding-top: 20px;
 }
+.padd-left-30{
+  padding-left: 80px;
+}
 
 .body-min-hieght{
   min-height: 550px;
@@ -131,6 +134,47 @@ padding: 6px;
 /*.modal-header{
   background-color: #CCC;
 }*/
+
+/* The navigation menu links */
+.sidenav {
+  height: 80%; 
+  width: 160px; 
+  position: fixed;
+  z-index: 1;
+  top: 0; 
+  left: 0;
+  background-color: #e9ecef; 
+  overflow-x: hidden; 
+  padding-top: 20px;
+}
+.sidenav a {
+  font-family: "Lato", sans-serif;
+  padding: 8px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 20px;
+  color: #818181;
+  display: block;
+}
+
+/* When you mouse over the navigation links, change their color */
+.sidenav a:hover {
+  color: #111;
+}
+
+/* Style page content */
+.main {
+  margin-left: 140px; /* Same as the width of the sidebar */
+  padding: 10px 30px;
+  margin-top: 100px;
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+
+
 
 /*! jQuery UI - v1.12.1 - 2016-09-14
 * http://jqueryui.com
@@ -1443,3 +1487,6 @@ a.ui-button:active,
   -webkit-box-shadow: 0px 0px 5px #666666;
   box-shadow: 0px 0px 5px #666666;
 }
+
+
+
