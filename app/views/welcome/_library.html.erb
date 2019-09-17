@@ -18,9 +18,11 @@
     <h5 class="card-title"><%= link_to library.name , library_detail_path(library) %></h5>
     <p class="card-text">
       <%= fa_icon "map-marker" %> <%= "#{library.city}, #{library.state}" %><br>
-      Available Seats: <%= library.seats %>
-      <%= link_to "Write a Review", new_review_path(library_id: library.id) %>
-    </p>
+      Available Seats: <%= library.seats %></p>
+      <p class="card-text">
+        <%= link_to "Write a Review", new_review_path(library_id: library.id) %>
+        <%#= link_to "Reviews",view_reviews_student_library_path(library) %>
+      </p>
     <% if library.seats == 0 %>
       <%= link_to 'All Seats Booked', 'javascript:;', class: 'btn btn-primary w-100' %>
     <% else %>

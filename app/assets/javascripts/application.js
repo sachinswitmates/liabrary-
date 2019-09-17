@@ -22,6 +22,9 @@
 //= require lightgallery.min
 //= require lg-thumbnail
 //= require jquery.validate
+//= require jquery.raty.js
+//= require jquery.raty
+//= require ratyrate
 //= require_tree .
 
 

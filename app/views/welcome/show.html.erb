@@ -13,9 +13,25 @@
   <hr>
 </div>
   <%= render partial: '/library_owner/libraries/image_items', locals: {images: @images} %>
+  <%#= javascript_include_tag 'ratyrate.js', "data-turbolinks-track": false %>
   <div class="card">
     <div class="card-body">
       <p class="card-text"><strong>Name: </strong><%= @library.name %></p>
       <p class="card-text"><strong>Address:</strong><%= @library.library_address %></p>
+      <!-- rating: <%= rating_for @library, "library_rating", enable_half: true,half_show: true,cancel: true  %>
+      <br> -->
+      Average Rating :
+      <div class='star-rating' data-score=<%= @avg_rating %>></div>
+      <em><%= "#{@reviews.count} reviews" %></em>
+      <p><%=link_to 'show reviews',view_reviews_student_library_path(@library) %></p>
     </div>
   </div>
+<script>
+  $('.star-rating').raty({
+    path: '/assets/',
+    readOnly: true,
+    score: function() {
+          return $(this).attr('data-score');
+  }
+});
+</script>

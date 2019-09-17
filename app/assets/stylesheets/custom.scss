@@ -21,61 +21,61 @@
 }
 
 .subscription-btn {
-     list-style-type:none;
-     margin:25px 0 0 0;
-     padding:0;
+  list-style-type:none;
+  margin:25px 0 0 0;
+  padding:0;
 }
 
 .subscription-btn li {
-    float:left;
-    margin:0 5px 0 0;
-    width: 265px;
-    height:70px;
-    position:relative;
+  float:left;
+  margin:0 5px 0 0;
+  width: 265px;
+  height:70px;
+  position:relative;
 }
 
 .subscription-btn label, .subscription-btn input {
-    display:block;
-    position:absolute;
-    top:0;
-    left:0;
-    right:0;
-    bottom:0;
+  display:block;
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
 }
 
 .subscription-btn input[type="radio"] {
-    opacity:0.011;
-    z-index:100;
+  opacity:0.011;
+  z-index:100;
 }
 
 .subscription-btn input[type="radio"]:checked + label {
-    background: #f76573;
-    color: #fff;
+  background: #f76573;
+  color: #fff;
 }
 
 .subscription-btn label {
-    padding: 20px 5px 5px 5px;
-    border:1px solid #CCC; 
-    cursor:pointer;
-    z-index:90;
-    border-radius: 5px;
-    text-align: center;
+  padding: 20px 5px 5px 5px;
+  border:1px solid #CCC; 
+  cursor:pointer;
+  z-index:90;
+  border-radius: 5px;
+  text-align: center;
 }
 
 .subscription-btn label:hover {
-     background:#DDD;
+  background:#DDD;
 }
 .green-box{
-    background: #f76573;
-    padding: 5px 15px 5px 15px;
-    border-radius: 5px;
-    color: #fff;
+  background: #f76573;
+  padding: 5px 15px 5px 15px;
+  border-radius: 5px;
+  color: #fff;
 }
 .black-box{
-    background: #696969;
-    padding: 5px 15px 5px 15px;
-    border-radius: 5px;
-    color: #fff;
+  background: #696969;
+  padding: 5px 15px 5px 15px;
+  border-radius: 5px;
+  color: #fff;
 }
 
 
@@ -88,12 +88,12 @@ body
 }
 .error
 {
-color:red;
-font-family:verdana, Helvetica;
+  color:red;
+  font-family:verdana, Helvetica;
 }
 li{
-list-style-type: none;
-padding: 6px;
+  list-style-type: none;
+  padding: 6px;
 }
 
 .error_msg, .error_msg_package{
@@ -173,7 +173,6 @@ padding: 6px;
   .sidenav {padding-top: 15px;}
   .sidenav a {font-size: 18px;}
 }
-
 
 
 /*! jQuery UI - v1.12.1 - 2016-09-14

@@ -14,8 +14,8 @@ class ReviewsController < ApplicationController
   end
 
   def create
-    #@library = Library.find_by(id: params[:review][:library_id])
-    @review = Reviews.new(review_params)
+    @library = Library.find_by(id: params[:review][:library_id])
+    @review = Review.new(review_params)
     @review.user_id = current_user.id
     if @review.save
       redirect_to root_path
@@ -44,10 +44,10 @@ class ReviewsController < ApplicationController
       @review = Review.find(params[:id])
     end
   
-  # def set_library
-  #   id = params[:id] || params[:review][:library_id]
-  #   @library = Library.find_by(id)
-  # end
+  def set_library
+    #id = params[:id] || params[:review][:library_id]
+    @library = Library.find_by(params[:id])
+  end
 
   def review_params
     params.require(:review).permit(:rating, :comment,:user_id,:library_id)

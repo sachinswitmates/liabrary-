@@ -15,6 +15,12 @@ class WelcomeController < ApplicationController
   def show
     @library = Library.find(params[:id])
     @images = @library.images
+    @reviews = @library.reviews.to_a
+    @avg_rating = if @reviews.blank?
+      0
+    else
+      @library.reviews.average(:rating).round(2)
+    end
   end
 
   def city_search

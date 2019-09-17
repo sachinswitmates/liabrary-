@@ -1,4 +1,5 @@
 Rails.application.routes.draw do 
+  post '/rate' => 'rater#create', :as => 'rate'
   get '/city_search' => 'welcome#city_search', :as => 'search_city_library'
   root 'welcome#index'
   devise_for :users, :controllers => {:registrations => "users/registrations", omniauth_callbacks: 'users/omniauth_callbacks' } do
@@ -27,7 +28,11 @@ Rails.application.routes.draw do
     resources :bank_accounts
   end
   namespace :student do
-    resources :libraries 
+    resources :libraries do
+      member do
+        get 'view_reviews'
+      end
+    end
   end
   
   resources :reviews, except: [:index]

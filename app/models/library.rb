@@ -1,4 +1,5 @@
 class Library < ApplicationRecord
+  ratyrate_rateable "library_rating"
   default_scope -> { where(deleted_at: nil) } 
 
   #validations
