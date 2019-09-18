@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   	resources :libraries do
       member do
         get 'library_bookings'
+        get 'view_library_reviews'
       end
     end
     resources :bank_accounts

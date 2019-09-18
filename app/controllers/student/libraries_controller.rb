@@ -14,6 +14,6 @@ class Student::LibrariesController < ApplicationController
   end
   def view_reviews
     @library = Library.find(params[:id])
-    @reviews = @library.reviews
+    @reviews = @library.reviews.order("created_at DESC").paginate(page: params[:page], per_page: 10)
   end
 end

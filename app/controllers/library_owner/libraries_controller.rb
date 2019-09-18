@@ -30,7 +30,7 @@ class LibraryOwner::LibrariesController < ApplicationController
 
   def update
     if @library.update(library_params)
-       flash[:notice] = "You have Successfully updated"
+      flash[:notice] = "You have Successfully updated"
       redirect_to library_owner_library_path
     else
       render 'edit'
@@ -48,12 +48,11 @@ class LibraryOwner::LibrariesController < ApplicationController
     @library = Library.find(params[:id])
     @bookings = @library.bookings.order("created_at DESC").paginate(:page => params[:page], :per_page => 10)
   end
-
-  # def update_unpaid_bookings
-  #   @booking = Booking.find(params[:id])
-  #   @bookings = @booking.update(payment_status: 'paid')
-  #   redirect_to library_owner_libraries_path
-  # end
+  
+  def view_library_reviews
+    @library = Library.find(params[:id])
+    @reviews = @library.reviews
+  end
   
 private
   def library_params

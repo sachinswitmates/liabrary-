@@ -57,6 +57,7 @@ gem 'rqrcode', '>= 1.0.0.pre'
 gem 'razorpay'
 gem 'jquery-validation-rails'
 gem 'jquery-ui-rails'
+gem 'ratyrate'
 
 
 group :development, :test do

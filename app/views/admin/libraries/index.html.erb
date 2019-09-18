@@ -1,65 +1,67 @@
-<div class="bg-white">
-  <div class="row">
-    <div class="col-6">
-      <h3>Listing Libraries</h3>
+<div class ="padd-left-40">
+  <div class="bg-white">
+    <div class="row">
+      <div class="col-6">
+        <h3>Listing Libraries</h3>
+      </div>
+      <div class="col-12 text-right">
+        <%#= link_to 'Add New Library', new_admin_library_path, method: :get, class: 'btn btn-primary'  %>
+      </div>
     </div>
-    <div class="col-12 text-right">
-      <%#= link_to 'Add New Library', new_admin_library_path, method: :get, class: 'btn btn-primary'  %>
-    </div>
-  </div>
-  <table class="table table-striped">
-    <tr>
-      <th> Library Name</th>
-      <th>Address</th>
-      <th style = "width: 15%">Contact Number</th>
-      <th>Opens</th>
-      <th>Seats</th>
-      <th>Booked Seats</th>
-      <th>Owner Name</th>
-      <th>Published</th>
-      <th colspan="6"></th>
-    </tr>
-    <% @libraries.each do |library| %>
+    <table class="table table-striped">
       <tr>
-        <td><%= library.name %></td>
-        <td><%= library.library_address %></td>
-        <td><%= library.contact_number %></td>
-        <td><%= library.open %></td>
-        <td><%= library.seats %></td>
-        <% if library.booked_seats.present? %>
-          <td>
-            <%= link_to library.booked_seats, lib_bookings_admin_library_path(library)%>
-          </td>
-        <%else%>
-          <td> 0</td>
-        <%end%>
-        <td><%= User.find_by(id: library.user_id)&.user_name  %></td>
-        <td><%= library.published %></td>
-        <td>
-          <%= link_to admin_library_path(library) do %>
-            <%= fa_icon "eye" %>
-          <% end %>
-        </td>
-        <% if current_user && current_user.admin? %>
-        <td>
-          <%= link_to edit_admin_library_path(library) do %>
-            <%= fa_icon "edit" %>
-          <% end %>
-          
-        </td>
-        <td>
-          <%= link_to admin_library_path(library),method: :delete,
-                data: { confirm: 'Are you sure?' } do %>
-            <%= fa_icon "trash" %>
-          <% end %>
-        </td>
-    <% end %>
+        <th> Library Name</th>
+        <th>Address</th>
+        <th style = "width: 15%">Contact Number</th>
+        <th>Opens</th>
+        <th>Seats</th>
+        <th>Booked Seats</th>
+        <th>Owner Name</th>
+        <th>Published</th>
+        <th colspan="6"></th>
       </tr>
-    <% end %>
-  </table>
-  <div class="row">
-    <div class="col-6 text-center">
-      <%= will_paginate @library,renderer: BootstrapPagination::Rails %>
+      <% @libraries.each do |library| %>
+        <tr>
+          <td><%= library.name %></td>
+          <td><%= library.library_address %></td>
+          <td><%= library.contact_number %></td>
+          <td><%= library.open %></td>
+          <td><%= library.seats %></td>
+          <% if library.booked_seats.present? %>
+            <td>
+              <%= link_to library.booked_seats, lib_bookings_admin_library_path(library)%>
+            </td>
+          <%else%>
+            <td> 0</td>
+          <%end%>
+          <td><%= User.find_by(id: library.user_id)&.user_name  %></td>
+          <td><%= library.published %></td>
+          <td>
+            <%= link_to admin_library_path(library) do %>
+              <%= fa_icon "eye" %>
+            <% end %>
+          </td>
+          <% if current_user && current_user.admin? %>
+          <td>
+            <%= link_to edit_admin_library_path(library) do %>
+              <%= fa_icon "edit" %>
+            <% end %>
+            
+          </td>
+          <td>
+            <%= link_to admin_library_path(library),method: :delete,
+                  data: { confirm: 'Are you sure?' } do %>
+              <%= fa_icon "trash" %>
+            <% end %>
+          </td>
+      <% end %>
+        </tr>
+      <% end %>
+    </table>
+    <div class="row">
+      <div class="col-6 text-center">
+        <%= will_paginate @library,renderer: BootstrapPagination::Rails %>
+      </div>
     </div>
   </div>
 </div>

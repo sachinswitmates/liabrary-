@@ -18,7 +18,7 @@ class ReviewsController < ApplicationController
     @review = Review.new(review_params)
     @review.user_id = current_user.id
     if @review.save
-      redirect_to root_path
+      redirect_to  view_reviews_student_library_path(@library)
     else
       render 'new'
     end
@@ -26,8 +26,8 @@ class ReviewsController < ApplicationController
 
   def update
     if @review.update(review_params)
-      flash[:notice] = "You have Successfully updated your review"
-      redirect_to root_path
+      flash[:notice] = "You have Successfully updated"
+      redirect_to view_reviews_student_library_path(@library)
     else
       render 'edit'
     end

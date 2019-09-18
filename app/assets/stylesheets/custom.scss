@@ -4,7 +4,8 @@
 .padd-top-15{
   padding-top: 20px;
 }
-.padd-left-30{
+
+.padd-left-40{
   padding-left: 80px;
 }
 
@@ -82,6 +83,7 @@
 .width-20{
   width: 20%;
 }
+
 body
 {
   font-family: Arial, Sans-serif;
@@ -91,6 +93,8 @@ body
   color:red;
   font-family:verdana, Helvetica;
 }
+
+
 li{
   list-style-type: none;
   padding: 6px;
@@ -104,6 +108,13 @@ li{
   max-height: 200px; 
   overflow-y: scroll; 
   overflow-x: hidden;
+}
+
+#errNm1 {
+  border: 1px solid red;
+}
+#errNm2 {
+  border: 1px solid green;
 }
 /*.fa {
   color : black;

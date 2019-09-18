@@ -23,6 +23,7 @@
     <%else%>
       Booked Seats: 0 </p>
     <%end%>
+    <br><%=link_to 'Reviews',view_library_reviews_library_owner_library_path(library)%>
     <hr>
     <% if library.published? %>
       <%= link_to 'View Bookings',library_bookings_library_owner_library_path(library), class: 'btn btn-primary' %>
