@@ -21,17 +21,11 @@
     <p class="card-text"><strong>Open: </strong><%= @library.open %></p>
     <p class="card=text"><strong>Seats: </strong><%= @library.seats %></p>
     <p class="card-text"><strong>Contact Number: </strong><%= @library.contact_number %></p>
-  <!-- <div>
-    <% if current_user %>
-    library rating: <%= rating_for @library, "library_rating", enable_half: true,half_show: true,cancel: true  %>
-      <br>
-  </div> -->
-      Average Rating :
-      <div class='star-rating' data-score=<%= @avg_rating %>></div>
-        <em><%= "#{@reviews.count} reviews" %></em>
-        <p><%=link_to 'show reviews',view_reviews_student_library_path(@library)%></p>
-      </div>
-      <%end%>
+    Average Rating :
+    <div class='star-rating' data-score=<%= @avg_rating %>></div>
+      <em><%= "#{@reviews.count} reviews" %></em>
+      <p><%=link_to 'show reviews',view_reviews_student_library_path(@library)%></p>
+    </div>
     <%= link_to 'Back', student_libraries_path %> 
   </div>
 </div>

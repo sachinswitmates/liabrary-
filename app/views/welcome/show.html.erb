@@ -19,8 +19,7 @@
     <div class="card-body">
       <p class="card-text"><strong>Name: </strong><%= @library.name %></p>
       <p class="card-text"><strong>Address:</strong><%= @library.library_address %></p>
-      <!-- rating: <%= rating_for @library, "library_rating", enable_half: true,half_show: true,cancel: true  %>
-      <br> -->
+     
       Average Rating :
       <div class='star-rating' data-score=<%= @avg_rating %>></div>
       <em><%= "#{@reviews.count} reviews" %></em>

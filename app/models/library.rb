@@ -1,5 +1,4 @@
 class Library < ApplicationRecord
-  ratyrate_rateable "library_rating"
   default_scope -> { where(deleted_at: nil) } 
 
   #validations
@@ -67,7 +66,7 @@ class Library < ApplicationRecord
             self.update_attribute("#{package}_plan_id", plan.id)
           end
         rescue => e
-          puts e.messages
+          puts e.message
         end
       end
     end
