@@ -1,33 +1,39 @@
 require 'rails_helper'
 
 RSpec.describe Library, type: :model do
-  context 'validations' do
-    it { should validate_presence_of(:name) }
-    it { should validate_uniqueness_of(:name)}
-    it { should validate_presence_of(:address1) }
-    it { should validate_uniqueness_of(:address1)}
-    it { should validate_presence_of(:city) }
-    it { should validate_presence_of(:zip_code) }
-    it { should validate_presence_of(:landmark) }
-    it { should validate_presence_of(:state) }
-    it { should validate_presence_of(:open) }
-    it { should validate_presence_of(:seats) }
-    it { should validate_presence_of(:contact_number) }
-    it { should validate_length_of(:contact_number).is_at_least(10)}
-   #it { is_expected.to validate_presence_of(:name) }
+  describe 'validations' do
+    it { is_expected.to validate_presence_of(:name) }
+    it { is_expected.to validate_uniqueness_of(:name) }
+    it { is_expected.to validate_presence_of(:address1) }
+    it { is_expected.to validate_uniqueness_of(:address1)}
+    it { is_expected.to validate_presence_of(:city) }
+    it { is_expected.to validate_presence_of(:zip_code) }
+    it { is_expected.to validate_presence_of(:landmark) }
+    it { is_expected.to validate_presence_of(:state) }
+    it { is_expected.to validate_presence_of(:open) }
+    it { is_expected.to validate_presence_of(:seats) }
+    it { is_expected.to validate_presence_of(:contact_number) }
+    it { is_expected.to validate_length_of(:contact_number).is_at_least(10)}
+    it "should validate package" do
+      library = FactoryGirl.create(:library)
+      expect(library[:monthly])
+      expect(library[:quaterly])
+      expect(library[:halfyearly])
+      expect(library[:yearly]) 
+    end
   end
 
-  context 'associations' do
-    it { should have_many(:bookings) }
-    it { should have_many(:users).through(:bookings) }
+  describe 'associations' do
     it "has a polymorphic relationship" do
       expect(subject).to have_many(:images) 
     end
-    it { should have_many(:reviews) }
+    it { is_expected.to have_many(:bookings) }
+    it { is_expected.to have_many(:users).through(:bookings) }
+    it { is_expected.to have_many(:reviews) }
   end
 
-  context 'nested attributes' do
-    it { should accept_nested_attributes_for :images }
+  describe 'nested attributes' do
+    it { is_expected.to accept_nested_attributes_for :images }
   end
 
   describe Library do

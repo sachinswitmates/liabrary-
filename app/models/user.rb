@@ -2,12 +2,12 @@ class User < ApplicationRecord
   ratyrate_rater
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  validates :first_name, presence: true
+  validates :last_name, presence: true
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable, :omniauthable, omniauth_providers: [:facebook,:google_oauth2]#omniauth_providers: [:google_oauth2]
+         :recoverable, :rememberable, :validatable, :omniauthable, omniauth_providers: [:facebook,:google_oauth2]
   
   attr_accessor :avatar       
-  
-  #Validations
 
   # Associations
   #has_many :libraries
@@ -47,7 +47,6 @@ class User < ApplicationRecord
       end
     end
   end
-
 
   def self.from_omniauth(access_token)
     data = access_token.info
