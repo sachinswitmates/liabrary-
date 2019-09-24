@@ -1,5 +1,5 @@
 require 'faker'
-FactoryGirl.define do
+FactoryBot.define do
   factory :library  do
     name {Faker::Lorem.name}
     address1 {Faker::Lorem.word}
@@ -14,5 +14,6 @@ FactoryGirl.define do
     quaterly {1000}
     halfyearly {3000}
     yearly {6000}
+    user_id {"2"}
   end
 end

@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   before :each do
-    @user = FactoryGirl.build(:user)
+    @user = FactoryBot.build(:user)
   end
 
   it "should not be valid without a first_name" do

@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :bank_account do
     bank_name {Faker::Lorem.word}
     account_number {Faker::Lorem.word}

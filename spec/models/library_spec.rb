@@ -15,7 +15,7 @@ RSpec.describe Library, type: :model do
     it { is_expected.to validate_presence_of(:contact_number) }
     it { is_expected.to validate_length_of(:contact_number).is_at_least(10)}
     it "should validate package" do
-      library = FactoryGirl.create(:library)
+      library = FactoryBot.create(:library)
       expect(library[:monthly])
       expect(library[:quaterly])
       expect(library[:halfyearly])
@@ -38,7 +38,7 @@ RSpec.describe Library, type: :model do
 
   describe Library do
     it "it returns a address1,address2,landmark,city,zipcode and state in string" do
-      library = FactoryGirl.create(:library)
+      library = FactoryBot.create(:library)
       expect(library.library_address).to eql "#{library.address1} ,#{library.address2} , #{library.landmark}, #{library.city}, #{library.zip_code}, #{library.state}"
     end
   end
