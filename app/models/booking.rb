@@ -1,5 +1,4 @@
-class Booking < ApplicationRecord
-   
+class Booking < ApplicationRecord 
   enum payment_status: [:paid, :unpaid]
 
   #associations

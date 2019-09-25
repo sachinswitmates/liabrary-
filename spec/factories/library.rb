@@ -2,7 +2,7 @@ require 'faker'
 FactoryBot.define do
   factory :library  do
     name {Faker::Lorem.name}
-    address1 {Faker::Lorem.word}
+    address1 {"sdfgfdgdf"}
     city {Faker::Lorem.word}
     zip_code {Faker::Lorem.word}
     state {Faker::Lorem.word}
