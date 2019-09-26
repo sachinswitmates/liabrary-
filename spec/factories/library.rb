@@ -8,12 +8,10 @@ FactoryBot.define do
     state {Faker::Lorem.word}
     landmark {Faker::Lorem.word}
     open {Faker::Lorem.word}
-    seats {Faker::Lorem.word}
+    seats {50}
     contact_number {"9999999999"}
-    monthly {100}
     quaterly {1000}
-    halfyearly {3000}
-    yearly {6000}
-    user_id {"2"}
+    user_id {2}
+    booked_seats {2}
   end
 end
