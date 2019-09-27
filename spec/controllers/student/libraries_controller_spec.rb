@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Student::LibrariesController, type: :controller do
   before(:each) do
-    @user = FactoryBot.create(:user,role: 'student')
+    @user = FactoryBot.create(:user)
     sign_in @user
     @library = FactoryBot.create(:library, user_id: @user.id)   
   end

@@ -4,6 +4,6 @@ FactoryBot.define do
     last_name {"test"}
     email {Faker::Internet.email}
     password {"password123"}
-    role {"library_owner"}
+    role {"student"}
   end
 end

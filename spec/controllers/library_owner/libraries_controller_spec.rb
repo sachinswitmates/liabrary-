@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe LibraryOwner::LibrariesController, type: :controller do
   before(:each) do
-    @user = FactoryBot.create(:user)
+    @user = FactoryBot.create(:user,role: 'library_owner')
     sign_in @user
     @library = FactoryBot.create(:library, user_id: @user.id)   
   end
@@ -33,8 +33,10 @@ RSpec.describe LibraryOwner::LibrariesController, type: :controller do
     context "with valid attributes" do
       it "creates a new library" do
         expect{
-          post :create, params: {library: FactoryBot.attributes_for(:library)}
+          post :create, params: {library: FactoryBot.attributes_for(:library).merge(user_id: @user.id)}
         }.to change(Library,:count).by(0)
+        @user.send_notification_email
+        expect(response.status).to eq 200
       end
       it "redirects to the new library" do
         post :create, params: {library: FactoryBot.attributes_for(:library)}

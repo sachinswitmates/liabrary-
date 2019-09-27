@@ -34,7 +34,6 @@ RSpec.describe Admin::LibrariesController, type: :controller do
         expect{
           post :create, params: {library: FactoryBot.attributes_for(:library)}
         }.to change(Library,:count).by(0)
-        # expect(response).to have_http_status(200)
         expect(response.status).to eq 200
       end
       it "redirects to the new library" do
@@ -46,7 +45,7 @@ RSpec.describe Admin::LibrariesController, type: :controller do
 
   describe "GET show" do
     it "show all libraries" do
-      @image = FactoryBot.create(:image,imageable_id: @library.id, imageable_type: 'Library')
+      @image = FactoryBot.create(:image ,imageable_id: @library.id, imageable_type: 'Library')
       get :show, params: {id:  @library.id}
       expect(assigns(:library)).to eql(@library)
       expect(response).to render_template(:show)

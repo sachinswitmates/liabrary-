@@ -56,18 +56,34 @@ RSpec.describe Library, type: :model do
   end
 
   describe 'create_plan_on_razorpay' do
-    it "create plan_id of packages" do
+    before(:each) do
       library = FactoryBot.create(:library)
-      library.update(quaterly: 1500, quaterly_plan_id: 'plan_Dquaterlyddddd',monthly: 500, monthly_plan_id: 'plan_Dmonthlycaddsqd',
-        halfyearly: 3000, halfyearly_plan_id: 'plan_Dhalfyearlydfsds',yearly: 6000,yearly_plan_id: 'plan_Dyeearltdfdfdewa')
-      expect(library).to eql(library)
+      package = 'monthly'
+      @options={
+          "period": (package == 'yearly') ? 'yearly' : 'monthly',
+          "interval": 1,
+          "item": {
+            "name": "L-#{library.id}-#{library[package]}-#{package}",
+            "description": "L-#{library.id}",
+            "amount": library[package].to_i * 100,
+            "currency": "INR"
+          },
+        }
+    end
+    it "create plan_id of packages" do
+      # plan = Razorpay::Plan.create(@options)
+      #expect(response).to have_http_status(400)
     end
   end
 
-  # describe 'get_interval' do
-  #   it 'get_interval packages' do
-  #     library = FactoryBot.create(:library)
-  #     expect(library.get_interval).to eq 3
-  #   end
-  # end
+  describe 'get_interval' do
+    before(:each) do
+      library = FactoryBot.create(:library)
+      package = 'monthly'
+      @interval = library.get_interval(package)
+    end
+    it 'get_interval packages' do
+      expect(@interval).to eq 1
+    end
+  end
 end
