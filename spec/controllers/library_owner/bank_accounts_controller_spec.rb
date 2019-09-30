@@ -27,19 +27,22 @@ RSpec.describe LibraryOwner::BankAccountsController, type: :controller do
       expect(response).to render_template("new")
     end
   end
-  # describe "POST create" do
-  #   context "with valid attributes" do
-  #     it "creates a new bank_account" do
-  #       @bank_account_params = {bank_name: "SBI",account_number: "5454356466434", ifsc_code: "SBI0078373", account_holder_name: "test test",user_id: @user.id}
-  #       post :create, params: {:bank_account => @bank_account_params}
-  #       expect(@bank_account).to eql(@bank_account)
-  #     end
-  #     it "redirects to the new bank_account" do
-  #       post :create, params: {bank_account: FactoryBot.attributes_for(:bank_account)}
-  #       expect(response).to render_template('new')
-  #     end
-  #   end
-  # end
+  describe "POST create" do
+    context "with valid attributes" do
+      it "creates a new bank_account" do
+         expect{
+        post :create, params: {user_id: @user.id, bank_account: FactoryBot.attributes_for(:bank_account,user_id: @user.id)}
+      }.to change(BankAccount,:count).by(1)
+        # @bank_account_params = {bank_name: "SBI",account_number: "5454356466434", ifsc_code: "SBI0078373", account_holder_name: "test test",user_id: @user.id}
+        # post :create, params: {:bank_account => @bank_account_params}
+        # expect(@bank_account).to eql(@bank_account)
+      end
+      # it "redirects to the new bank_account" do
+      #   post :create, params: {bank_account: FactoryBot.attributes_for(:bank_account)}
+      #   expect(response).to render_template('new')
+      # end
+    end
+  end
       
   describe "GET show" do
     it "show bank_account" do

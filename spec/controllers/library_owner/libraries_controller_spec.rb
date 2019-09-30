@@ -8,9 +8,9 @@ RSpec.describe LibraryOwner::LibrariesController, type: :controller do
   end
 
   describe "GET index" do
-    it "shows all libraries for signed in user" do
+    it "shows all libraries of current user" do
       get :index
-      expect(@library).to eql(@library)      
+      expect(@user.libraries).to eql(@user.libraries)      
     end 
     it "renders the index template" do
       get :index
@@ -30,34 +30,12 @@ RSpec.describe LibraryOwner::LibrariesController, type: :controller do
   end
 
   describe "POST create" do
-    context "with valid attributes" do
-      it "creates a new library" do
-        expect{
-          post :create, params: {library: FactoryBot.attributes_for(:library).merge(user_id: @user.id)}
-        }.to change(Library,:count).by(0)
-        @user.send_notification_email
-        expect(response.status).to eq 200
-      end
-      it "redirects to the new library" do
-        post :create, params: {library: FactoryBot.attributes_for(:library)}
-        expect(response).to render_template('new')
-      end
-    end 
-  end
-
-  describe "#library_bookings" do
-    it "show a library bookings" do
-      booking = FactoryBot.create(:booking, user_id: @user.id, library_id: @library.id)
-      get :library_bookings, params: {id: @library.id}
-      expect(response).to render_template(:library_bookings)
-    end
-  end
-
-  describe '#view_library_reviews' do
-    it " show a library_reviews" do
-      review = FactoryBot.create(:review, library_id: @library.id, user_id: @user.id)
-      get :view_library_reviews,params: {id: @library.id}
-      expect(response).to render_template(:view_library_reviews)
+    it "creates a new library" do
+      expect{
+        post :create, params: {library: FactoryBot.attributes_for(:library,user_id: @user.id)}
+      }.to change(Library,:count).by(1)
+      @user.send_notification_email
+      expect(response).to redirect_to library_owner_libraries_path
     end
   end
 
@@ -85,5 +63,30 @@ RSpec.describe LibraryOwner::LibrariesController, type: :controller do
       expect(assigns(:library)).to eql(@library)
       expect(response).to render_template(:show)
     end
+  end
+
+  describe 'prevent_unauthorize_access' do
+    it "library owner is not authorize to access page" do
+      sign_in @user 
+      @user.role == 'library_owner'
+      flash[:alert] = "You'r not authorize to access this page"
+      expect(response).to have_http_status(200)
+    end
   end  
+
+  describe "#library_bookings" do
+    it "show a library bookings" do
+      booking = FactoryBot.create(:booking, user_id: @user.id, library_id: @library.id)
+      get :library_bookings, params: {id: @library.id}
+      expect(response).to render_template(:library_bookings)
+    end
+  end
+
+  describe '#view_library_reviews' do
+    it " show a library_reviews" do
+      review = FactoryBot.create(:review, library_id: @library.id, user_id: @user.id)
+      get :view_library_reviews,params: {id: @library.id}
+      expect(response).to render_template(:view_library_reviews)
+    end
+  end
 end

@@ -25,8 +25,8 @@ class User < ApplicationRecord
   end
 
   def send_notification_email
-    UserMailer.notify_admin(User.admin_user).deliver_now
     UserMailer.notify_library_owner(self).deliver_now
+    UserMailer.notify_admin(User.admin_user).deliver_now
   end
 
   def self.admin_user

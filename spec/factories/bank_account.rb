@@ -4,6 +4,6 @@ FactoryBot.define do
     account_number {Faker::Lorem.word}
     ifsc_code {"HDFCs23832"}
     account_holder_name{Faker::Lorem.word}
-    user_id {"2"}
+    user
   end
 end

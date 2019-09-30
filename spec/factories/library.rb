@@ -1,11 +1,11 @@
 require 'faker'
 FactoryBot.define do
   factory :library  do
-    name {Faker::Lorem.name}
-    address1 {"sdfgfdgdf"}
-    city {Faker::Lorem.word}
+    name {Faker::Name.unique.name}
+    address1 {Faker::Address.full_address}
+    city {'indore'}
     zip_code {Faker::Lorem.word}
-    state {Faker::Lorem.word}
+    state {'Madhya Pradesh'}
     landmark {Faker::Lorem.word}
     open {Faker::Lorem.word}
     seats {50}
@@ -13,5 +13,7 @@ FactoryBot.define do
     monthly {1000}
     user_id {2}
     booked_seats {2}
+    published {'false'}
+    monthly_plan_id {'plan_Djpschrowrjcs'}
   end
 end

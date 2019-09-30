@@ -39,7 +39,7 @@ class LibraryOwner::BankAccountsController < ApplicationController
 
 private
   def bank_account_params
-    params.require(:bank_account).permit(:bank_name,:account_number, :ifsc_code, :account_holder_name)
+    params.require(:bank_account).permit(:bank_name,:account_number, :ifsc_code, :account_holder_name,:user_id)
   end
 
 end

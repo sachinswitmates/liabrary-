@@ -30,10 +30,6 @@ class BookingsController < ApplicationController
     @booking =Booking.find(params[:id])
   end
 
-  def edit
-    @booking = Booking.find(params[:id])
-  end
-
 private
   def booking_params
     params.require(:booking).permit(:package, :payment_method, :subscription_length,:token, :library_id,:razorpay_payment_id,:plan_id,:payment_status)
@@ -42,5 +38,4 @@ private
   def set_library
     @library = Library.find(params[:library_id])
   end
-
 end

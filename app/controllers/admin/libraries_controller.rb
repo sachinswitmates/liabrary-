@@ -72,7 +72,7 @@ class Admin::LibrariesController < ApplicationController
  
 private
   def library_params
-    params.require(:library).permit(:name,:address1,:address2,:state,:city,:landmark,:zip_code, :open, :seats,:contact_number,:published)
+    params.require(:library).permit(:name,:address1,:address2,:state,:city,:landmark,:zip_code, :open, :seats,:contact_number,:published,:user_id,:monthly,:quaterly, :halfyearly, :yearly,:monthly_plan_id,:quaterly_plan_id,:halfyearly_plan_id,:yearly_plan_id,images_attributes: [:id, :avatar, :_destroy])
   end
 
   def set_library

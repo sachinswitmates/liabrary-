@@ -6,7 +6,7 @@ class Booking < ApplicationRecord
   belongs_to :library, optional:true
   has_one :qrcode
 
-  # Callbacks
+  #Callbacks
   after_create :update_seats
   after_create :update_subscription_date
   after_create :generate_qrcode

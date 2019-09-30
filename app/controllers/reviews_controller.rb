@@ -1,6 +1,6 @@
 class ReviewsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_review, only: [:show, :edit, :update, :destroy]
+  before_action :set_review, only: [:show, :edit, :update]
   before_action :set_library, except: [:create]
 
   def new
@@ -33,11 +33,11 @@ class ReviewsController < ApplicationController
     end
   end
 
-  def destroy
-    @review.destroy
-    flash[:notice] = "you have Successfully deleted your review"
-    redirect_to root_path
-  end
+  # def destroy
+  #   @review.destroy
+  #   flash[:notice] = "you have Successfully deleted your review"
+  #   redirect_to root_path
+  # end
 
   private
     def set_review
@@ -49,9 +49,10 @@ class ReviewsController < ApplicationController
     @library = Library.find_by(params[:id])
   end
 
-  def review_params
-    params.require(:review).permit(:rating, :comment,:user_id,:library_id)
-  end
+  private
+    def review_params
+      params.require(:review).permit(:rating, :comment,:user_id,:library_id)
+    end
 end
 
 

@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :review do
-    rating {"1"}
-    comment {"wdfegfdvgds"}
+    rating {"4"}
+    comment {"good"}
   end
 end

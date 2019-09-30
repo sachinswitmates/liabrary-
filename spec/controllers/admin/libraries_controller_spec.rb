@@ -7,7 +7,7 @@ RSpec.describe Admin::LibrariesController, type: :controller do
     @library = FactoryBot.create(:library, user_id: @user.id)   
   end
   describe "GET index" do
-    it "shows all libraries for signed in user" do
+    it "shows all libraries for admin" do
       get :index
       expect(@library).to eql(@library)      
     end 
@@ -32,13 +32,13 @@ RSpec.describe Admin::LibrariesController, type: :controller do
     context "with valid attributes" do
       it "creates a new library" do
         expect{
-          post :create, params: {library: FactoryBot.attributes_for(:library)}
-        }.to change(Library,:count).by(0)
-        expect(response.status).to eq 200
+          post :create, params: {library: FactoryBot.attributes_for(:library).merge(user_id: @user.id)}
+        }.to change(Library,:count).by(1)
+        expect(response).to redirect_to admin_libraries_path
       end
       it "redirects to the new library" do
-        post :create, params: {library: FactoryBot.attributes_for(:library)}
-        expect(response).to render_template('new')
+        post :create, params: {library: FactoryBot.attributes_for(:library,user_id: nil)}
+        expect(response.status).to eq 302
       end
     end 
   end
@@ -55,9 +55,10 @@ RSpec.describe Admin::LibrariesController, type: :controller do
   describe "PUT update" do  
     context "with valid attributes" do
       it "should update the library" do
-        @attr = { :name => "devv", :city => "bhopal" }
+        @attr = { :name => "devv", :city => "bhopal", published: true }
         put :update, params: {:id => @library.id, :library => @attr }
         @library.update(@attr)
+        @library.send_published_notification_email
         expect(response).to redirect_to admin_libraries_path
       end
       it "should re-render edit template" do

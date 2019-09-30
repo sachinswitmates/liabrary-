@@ -11,7 +11,7 @@ RSpec.describe BookingsController, type: :controller do
   describe "GET index" do
     it "shows all libraries for signed in user" do
       get :index
-      expect(@booking).to eql(@booking)      
+      expect(@user.bookings).to eql(@user.bookings)      
     end 
     it "renders the index template" do
       get :index

@@ -1,4 +1,5 @@
 class UserMailer < ApplicationMailer 
+
   def notify_library_owner(user)
     @user = user
     mail(to: @user.email, subject: 'Your library has created')

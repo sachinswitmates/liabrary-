@@ -21,10 +21,6 @@ RSpec.describe User, type: :model do
     @user.password = nil
     expect(@user).not_to be_valid
   end
-  it "should not be valid without a role" do
-    @user.role = nil
-    expect(@user).not_to be_valid
-  end
 
   describe 'associations' do
     it "has a polymorphic relationship" do
@@ -40,26 +36,38 @@ RSpec.describe User, type: :model do
     it "returns a first_name and last_name in a string " do
       expect(@user.user_name).to eql "#{@user.first_name} #{@user.last_name}"
     end
+
   describe 'enum role' do
     it { is_expected.to define_enum_for(:role).with([:admin, :library_owner, :student]) }
   end
 
   end
-  # describe 'user mailer' do
-  #   it "sends an email" do
-  #     expect { @user.send_notification_email }.to change { ApplicationMailer.deliveries.count }.by(0)
-  #   end
-  # end
-  # describe 'instructions' do
-  #  # let(:user) { name: 'test', email: 'test@email.com' }
-  #   let(:mail) { UserMailer.notify_library_owner(@user) }
+  describe 'user mailer' do
+    it "sends an email after creating library to library_owner and admin" do
+      expect { @user.send_notification_email }.to change { ApplicationMailer.deliveries.count }.by(2)
+    end
+  end
 
-  #   it 'renders the subject' do
-  #     expect(mail.subject).to eql('Your library has created')
-  #   end
+  describe 'notify library owner' do
+    let(:mail) { UserMailer.notify_library_owner(@user) }
 
-  #   it 'renders the receiver email' do
-  #     expect(mail.to).to eql([@user.email])
-  #   end
-  # end
+    it 'renders the subject' do
+      expect(mail.subject).to eql('Your library has created')
+    end
+    it 'renders the receiver email' do
+      expect(mail.to).to eql([@user.email])
+    end
+  end
+
+  describe 'notify admin' do
+    user = FactoryBot.build(:user, email: 'admin@gmail.com',role: 'admin')
+    let(:mail) { UserMailer.notify_admin(user) } 
+
+     it 'renders the subject' do
+      expect(mail.subject).to eql("Notification")
+    end
+    it 'renders the receiver email' do
+      expect(mail.to).to eql([user.email])
+    end
+  end
 end
