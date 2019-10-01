@@ -67,10 +67,22 @@ RSpec.describe Booking, type: :model do
   end
 
   describe "generate qrcode" do
+    # @qr = RQRCode::QRCode.new('library', :size => 4, :level => :h)
+    # png = @qr.as_png(
+    #       resize_gte_to: false,
+    #       resize_exactly_to: false,
+    #       fill: 'white',
+    #       color: 'black',
+    #       size: 120,
+    #       border_modules: 4,
+    #       module_px_size: 6,
+    #       file: nil 
+    #     )
     it "generate qrcode" do
       @booking = FactoryBot.create(:booking,user_id: @user.id,library_id: @library.id )
       filename = "#{Rails.root}/public/code_#{@booking.id}.png"
       file = File.new(filename, "w")
+      #File.write(filename, png.to_s.force_encoding('UTF-8'))
       @qrcode = FactoryBot.create(:qrcode,code: file ,booking_id: @booking.id)
       expect(@qrcode.code.url).to eql(@qrcode.code.url)
       File.delete(filename) if File.exist?(filename)

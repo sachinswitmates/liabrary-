@@ -72,7 +72,7 @@ RSpec.describe Library, type: :model do
     end
     it "create plan_id of packages" do
       # plan = Razorpay::Plan.create(@options)
-      #expect(response).to have_http_status(400)
+      # expect(response).to have_http_status(400)
     end
   end
 

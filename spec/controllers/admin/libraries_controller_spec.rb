@@ -47,11 +47,18 @@ RSpec.describe Admin::LibrariesController, type: :controller do
     it "show all libraries" do
       @image = FactoryBot.create(:image ,imageable_id: @library.id, imageable_type: 'Library')
       get :show, params: {id:  @library.id}
-      expect(assigns(:library)).to eql(@library)
-      expect(response).to render_template(:show)
+      expect(@library.images).to eq(@library.images)
+      expect(response.status).to eq 200
     end
   end
 
+  describe 'GET edit' do
+    it 'edit the library details' do
+      get :edit, params: {id: @library.id}
+      expect(response).to render_template ('edit')
+    end
+  end
+  
   describe "PUT update" do  
     context "with valid attributes" do
       it "should update the library" do

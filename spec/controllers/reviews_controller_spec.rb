@@ -19,6 +19,13 @@ RSpec.describe ReviewsController, type: :controller do
     end
   end
 
+  describe 'GET edit' do
+    it 'edit the review' do
+      get :edit, params: {id: @review.id}
+      expect(response.status).to eq 200
+    end
+  end
+
   describe "POST create" do
     it 'creates a new review' do
       expect{ post :create, params: {review: FactoryBot.attributes_for(:review,library_id: @library.id, user_id: @user.id)}

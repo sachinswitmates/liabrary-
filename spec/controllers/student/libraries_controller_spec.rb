@@ -4,13 +4,13 @@ RSpec.describe Student::LibrariesController, type: :controller do
   before(:each) do
     @user = FactoryBot.create(:user)
     sign_in @user
-    @library = FactoryBot.create(:library, user_id: @user.id)   
+    @library = FactoryBot.create(:library, user_id: @user.id,published: true)   
   end
   
   describe "GET index" do
     it "shows all libraries for signed in user" do
       get :index
-      expect(@library).to eql(@library)      
+      expect(@library.published).to eql(@library.published)      
     end 
     it "renders the index template" do
       get :index
