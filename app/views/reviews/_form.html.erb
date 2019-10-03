@@ -5,7 +5,9 @@
       <div class="row">
         <div class="col-6">
           <%= form.hidden_field :user_id %>
-          <%= form.hidden_field :library_id,:value => params[:library_id]%>
+          <%#byebug%>
+          <% library_id = params[:library_id].present? ? params[:library_id] : form.object.library_id %>
+          <%= form.hidden_field :library_id, value: library_id %>
           <div class="form-group row">
             <%= form.label :rating, class: 'col-3 form-control-label' %>
             <div class="col-6" id='star-rating'></div>

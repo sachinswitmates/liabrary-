@@ -1,7 +1,7 @@
 class ReviewsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_review, only: [:show, :edit, :update]
-  before_action :set_library, except: [:create]
+  before_action :set_review, only: [:show, :edit,:update,:destroy]
+  before_action :set_library, except: [:create,:update]
 
   def new
     @review = Review.new
@@ -25,19 +25,20 @@ class ReviewsController < ApplicationController
   end
 
   def update
+    @library = Library.find_by(id: params[:review][:library_id])
     if @review.update(review_params)
-      flash[:notice] = "You have Successfully updated"
-      redirect_to view_reviews_student_library_path(@library)
+      flash[:notice] = "You have Successfully updated your review"
+      redirect_to  view_reviews_student_library_path( @library)
     else
       render 'edit'
     end
   end
 
-  # def destroy
-  #   @review.destroy
-  #   flash[:notice] = "you have Successfully deleted your review"
-  #   redirect_to root_path
-  # end
+  def destroy
+    @review.destroy
+    flash[:notice] = "you have Successfully deleted your review"
+    redirect_to root_path
+  end
 
   private
     def set_review
@@ -45,7 +46,6 @@ class ReviewsController < ApplicationController
     end
   
   def set_library
-    #id = params[:id] || params[:review][:library_id]
     @library = Library.find_by(params[:id])
   end
 

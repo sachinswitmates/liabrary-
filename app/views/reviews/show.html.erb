@@ -1,0 +1,35 @@
+<div class ="padd-left-40">
+  <div class="bg-white">
+    <div class="row">
+      <div class="col-12">
+        <h3><%=@library.name %> Reviews</h3>
+        <hr>
+        <div class="col-12 text-right">
+          <%#= link_to "Write a Review", new_review_path(@library) %>
+        </div>
+      </div>
+    </div>
+      <div class="card" style="width: 350px; background: #ccc">
+        <div class="card-body">
+          <div class="reviews">
+            <p class="card-text"><strong>Rating: </strong> <div class="star-rating" data-score= <%= @review.rating %> ></div></p>
+            <p class="card-text"><strong>Comment: </strong><%= @review.comment%></p>
+            <p class="card-text"><strong>commented by: </strong><%= User.find_by(id: @review.user_id)&.user_name%></p>
+            <p class="card-text"><strong>created_at: </strong><%= @review.created_at&.strftime('%d %b %Y , %I:%M:%S %p')%></p>
+              <%= link_to 'Edit', edit_review_path(@review.id) %>
+          </div>
+        </div>
+      </div>
+    <%end%>
+    <%#= will_paginate @reviews,renderer: BootstrapPagination::Rails %>
+  </div>
+</div>
+<script>
+  $('.star-rating').raty({
+    path: '/assets/',
+    readOnly: true,
+    score: function() {
+          return $(this).attr('data-score');
+  }
+});
+</script>

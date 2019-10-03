@@ -13,4 +13,9 @@ RSpec.describe Review, type: :model do
     @review.comment = nil
     expect(@review).not_to be_valid
   end 
+
+  describe 'associations' do
+    it { is_expected.to belong_to(:user) }
+    it { is_expected.to belong_to(:library)}
+  end
 end

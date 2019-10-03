@@ -28,7 +28,7 @@ RSpec.describe Student::LibrariesController, type: :controller do
     end
   end
 
-  describe '#view_reviews' do
+  describe 'view_reviews' do
     it " show a library_reviews" do
       review = FactoryBot.create(:review, library_id: @library.id, user_id: @user.id)
       get :view_reviews,params: {id: @library.id}
