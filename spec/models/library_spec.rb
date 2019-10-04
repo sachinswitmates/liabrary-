@@ -57,22 +57,11 @@ RSpec.describe Library, type: :model do
 
   describe 'create_plan_on_razorpay' do
     before(:each) do
-      library = FactoryBot.create(:library)
-      package = 'monthly'
-      @options={
-          "period": (package == 'yearly') ? 'yearly' : 'monthly',
-          "interval": 1,
-          "item": {
-            "name": "L-#{library.id}-#{library[package]}-#{package}",
-            "description": "L-#{library.id}",
-            "amount": library[package].to_i * 100,
-            "currency": "INR"
-          },
-        }
+      @user = FactoryBot.create(:user)
+      @library = FactoryBot.create(:library,user_id: @user.id,quaterly: 1500)
     end
     it "create plan_id of packages" do
-      #plan = Razorpay::Plan.create(@options)
-      # expect(response).to have_http_status(400)
+      expect(@library.create_plan_on_razorpay).not_to be_nil
     end
   end
 

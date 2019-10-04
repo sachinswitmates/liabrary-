@@ -3,10 +3,10 @@
     <div class="row">
       <div class="col-12">
         <h3><%=@library.name %> Reviews</h3>
-        <hr>
         <div class="col-12 text-right">
-          <%#= link_to "Write a Review", new_review_path(@library) %>
+          <%= link_to "Write a Review", new_review_path(user_id: @user,library_id: @library.id) %>
         </div>
+        <hr>
       </div>
     </div>
     <% @reviews.each do |review| %>
@@ -17,7 +17,6 @@
             <p class="card-text"><strong>Comment: </strong><%= review.comment%></p>
             <p class="card-text"><strong>commented by: </strong><%= User.find_by(id: review.user_id)&.user_name%></p>
             <p class="card-text"><strong>created_at: </strong><%= review.created_at&.strftime('%d %b %Y , %I:%M:%S %p')%></p>
-
             <% if user_signed_in? %>
               <% if current_user.reviews.exists?(review.id) %>
                 <%= link_to 'Edit', edit_review_path(review.id) %> |

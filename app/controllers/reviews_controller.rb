@@ -37,7 +37,7 @@ class ReviewsController < ApplicationController
   def destroy
     @review.destroy
     flash[:notice] = "you have Successfully deleted your review"
-    redirect_to root_path
+    redirect_to view_reviews_student_library_path( @library)
   end
 
   private

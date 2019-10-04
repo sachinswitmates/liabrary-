@@ -80,10 +80,10 @@ RSpec.describe Admin::LibrariesController, type: :controller do
   describe 'DELETE #destroy' do
     it "deletes the library" do
       expect{ 
-        delete :destroy, params: {:id => @library}
+        delete :destroy, params: {:id => @library.id}
      }.to change(Library, :count).by(-1)
       @library.update(deleted_at: Time.now)
-     expect(response).to have_http_status(302)
+     expect(response).to redirect_to admin_libraries_path
     end
   end
 

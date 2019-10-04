@@ -10,10 +10,9 @@ FactoryBot.define do
     open {Faker::Lorem.word}
     seats {50}
     contact_number {"9999999999"}
-    monthly {1000}
+    monthly {500}
     user_id {2}
     booked_seats {2}
     published {'false'}
-    monthly_plan_id {'plan_Djpschrowrjcs'}
   end
 end

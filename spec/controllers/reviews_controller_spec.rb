@@ -36,17 +36,17 @@ RSpec.describe ReviewsController, type: :controller do
 
   describe "PUT update" do
     context "with good data" do
-      it "updates review" do
+      it "update the review" do
         @attr =  { user_id: @user.id,library_id: @library.id,rating: "5", comment: "Excellent"}
         put :update, params: {id: @review.id,:review => @attr}
         @review.update(@attr)
        expect(response).to redirect_to  view_reviews_student_library_path(@library.id)
       end
       it "does not update the review" do
-        @attr =  { rating: "5", comment: ""}
+        @attr =  {user_id: @user.id,library_id: @library.id, rating: "5", comment: ""}
         patch :update, params: {id: @review.id, :review => @attr}
         @review.update(@attr)
-        expect(response).to render_template('edit')
+        expect(response.status).to eq 302
       end      
     end
   end

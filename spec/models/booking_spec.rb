@@ -4,6 +4,7 @@ RSpec.describe Booking, type: :model do
   before(:each) do
     @user = FactoryBot.create(:user)
     @library = FactoryBot.create(:library,user_id: @user.id)
+    @booking = FactoryBot.create(:booking,user_id: @user.id,library_id: @library.id )
   end
   
   describe 'enum payment status' do
@@ -27,30 +28,37 @@ RSpec.describe Booking, type: :model do
 
   describe 'update_subscription_date' do
     it " update_subscription_date" do
-    booking = FactoryBot.create(:booking,user_id: @user.id,library_id: @library.id )
-    booking.update(package: '500',start_date: (Time.now), end_date: (Time.now + 30.days))
-    expect(booking).to eql(booking) 
+    @booking.update(package: '500',start_date: (Time.now), end_date: (Time.now + 30.days))
+    expect(@booking).to eql(@booking) 
     end
   end
 
   describe 'subscription_type' do
     it "subscription_length" do
-      booking = FactoryBot.create(:booking,user_id: @user.id,library_id: @library.id )
-      expect(booking.subscription_length).to eq 'quaterly'
+      expect(@booking.subscription_length).to eq 'quaterly'
     end
   end
   
   describe "calcuate_subscription_end" do
     it "subscription_type" do
-      booking = FactoryBot.create(:booking,user_id: @user.id,library_id: @library.id )
-      expect(booking.subscription_type).to eq 3
+      expect(@booking.subscription_type).to eq 3
     end
   end
 
   describe 'user mailer' do
     it "sends an email after booking a library to student and library owner" do
-      booking = FactoryBot.create(:booking,user_id: @user.id,library_id: @library.id )
-      expect { booking.send_booking_notification_email }.to change { ApplicationMailer.deliveries.count }.by(2)
+      expect { @booking.send_booking_notification_email }.to change { ApplicationMailer.deliveries.count }.by(2)
+    end
+  end
+
+  describe 'notify student' do
+    let(:mail) { UserMailer.notify_student(@user) } 
+
+     it 'renders the subject' do
+      expect(mail.subject).to eql("Your Booking Has Done")
+    end
+    it 'renders the receiver email' do
+      expect(mail.to).to eql([@user.email])
     end
   end
 
@@ -66,26 +74,15 @@ RSpec.describe Booking, type: :model do
     end
   end
 
-  describe "generate qrcode" do
-    # @qr = RQRCode::QRCode.new('library', :size => 4, :level => :h)
-    # png = @qr.as_png(
-    #       resize_gte_to: false,
-    #       resize_exactly_to: false,
-    #       fill: 'white',
-    #       color: 'black',
-    #       size: 120,
-    #       border_modules: 4,
-    #       module_px_size: 6,
-    #       file: nil 
-    #     )
-    it "generate qrcode" do
-      @booking = FactoryBot.create(:booking,user_id: @user.id,library_id: @library.id )
-      filename = "#{Rails.root}/public/code_#{@booking.id}.png"
-      file = File.new(filename, "w")
-      #File.write(filename, png.to_s.force_encoding('UTF-8'))
-      @qrcode = FactoryBot.create(:qrcode,code: file ,booking_id: @booking.id)
-      expect(@qrcode.code.url).to eql(@qrcode.code.url)
-      File.delete(filename) if File.exist?(filename)
+  describe "generate_qrcode" do
+    it 'get qrcode' do
+      expect(@booking.qrcode).not_to be_nil
+    end
+  end
+  
+  describe 'generate_token' do
+    it 'generate token' do
+      expect(@booking.generate_token).not_to be_nil
     end
   end
 end

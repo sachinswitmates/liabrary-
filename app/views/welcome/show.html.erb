@@ -19,11 +19,12 @@
     <div class="card-body">
       <p class="card-text"><strong>Name: </strong><%= @library.name %></p>
       <p class="card-text"><strong>Address:</strong><%= @library.library_address %></p>
-     
+
       Average Rating :
       <div class='star-rating' data-score=<%= @avg_rating %>></div>
       <em><%= "#{@reviews.count} reviews" %></em>
       <p><%=link_to 'show reviews',view_reviews_student_library_path(@library) %></p>
+      <%= link_to 'Back', student_libraries_path %>
     </div>
   </div>
 </div>
