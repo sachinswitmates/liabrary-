@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe LibraryOwner::BankAccountsController, type: :controller do
-
   before(:each) do
     @user = FactoryBot.create(:user,role: 'library_owner')
     sign_in @user
@@ -11,7 +10,7 @@ RSpec.describe LibraryOwner::BankAccountsController, type: :controller do
     it "shows bank details for signed in user" do
       @bank_account = FactoryBot.create(:bank_account, user_id: @user.id)   
       get :index
-      expect(@bank_account).to eql(@bank_account)      
+      expect(@user.bank_account).to eql(@user.bank_account)      
     end 
     it "renders the index template" do
       get :index
@@ -20,10 +19,9 @@ RSpec.describe LibraryOwner::BankAccountsController, type: :controller do
   end
 
   describe "GET new" do
-    it "create a new bank_account" do
-      @bank_account = FactoryBot.create(:bank_account, user_id: @user.id)   
+    it "create a new bank_account" do  
       get :new
-      expect(assigns(:bank_account)).to be_an_instance_of(BankAccount)
+      expect(assigns(:bank_account)).to be_a_new(BankAccount)
     end
     it "renders the new template" do
       get :new
@@ -49,6 +47,7 @@ RSpec.describe LibraryOwner::BankAccountsController, type: :controller do
       @bank_account = FactoryBot.create(:bank_account, user_id: @user.id)   
       get :show, params: {id:  @bank_account.id}
       expect(assigns(:bank_account)).to eql(@bank_account)
+      expect(response).to render_template(:show)
     end
   end
 

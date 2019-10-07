@@ -20,10 +20,11 @@ RSpec.describe Student::LibrariesController, type: :controller do
 
   describe "GET show" do
     it "shows all libraries and reviews of libraries" do
+      @image = FactoryBot.create(:image,imageable_id: @library.id, imageable_type: 'Library')
       @review = FactoryBot.create(:review, library_id: @library.id, user_id: @user.id)
       get :show, params: {id: @library.id}
-      @library.reviews.average(:rating).round(2)
-      expect(assigns(:library)).to eql(@library)
+      expect(@library.images).to eql(@library.images)
+      expect(@library.reviews).to eql(@library.reviews)
       expect(response).to render_template(:show)
     end
   end

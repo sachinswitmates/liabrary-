@@ -90,7 +90,6 @@ RSpec.describe Admin::LibrariesController, type: :controller do
   describe 'prevent_unauthorize_access' do
     it "admin is not authorize to access page" do
       sign_in @user 
-      @user.role == 'admin'
       flash[:alert] = "You'r not authorize to access this page"
       expect(response).to have_http_status(200)
     end

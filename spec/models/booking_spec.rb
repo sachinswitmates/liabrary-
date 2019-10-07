@@ -19,10 +19,8 @@ RSpec.describe Booking, type: :model do
 
   describe 'update_seats' do
     it "update_seats" do
-      @library.update(seats: @library.seats - 1)
-      @library.update(booked_seats: (@library.booked_seats + 1))
-      expect(@library.seats).to eq (@library.seats)
-      expect(@library.booked_seats).to eq (@library.booked_seats)
+      expect(@library.decrement!(:seats)).to eq (@library.decrement!(:seats))
+      expect(@library.increment!(:booked_seats)).to eq (@library.increment!(:booked_seats))
     end
   end
 

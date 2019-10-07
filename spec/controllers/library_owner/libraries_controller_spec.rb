@@ -61,7 +61,7 @@ RSpec.describe LibraryOwner::LibrariesController, type: :controller do
       @image = FactoryBot.create(:image,imageable_id: @library.id, imageable_type: 'Library')
       get :show, params: {id:  @library.id}
       expect(@library.images).to eq(@library.images)
-      expect(response.status).to eq 200
+      expect(response).to render_template(:show)
     end
   end
 
@@ -75,7 +75,6 @@ RSpec.describe LibraryOwner::LibrariesController, type: :controller do
   describe 'prevent_unauthorize_access' do
     it "library owner is not authorize to access page" do
       sign_in @user 
-      @user.role == 'library_owner'
       flash[:alert] = "You'r not authorize to access this page"
       expect(response).to have_http_status(200)
     end

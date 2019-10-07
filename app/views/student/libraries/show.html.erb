@@ -13,7 +13,6 @@
   <hr>
 </div>
 <%= render partial: '/library_owner/libraries/image_items', locals: {images: @images} %>
-<%= javascript_include_tag 'ratyrate.js', "data-turbolinks-track": false %>
 <div class="card">
   <div class="card-body">
     <p class="card-text"><strong>Name: </strong><%= @library.name %></p>
