@@ -1,7 +1,5 @@
 FactoryBot.define do
   factory :booking do
-    user
-    library
     package {"1500"}
     payment_method {"Online"}
     start_date {Time.now}

@@ -10,7 +10,7 @@ RSpec.describe LibraryOwner::LibrariesController, type: :controller do
   describe "GET index" do
     it "shows all libraries of current user" do
       get :index
-      expect(@user.libraries).to eql(@user.libraries)      
+      expect(@library).to eql(@library)      
     end 
     it "renders the index template" do
       get :index

@@ -21,7 +21,7 @@
     <% if library.booked_seats.present? %>
       Booked Seats: <%= library.booked_seats %>
     <%else%>
-      Booked Seats: 0 </p>
+      Booked Seats: 0 
     <%end%>
     <br><%=link_to 'Reviews',view_library_reviews_library_owner_library_path(library)%>
     <hr>

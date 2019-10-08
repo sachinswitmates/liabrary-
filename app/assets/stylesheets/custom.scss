@@ -8,6 +8,9 @@
 .padd-left-40{
   padding-left: 80px;
 }
+.padd-left-50{
+  padding-left: 150px;
+}
 
 .body-min-hieght{
   min-height: 550px;
@@ -143,15 +146,15 @@ li{
 
 /* The navigation menu links */
 .sidenav {
-  height: 80%; 
+  height: 100%; 
   width: 160px; 
   position: fixed;
   z-index: 1;
   top: 0; 
   left: 0;
-  background-color: #e9ecef; 
+  background-color: #fff; 
   overflow-x: hidden; 
-  padding-top: 20px;
+  padding-top: 10px;
 }
 .sidenav a {
   font-family: "Lato", sans-serif;

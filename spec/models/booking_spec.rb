@@ -19,15 +19,13 @@ RSpec.describe Booking, type: :model do
 
   describe 'update_seats' do
     it "update_seats" do
-      expect(@library.decrement!(:seats)).to eq (@library.decrement!(:seats))
-      expect(@library.increment!(:booked_seats)).to eq (@library.increment!(:booked_seats))
+      expect(@booking.update_seats).to eql(@booking.update_seats)
     end
   end
 
-  describe 'update_subscription_date' do
-    it " update_subscription_date" do
-    @booking.update(package: '500',start_date: (Time.now), end_date: (Time.now + 30.days))
-    expect(@booking).to eql(@booking) 
+  describe 'update subscription date' do
+    it " update start and end date" do
+    expect(@booking.update_subscription_date).not_to be_nil
     end
   end
 

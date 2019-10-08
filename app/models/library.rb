@@ -59,7 +59,6 @@ class Library < ApplicationRecord
             "currency": "INR"
           },
         }
-
         begin
           plan = Razorpay::Plan.create(options)
           if plan.id.present?
