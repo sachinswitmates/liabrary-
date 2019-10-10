@@ -8,6 +8,7 @@ require 'rspec/rails'
 require 'devise'
 require 'shoulda/matchers'
 require 'capybara/rspec'
+require 'selenium-webdriver'
 
 Shoulda::Matchers.configure do |config|
   config.integrate do |with|

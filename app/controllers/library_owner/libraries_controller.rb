@@ -14,6 +14,7 @@ class LibraryOwner::LibrariesController < ApplicationController
   def create
     @library = current_user.libraries.new(library_params)
     if @library.save
+      flash[:notice] = "You have Successfully created your library."
       current_user.send_notification_email
       redirect_to library_owner_libraries_path
     else
