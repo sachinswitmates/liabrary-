@@ -21,6 +21,7 @@ class Admin::LibrariesController < ApplicationController
   def create
     @library = Library.new(library_params)
     if @library.save
+      flash[:notice] = "You have Successfully created library."
       redirect_to admin_libraries_path
     else
       render 'new'

@@ -9,7 +9,8 @@
               <%= form.input :address1 %>
               <%= form.input :address2 %>
               <%= form.input :landmark %>
-              <%= form.input :state ,collection: states.map { |c| [c[0], c[1]] } %>
+              <%=form.label :state %>
+              <%= form.select :state ,options_for_select(states),{}, class: 'form-control' %><br>
               <%= form.input :city %>
               <%= form.label :packages %>
               <%= form.input :monthly %>
@@ -20,7 +21,7 @@
               <div class= "col-6">
                 <%= form.input :zip_code %>
                 <%= form.input :open,hint: 'No sepical characters',placeholder: '8AM-11PM'%>
-                <%= form.input :seats ,collection: 0..1000%>
+                <%= form.input :seats %>
                 <%= form.input :contact_number %>
                 <%= form.check_box :published, value: true %>
                 <%= form.label :published %>
