@@ -1,5 +1,4 @@
 require 'rails_helper'
-require 'selenium-webdriver'
 
 RSpec.feature "Admins", type: :feature do
   scenario 'should be successful'do
@@ -18,11 +17,12 @@ RSpec.feature "Admins", type: :feature do
       fill_in 'Address2', with: 'Agra Bombay road'
       fill_in 'Landmark', with: 'Vijay Nagar'
       fill_in 'City', with: 'Indore'
+      select 'Madhya Pradesh', from: 'State'
       fill_in 'Monthly', with: '500'
       fill_in 'Yearly', with: '6500'
       fill_in 'Zip code', with: '452001'
       fill_in 'Open', with: '24 hrs'
-      fill_in 'Seats', with: '200'
+      select '501', from: 'Seats'
       fill_in 'Contact number', with: '8888889878'
     end
     sleep 1

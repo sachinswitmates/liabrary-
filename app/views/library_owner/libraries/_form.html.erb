@@ -20,7 +20,7 @@
             <div class="col-6">
               <%= form.input :zip_code %>
               <%= form.input :open,hint: 'No sepical characters',placeholder:'8AM-11PM'%>
-              <%= form.input :seats  %>
+              <%= form.input :seats,collection: 0..1000  %>
               <%= form.input :contact_number %>
               <%= form.hidden_field :user_id, value: current_user.id %>
               <div id="images">

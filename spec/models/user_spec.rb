@@ -60,7 +60,7 @@ RSpec.describe User, type: :model do
   end
 
   describe 'notify admin' do
-    user = FactoryBot.build(:user, email: 'admin@gmail.com',role: 'admin')
+    user = FactoryBot.create(:user, email: Faker::Internet.email,role: 'admin')
     let(:mail) { UserMailer.notify_admin(user) } 
 
      it 'renders the subject' do
