@@ -29,6 +29,8 @@ RSpec.feature "Admins", type: :feature do
     click_button 'Save'
     expect(page).to have_content 'You have Successfully created library.'
     library = FactoryBot.create(:library)
+    user = User.create(first_name: 'test1', last_name: 'test2', email: 'student@example.com',password: 'password1',role: 'student')
+    booking = FactoryBot.create(:booking,user_id: user.id,library_id: library.id)
     sleep 1
     visit "/admin/libraries/#{library.id}/edit"
     sleep 2

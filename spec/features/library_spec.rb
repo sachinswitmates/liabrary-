@@ -6,7 +6,7 @@ RSpec.feature "Libraries", type: :feature do
       visit '/users/sign_up?partner=true'
       fill_in 'First Name', with: 'test'
       fill_in 'Last Name', with: 'test'
-      fill_in 'Email', with: 'library_owner@example.com'
+      fill_in 'Email', with: 'library_owner1@example.com'
       fill_in 'user[password]', with: 'password1'
       fill_in 'Confirm Password', with: 'password1'
       click_button 'Create User'
@@ -26,10 +26,13 @@ RSpec.feature "Libraries", type: :feature do
         fill_in 'Open', with: '24 hrs'
         select '501', from: 'Seats'
         fill_in 'Contact number', with: '8888889878'
+        click_link 'add image'
+        sleep 2
+        #find_field('Avatar').set('/home/rails/rails_work/test_projects/LibraryApp/spec/support/image/avatar/2/default_library.jpg')
       end
       click_button 'Save'
       expect(page).to have_content 'You have Successfully created your library.'
-      sleep(2)
+      sleep 2
     end
     scenario 'should failed' do
       user = User.create(first_name: 'test', last_name: 'test', email: 'user@example.com',password: 'password1',role: 'library_owner')
@@ -60,10 +63,10 @@ RSpec.feature "Libraries", type: :feature do
   end
   context 'library update' do 
     scenario 'should be successful' do
-      user = User.create(first_name: 'test', last_name: 'test', email: 'library_owner@example.com',password: 'password1',role: 'library_owner')
-      library = FactoryBot.create(:library,published: false, user_id: user.id)
+      user = User.create(first_name: 'test', last_name: 'test', email: 'library_owner1@example.com',password: 'password1',role: 'library_owner')
+      library = FactoryBot.create(:library, user_id: user.id)
       visit '/users/sign_in'
-      fill_in 'Email', with: 'library_owner@example.com'
+      fill_in 'Email', with: 'library_owner1@example.com'
       fill_in 'Password', with: 'password1'
       click_button 'Login'
       expect(page).to have_content 'Signed in successfully.'
@@ -93,16 +96,37 @@ RSpec.feature "Libraries", type: :feature do
       sleep 1
       click_link 'Payment Method'
       sleep 2
+
+      #create bank account
       visit '/library_owner/bank_accounts/new'
       sleep 2
       within('form') do
         fill_in 'Bank name', with: 'Axis'
         fill_in 'Account number', with: '87899985522222'
         fill_in 'Ifsc code', with: 'AXIS000423'
-        fill_in 'Account holder name', with: 'test'
+        fill_in 'Account holder name', with: ''
+      end
+      click_button 'Save'
+      expect(page).to have_content "Account holder name can't be blank"
+      sleep 2
+      within('form') do
+        fill_in 'Account holder name', with: 'test1'
       end
       click_button 'Save'
       expect(page).to have_content 'Payment method added successfully'
+      sleep 3
+
+      #edit bank account
+      click_link 'Edit'
+      sleep 2
+      within('form') do
+        fill_in 'Bank name', with: 'Axis'
+        fill_in 'Account number', with: '12345678907563'
+        fill_in 'Ifsc code', with: 'AXIS000423'
+        fill_in 'Account holder name', with: 'test'
+      end
+      click_button 'Update'
+      expect(page).to have_content 'Payment method updated successfully'
       sleep 2
       click_link 'Dashboard'
       sleep 2

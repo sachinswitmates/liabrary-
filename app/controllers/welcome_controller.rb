@@ -5,7 +5,7 @@ class WelcomeController < ApplicationController
       if @libraries.empty?
         flash[:notice] = "Currently this city has no libraries."
       else
-        flash[:notice] = " This City has #{@libraries.count} libraries."    
+        flash[:notice] = "This City has #{@libraries.count} libraries."    
       end
     else
       @libraries = Library.published.order("created_at DESC").paginate(page: params[:page], per_page: 10)
