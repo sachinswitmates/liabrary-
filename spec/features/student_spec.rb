@@ -8,7 +8,7 @@ RSpec.feature "Students", type: :feature do
       within('form') do
         fill_in 'First Name', with: 'test1'
         fill_in 'Last Name', with: 'test1'
-        fill_in 'Email', with: 'test1@example.com'
+        fill_in 'Email', with: 'student1@example.com'
         fill_in 'user[password]', with: 'password1'
         fill_in 'Confirm Password', with: 'password1'
       end
@@ -23,7 +23,7 @@ RSpec.feature "Students", type: :feature do
       within('form') do
         fill_in 'First Name', with: 'test1'
         fill_in 'Last Name', with: 'test1'
-        fill_in 'Email', with: 'test1@example.com'
+        fill_in 'Email', with: 'student1@example.com'
         fill_in 'user[password]', with: ''
       end
       click_button 'Create User'
@@ -34,10 +34,10 @@ RSpec.feature "Students", type: :feature do
 
   context 'create booking' do 
     scenario 'should be successful'do
-      user = User.create(first_name: 'test1', last_name: 'test2', email: 'test1@example.com',password: 'password1',role: 'student')
-      library = FactoryBot.create(:library)
+      user = User.create(first_name: 'test1', last_name: 'test2', email: 'student1@example.com',password: 'password1',role: 'student') 
+      library = FactoryBot.create(:library,published: true)
       visit '/users/sign_in'
-      fill_in 'Email', with: 'test1@example.com'
+      fill_in 'Email', with: 'student1@example.com'
       fill_in 'Password', with: 'password1'
       click_button 'Login'
       expect(page).to have_content 'Signed in successfully.'
@@ -126,7 +126,7 @@ RSpec.feature "Students", type: :feature do
       sleep 2
       click_link 'Logout'
       sleep 1
-      page.driver.browser.switch_to.alert.accept
+      #page.driver.browser.switch_to.alert.accept
       expect(page). to have_content 'Signed out successfully.'
       sleep 1
     end

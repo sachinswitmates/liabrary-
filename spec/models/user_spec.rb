@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   before :each do
-    @user = FactoryBot.build(:user)
+    @user = FactoryBot.build(:user,role: 'library_owner')
   end
 
   it "should not be valid without a first_name" do
@@ -44,13 +44,13 @@ RSpec.describe User, type: :model do
   end
   describe 'user mailer' do
     it "sends an email after creating library to library_owner and admin" do
+      @user = FactoryBot.create(:user, email: 'admin@gmail.com', role: 'admin')
       expect { @user.send_notification_email }.to change { ApplicationMailer.deliveries.count }.by(2)
     end
   end
 
   describe 'notify library owner' do
     let(:mail) { UserMailer.notify_library_owner(@user) }
-
     it 'renders the subject' do
       expect(mail.subject).to eql('Your library has created')
     end
@@ -60,14 +60,13 @@ RSpec.describe User, type: :model do
   end
 
   describe 'notify admin' do
-    user = FactoryBot.create(:user, email: Faker::Internet.email,role: 'admin')
-    let(:mail) { UserMailer.notify_admin(user) } 
-
+    # @user = FactoryBot.create(:user, email: 'admin@gmail.com', role: 'admin')
+    let(:mail) { UserMailer.notify_admin(@user) } 
      it 'renders the subject' do
       expect(mail.subject).to eql("Notification")
     end
     it 'renders the receiver email' do
-      expect(mail.to).to eql([user.email])
+      expect(mail.to).to eql([@user.email])
     end
   end
 end

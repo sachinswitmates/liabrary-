@@ -31,6 +31,7 @@ RSpec.describe LibraryOwner::LibrariesController, type: :controller do
 
   describe "POST create" do
     it "creates a new library" do
+      user = FactoryBot.create(:user,email: 'admin@gmail.com',role: 'admin')
       expect{
         post :create, params: {library: FactoryBot.attributes_for(:library,user_id: @user.id)}
       }.to change(Library,:count).by(1)
@@ -46,6 +47,7 @@ RSpec.describe LibraryOwner::LibrariesController, type: :controller do
         put :update, params: {:id => @library.id, :library => @attr }
         @library.update(@attr)
         expect(response).to redirect_to library_owner_library_path(@library)
+        #expect(response.status).to eq 302
       end
       it "should re-render edit template" do
         @attr = { :name => "", :city => "bhopal" }

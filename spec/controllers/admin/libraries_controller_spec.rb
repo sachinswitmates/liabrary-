@@ -67,6 +67,7 @@ RSpec.describe Admin::LibrariesController, type: :controller do
         @library.update(@attr)
         @library.send_published_notification_email
         expect(response).to redirect_to admin_libraries_path
+        #expect(response.status).to eq 302
       end
       it "should re-render edit template" do
         @attr = { :name => "", :city => "bhopal" }
