@@ -65,7 +65,7 @@ RSpec.describe Admin::LibrariesController, type: :controller do
         @attr = { :name => "devv", :city => "bhopal", published: true }
         put :update, params: {:id => @library.id, :library => @attr }
         @library.update(@attr)
-        @library.send_published_notification_email
+        #@library.send_published_notification_email
         expect(response).to redirect_to admin_libraries_path
         #expect(response.status).to eq 302
       end
@@ -83,7 +83,7 @@ RSpec.describe Admin::LibrariesController, type: :controller do
       expect{ 
         delete :destroy, params: {:id => @library.id}
      }.to change(Library, :count).by(-1)
-      @library.update(deleted_at: Time.now)
+      #@library.update(deleted_at: Time.now)
      expect(response).to redirect_to admin_libraries_path
     end
   end

@@ -35,7 +35,7 @@ RSpec.describe LibraryOwner::LibrariesController, type: :controller do
       expect{
         post :create, params: {library: FactoryBot.attributes_for(:library,user_id: @user.id)}
       }.to change(Library,:count).by(1)
-      @user.send_notification_email
+      #@user.send_notification_email
       expect(response).to redirect_to library_owner_libraries_path
     end
   end

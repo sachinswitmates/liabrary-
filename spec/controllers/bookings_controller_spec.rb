@@ -35,7 +35,7 @@ RSpec.describe BookingsController, type: :controller do
       expect{
         post :create, params: {library_id: @library.id,booking: FactoryBot.attributes_for(:booking).merge(library_id: @library.id)} 
       }.to change(Booking,:count).by(1)
-      @booking.send_booking_notification_email
+      # @booking.send_booking_notification_email
       expect(response).to redirect_to bookings_path
     end
   end
