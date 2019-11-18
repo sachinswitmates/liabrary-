@@ -58,7 +58,7 @@ class Booking < ApplicationRecord
   def generate_qrcode
     self.token = generate_token
     self.save
-    @qr = RQRCode::QRCode.new(self.token, :size => 4, :level => :h)
+    @qr = RQRCode::QRCode.new(self.token, :size => 5, :level => :h)
     png = @qr.as_png(
           resize_gte_to: false,
           resize_exactly_to: false,

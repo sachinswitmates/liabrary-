@@ -1,5 +1,7 @@
 {
   "name": "LibraryApp",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "instascan": "^1.0.0"
+  }
 }

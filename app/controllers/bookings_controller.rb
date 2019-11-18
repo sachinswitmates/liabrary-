@@ -12,6 +12,7 @@ class BookingsController < ApplicationController
 
   def create
     @booking = current_user.bookings.new(booking_params)
+    #if verify_recaptcha(model: @booking) && @booking.save
     if @booking.save
       if @booking.payment_method == 'Online' && @booking.razorpay_payment_id.present?
         @booking.update(payment_status: 'paid')

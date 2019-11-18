@@ -8,12 +8,12 @@ RSpec.describe Booking, type: :model do
   end
   
   describe 'enum payment status' do
-    it { should define_enum_for(:payment_status).with(paid: 0, unpaid: 1) } 
+    it { should define_enum_for(:payment_status).with_values(paid: 0, unpaid: 1) } 
   end
 
   describe 'associations' do
-    it {is_expected.to belong_to(:user)}
-    it {is_expected.to belong_to(:library)}
+    it {is_expected.to belong_to(:user).optional}
+    it {is_expected.to belong_to(:library).optional}
     it {is_expected.to have_one (:qrcode)}
   end
 
