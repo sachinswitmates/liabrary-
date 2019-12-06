@@ -221,8 +221,8 @@ GEM
       parallel
     popper_js (1.14.5)
     public_suffix (4.0.1)
-    puma (3.12.1)
-    puma (3.12.1-java)
+    puma (3.12.2)
+    puma (3.12.2-java)
     rack (2.0.7)
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
@@ -404,7 +404,7 @@ DEPENDENCIES
   omniauth-facebook
   omniauth-google-oauth2
   parallel_tests
-  puma (~> 3.11)
+  puma (~> 3.12)
   rails (~> 5.2.3)
   rails-controller-testing
   ratyrate
